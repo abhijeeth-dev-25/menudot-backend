@@ -1,0 +1,208 @@
+DataBase design for menudo- Restaurant management application and live order tracking and order ready services (by multiple applications like: swiggy,  zomato, magic pin etc.
+
+
+Registration ( signup )
+
+Basic Details	:
+- Owner’s full name 
+- Restaurent full name
+- Location
+Owner Contact Details :
+- Email 
+- Mobile Number
+- whatsApp number (optional)
+Working Days :
+* Monday, Tuesday, Wednesday, Thursday, Friday, Saturday 
+Opening and closing time :
+* Open time
+* Colse time
+Restaurant documents :
+- What’s your outlet type?
+Enter PAN & GSTIN Details:
+- Owner PAN
+- GSTIN
+Official Bank Details :
+- Bank IFSC code
+- Bank Account number
+FSSAI Certification :
+- FSSAI Certification number
+Menu Setup :
+- What kind of food is on your menu?
+* Veg only 
+* Both veg and Non-veg
+- Add cuisines that you serve
+- Cost for two
+Upload Your Menu :
+- Pdf, Doc, Png etc
+Packing Charges :
+ Overview
+- Commission
+- Onboarding fee
+ Terms and conditions 
+
+After entering and submitting this details, it will send to companies  mail. 
+  - After receiving the mail, company will approve it after the verification and provides an account to use.
+
+Restaurant dashboard :
+Sections:
+
+- [ ] Home
+- [ ] Orders
+- [ ] Menu
+- [ ] Bookings
+- [ ] Tables
+- [ ] Dineout
+- [ ] Staff
+- [ ] Growth
+- [ ] Complaints
+- [ ] Rating
+- [ ] Reports
+- [ ] Finance
+- [ ] Raw Materials
+- [ ] Profile
+- [ ] Notifications
+- [ ] Screens
+- [ ] Services
+
+Menu:
+- Categories
+- Items
+- Add items
+- Update items
+- Delete items
+
+Swiggy Menu:
+Zomato Menu:
+Magicpin Menu:
+- [ ] Note: our application will have option to handle multiple platform menu , orders and dineout bookings.
+
+Items: 
+- Item name
+- Price
+- Category 
+- Veg or non veg
+-  Item rating
+- Item tag
+- Item description
+- Ingredients 
+- Image
+- Add category (add ons)
+- Stock (available or not)
+- Create item
+- Delete item
+
+Orders:
+- Order from Swiggy
+- Order from Zomato
+- Order from Magic pin etc
+- Restaurant id
+- Status
+- Sub total
+- Tax
+- Service charge
+- Platform charge
+- GST
+- Coupons & Discounts
+- Total
+
+Tables:
+- Unique QR
+- Table number
+- Table id
+- Services
+- Orders
+- Bills
+- Payments
+- Order items
+
+Staff:
+( working employees, chefs)
+Roles:
+- Owner
+* Will have complete access to update and delete anything the application.
+- Manager
+* Can access complete application ( can only see the restaurant details can’t modify) can update servers and chefs data. ( can’t see restaurant personal secrets details )
+- Servers ( 1 or more)
+* Can only see orders and status
+- Chef
+* Only orders can see and update the status
+
+Screens:
+* Can able create multiple screens for different role, like: owner - can access all screens
+* Manger - can access all similar to the owner
+* Server - will have access to order page, tables page, booking page, orders stats.
+* Chef - can see the orders page and notifications , can update related to food preparation. Can update the menu - because if any item out of stock, chef can update
+- [ ] Note: owner can create screens for each any every staff and set user name and password for everyone to login on there device.
+
+Services:
+- Cleaning
+- Order
+- Queries
+- Bill - if not online
+- Water 
+- Others
+
+Notifications:
+- Orders 
+- Order status
+- Live updates
+- [ ] Swiggy notifications 
+- [ ] Zomato notifications
+- [ ] Other denpends on owner update
+
+Notes: for the multiple restaurant handling inside the our application , they login with swiggy , zomato or specific company user credentials. In our will be provided an option to login with swiggy and zomato (direct option, without any login details required)
+
+
+Raw Materials:
+- Materials update
+- Stocks details
+- Maintains
+- Etc
+
+Finance:
+- Staff salaries
+- Every bills , buys, expenditures 
+- Analytics
+- Live statistics and valuations
+- Profit and loss 
+- On daily bases
+- Record of every day
+
+Dineout:
+- Can book table before
+- Table number
+- Time
+- Day
+- prebooking charges
+- [ ] Booking from swiggy dine out or zomto dine out or any others.- show them on separate page in side the dine out section.
+
+Growth:
+- Self ads
+- Others ads
+- [ ] We are going to show the ads on our customer side application screens. 
+
+Customer side:
+- Customer will come and scan the qr on table and enter into application.
+- Where they can see the items to order and service options and bill details and payment option etc
+- Option enter there name and number of people. 
+
+How qr works:
+- When the  customer comes and the server will serve a table for them, then the server on qr by there table 
+- Until the server on there qr option to scan, until now -> no customer can able can the scanner.
+- It won’t show any items and don’t take orders.
+- After completion bill the qr will automatically, offs the scanning permission.
+- At a time only one user can able scan from the side of table.
+- After scanning the qr restaurant will know the device name and time details of the particular user for security purpose.
+
+
+
+
+
+
+
+
+
+
+
+
+ 
