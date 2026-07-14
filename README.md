@@ -445,10 +445,46 @@ All inventory endpoints require authentication (`protect`) and tenant resolution
   }
   ```
 
-#### `POST /feedback/sync/:platform`
-*Simulate reviews fetch/pull from third party aggregators (Swiggy/Zomato).*
-- **Headers**: Requires Bearer Token (Owner/Manager).
 - **Behavior**: Verifies that the `PlatformIntegration` configured in Phase 1 is active. Syncs reviews idempotently checking if `externalReviewId` already exists.
+
+---
+
+### Growth & Ads (Phase 5)
+
+#### `GET /campaigns/active` (Public)
+*Fetch currently active promotions/sponsored items served on customer tables.*
+- **Headers**: Requires `x-restaurant-id` header to identify tenant.
+- **Behavior**: Retrieves running campaigns, maps MenuItem details, and atomically increments impression count for served ads.
+
+#### `POST /campaigns/:id/click` (Public)
+*Register click on an ad campaign.*
+- **Headers**: Requires `x-restaurant-id` header.
+- **Behavior**: Increments ad clicks metrics by 1 and charges the Cost-Per-Click (CPC) value to `currentSpent`. If `currentSpent >= budgetLimit`, automatically pauses the campaign setting status to `'completed'`.
+
+#### `POST /campaigns`
+*Configure a new advertising campaign.*
+- **Headers**: Requires Bearer Token (Owner/Manager) & `x-restaurant-id`.
+- **Body**:
+  ```json
+  {
+    "name": "Pizza Promo",
+    "type": "sponsored_item" || "discount_banner",
+    "menuItemId": "pizzaMenuItemObjectId",
+    "startDate": "2026-07-13T00:00:00Z",
+    "endDate": "2026-07-15T23:59:59Z",
+    "budgetLimit": 50,
+    "costPerClick": 10
+  }
+  ```
+
+#### `GET /campaigns`
+*Retrieve campaign listings.*
+- **Headers**: Requires Bearer Token (Owner/Manager) & `x-restaurant-id`.
+
+#### `PATCH /campaigns/:id`
+*Modify campaign parameters.*
+- **Headers**: Requires Bearer Token (Owner/Manager) & `x-restaurant-id`.
+
 
 
 

@@ -26,7 +26,7 @@ Official Bank Details :
 - Bank Account number
 FSSAI Certification :
 - FSSAI Certification number
-Menu Setup :
+Menu Setup :x
 - What kind of food is on your menu?
 * Veg only 
 * Both veg and Non-veg
