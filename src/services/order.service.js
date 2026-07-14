@@ -1,4 +1,5 @@
 const OrderRepository = require('../repositories/order.repository');
+const InventoryService = require('./inventory.service');
 const AppError = require('../exceptions/AppError');
 const socketManager = require('../utils/socket');
 const logger = require('../utils/logger');
@@ -24,6 +25,15 @@ class OrderService {
       { restaurantId, orderId, oldStatus, newStatus: status },
       'Order status updated successfully'
     );
+
+    // Trigger auto-consumption of raw materials if transitioning to completed status
+    if (status === 'completed' && oldStatus !== 'completed') {
+      try {
+        await InventoryService.consumeInventoryForOrder(restaurantId, orderId);
+      } catch (err) {
+        logger.error({ err, orderId, restaurantId }, 'Failed to auto-consume inventory for completed order. Continuing.');
+      }
+    }
 
     // Broadcast live WebSocket event to restaurant room
     socketManager.broadcastToRestaurant(restaurantId, 'order_updated', updatedOrder);

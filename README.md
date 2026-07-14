@@ -370,4 +370,42 @@ All endpoints require authentication (`protect`), tenant resolution (`resolveTen
 *Receive reservations from Swiggy/Zomato Dineout integrations.*
 - **Behavior**: Runs idempotency validation on `source.externalBookingId`. Resolves table if specified, and inserts a confirmed booking.
 
+---
+
+### Raw Materials & Inventory (Phase 2)
+
+All inventory endpoints require authentication (`protect`) and tenant resolution (`resolveTenant`).
+
+#### `POST /inventory/items`
+*Create a new raw material/inventory item.*
+- **Headers**: Requires Bearer Token (Owner/Manager).
+- **Body**:
+  ```json
+  {
+    "name": "Mozzarella Cheese",
+    "unit": "kg",
+    "currentStock": 0,
+    "reorderThreshold": 2,
+    "costPerUnit": 400
+  }
+  ```
+
+#### `GET /inventory/items`
+*Retrieve list of all inventory items and current stock levels.*
+- **Headers**: Requires Bearer Token (Owner/Manager/Chef).
+
+#### `POST /inventory/items/:id/adjust`
+*Manually adjust stock levels (restock purchase or wastage).*
+- **Headers**: Requires Bearer Token (Owner/Manager/Chef).
+- **Body**:
+  ```json
+  {
+    "type": "purchase" || "wastage" || "adjustment",
+    "quantity": 10,
+    "reason": "Restocked for the weekend"
+  }
+  ```
+- **Behavior**: Atomically updates item stock in a transaction and registers a transaction ledger entry in `InventoryTransaction`.
+
+
 

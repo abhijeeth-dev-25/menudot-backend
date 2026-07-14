@@ -37,6 +37,19 @@ const addOnGroupSchema = new mongoose.Schema({
   options: [addOnOptionSchema],
 });
 
+const recipeItemSchema = new mongoose.Schema({
+  inventoryItemId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'InventoryItem',
+    required: true,
+  },
+  quantityRequired: {
+    type: Number,
+    required: true,
+    min: 0,
+  },
+}, { _id: false });
+
 const menuItemSchema = new mongoose.Schema({
   categoryId: {
     type: mongoose.Schema.Types.ObjectId,
@@ -98,6 +111,10 @@ const menuItemSchema = new mongoose.Schema({
     type: Number,
     default: 5.0, // Defaults to 5% standard GST
     min: 0,
+  },
+  recipe: {
+    type: [recipeItemSchema],
+    default: [],
   },
   platformMappings: {
     swiggy: {
