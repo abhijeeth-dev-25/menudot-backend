@@ -203,12 +203,6 @@ class TableService {
     const validatedItems = [];
 
     for (const cartItem of items) {
-      console.log('DEBUG placeDineInOrder findOne inputs:', {
-        itemId: cartItem.itemId,
-        itemIdType: typeof cartItem.itemId,
-        restaurantId,
-        restaurantIdType: typeof restaurantId,
-      });
       const menuItem = await MenuItem.findOne({
         _id: cartItem.itemId,
         restaurantId,

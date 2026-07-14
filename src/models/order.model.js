@@ -84,6 +84,10 @@ orderSchema.index({ restaurantId: 1, orderSource: 1, platformOrderId: 1 }, {
   partialFilterExpression: { platformOrderId: { $type: 'string' } }
 });
 
+// Performance Indexes for Dashboard & Reports
+orderSchema.index({ restaurantId: 1, status: 1, createdAt: -1 });
+orderSchema.index({ restaurantId: 1, createdAt: -1 });
+
 // Register auditable plugin for tenancy and soft-delete scoping
 orderSchema.plugin(auditablePlugin);
 

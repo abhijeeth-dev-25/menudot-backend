@@ -104,16 +104,19 @@ const menuItemSchema = new mongoose.Schema({
       itemId: { type: String, default: null, index: true },
       status: { type: String, enum: ['active', 'inactive'], default: 'active' },
       priceOverride: { type: Number, default: null },
+      syncedAt: { type: Date, default: null },
     },
     zomato: {
       itemId: { type: String, default: null, index: true },
       status: { type: String, enum: ['active', 'inactive'], default: 'active' },
       priceOverride: { type: Number, default: null },
+      syncedAt: { type: Date, default: null },
     },
     magicpin: {
       itemId: { type: String, default: null, index: true },
       status: { type: String, enum: ['active', 'inactive'], default: 'active' },
       priceOverride: { type: Number, default: null },
+      syncedAt: { type: Date, default: null },
     },
   },
 });

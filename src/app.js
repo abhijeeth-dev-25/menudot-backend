@@ -18,6 +18,7 @@ const tableRoutes = require('./routes/table.routes');
 const staffRoutes = require('./routes/staff.routes');
 const screenRoutes = require('./routes/screen.routes');
 const orderRoutes = require('./routes/order.routes');
+const platformIntegrationRoutes = require('./routes/platformIntegration.routes');
 const path = require('path');
 
 const app = express();
@@ -105,6 +106,7 @@ app.use('/api/v1/tables', tableRoutes);
 app.use('/api/v1/staff', staffRoutes);
 app.use('/api/v1/screens', screenRoutes);
 app.use('/api/v1/orders', orderRoutes);
+app.use('/api/v1/integrations', platformIntegrationRoutes);
 
 // 8. 404 Handler for undefined routes
 app.use((req, res, next) => {

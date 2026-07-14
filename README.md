@@ -206,6 +206,34 @@ All requests must be prefixed with `/api/v1`.
 - **Body**: `{ "restaurantId": "ID", "tableNumber": "T-1", "serviceType": "water" || "bill" || "cleaning" || "queries" || "others" }`
 - **Behavior**: Routes and emits `service_call_received` socket notification to active screens that are configured to listen to this service type and table number.
 
+#### `POST /tables/order` (Public)
+*Customer dine-in order placement via QR code session.*
+- **Body**:
+  ```json
+  {
+    "code": "qr_hex_token",
+    "deviceId": "customer_device_uuid",
+    "items": [
+      {
+        "itemId": "menuItemObjectId",
+        "quantity": 2,
+        "addOns": [
+          { "name": "Extra Guacamole" }
+        ]
+      }
+    ]
+  }
+  ```
+- **Security Guards** (in order):
+  1. QR code token must resolve to an existing table.
+  2. QR code must have `isActive: true` — rejected with `400` if disabled by staff.
+  3. Table must be in `occupied` status with an active customer session — rejected with `400` if no session.
+  4. `deviceId` in the request must exactly match the session owner's device — rejected with `403` for foreign devices.
+- **Pricing**: All item prices and add-on prices are resolved from the **database source-of-truth**, never from the client request. Client-submitted prices are ignored.
+- **Calculations**: `subtotal = Σ (itemPrice + addOnSubtotal) × quantity`, `tax = subtotal × (itemTaxRate / 100)`, `grandTotal = subtotal + tax`. Rounded to 2 decimal places.
+- **Behavior**: Commits the order atomically in a database transaction, links the order `_id` to the table's `activeSession.orderIds` array, and broadcasts a real-time `order_created` Socket.io event to all authenticated KDS screens in the restaurant room.
+- **Response**: Full order document including `totals`, `orderSource: 'dine_in'`, `tableNumber`, and linked `tableId`.
+
 ---
 
 ### Menu Catalog & Media
@@ -265,3 +293,44 @@ All requests must be prefixed with `/api/v1`.
 *Receive external orders from third-party aggregators.*
 - **Headers**: Required HMAC-SHA256 signature headers.
 - **Behavior**: Verifies signature, transforms payload, runs idempotency checks to block duplicates, saves order in DB, and emits real-time `order_created` websocket alerts.
+
+---
+
+### Platform Integrations & Settings (Module 4)
+
+All endpoints require authentication (`protect`), tenant resolution (`resolveTenant` via `x-restaurant-id` header), and `owner` or `manager` roles.
+
+#### `POST /integrations`
+*Configure or onboard a third-party aggregator integration.*
+- **Body**:
+  ```json
+  {
+    "platform": "swiggy" || "zomato" || "magicpin",
+    "externalRestaurantId": "SWIG-12345",
+    "credentials": {
+      "accessToken": "raw_token",
+      "refreshToken": "raw_refresh_token",
+      "expiresAt": "2026-12-31T23:59:59.000Z"
+    },
+    "syncSettings": {
+      "menuSync": true,
+      "orderSync": true,
+      "autoAcceptOrders": true
+    }
+  }
+  ```
+- **Behavior**: Encrypts `credentials.accessToken` and `credentials.refreshToken` using AES-256-GCM before database write. Upserts the platform integration record.
+
+#### `GET /integrations`
+*Retrieve active platform integrations configured for the restaurant.*
+- **Behavior**: Returns the integration profile. If logged in as an `owner`, decrypts and returns raw tokens. If logged in as a non-owner staff member (e.g. manager/chef/server), redacts access and refresh tokens to `[REDACTED]`.
+
+#### `PATCH /integrations/:id`
+*Modify sync settings, toggle credentials, or change status.*
+- **Body**: Supports partial updates to `syncSettings`, `status`, `externalRestaurantId`, and `credentials`.
+
+#### `POST /integrations/:id/sync/menu`
+*Trigger menu sync simulation.*
+- **Behavior**: Verifies that menu sync is enabled. Fetches all restaurant menu items, filters items that are mapped and active for the platform, sets their `platformMappings[platform].syncedAt` to the current time, and updates `lastSyncedAt` on the integration profile.
+- **Response**: `{ "syncedItemsCount": X, "lastSyncedAt": "timestamp" }`
+
