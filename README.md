@@ -334,3 +334,40 @@ All endpoints require authentication (`protect`), tenant resolution (`resolveTen
 - **Behavior**: Verifies that menu sync is enabled. Fetches all restaurant menu items, filters items that are mapped and active for the platform, sets their `platformMappings[platform].syncedAt` to the current time, and updates `lastSyncedAt` on the integration profile.
 - **Response**: `{ "syncedItemsCount": X, "lastSyncedAt": "timestamp" }`
 
+---
+
+### Dineout Bookings (Phase 1)
+
+#### `POST /bookings` (Public)
+*Create a new table reservation.*
+- **Body**:
+  ```json
+  {
+    "restaurantId": "restaurantObjectId",
+    "bookingDate": "2026-07-20",
+    "timeSlot": "19:00",
+    "customerName": "Alice Customer",
+    "customerMobile": "+919999988888",
+    "numberOfPeople": 4,
+    "tableNumber": "Table-15"
+  }
+  ```
+- **Behavior**:
+  - Resolves table by `tableNumber` (if provided), validates that capacity fits the party size, and checks for conflicting confirmed bookings for the same date + slot. If a conflict or capacity mismatch occurs, returns `400`.
+  - Confirms the booking dynamically (sets `status` to `'confirmed'`).
+
+#### `GET /bookings`
+*List bookings for a restaurant.*
+- **Headers**: Requires Bearer Token (Owner/Manager/Server/Chef).
+- **Query Filters**: `bookingDate`, `status`, `platform`.
+
+#### `PATCH /bookings/:id`
+*Modify a booking (update status or table).*
+- **Headers**: Requires Bearer Token (Owner/Manager/Server).
+- **Body**: Supports updating `status` and `tableNumber`.
+
+#### `POST /bookings/webhooks/dineout/:platform` (Public Webhook)
+*Receive reservations from Swiggy/Zomato Dineout integrations.*
+- **Behavior**: Runs idempotency validation on `source.externalBookingId`. Resolves table if specified, and inserts a confirmed booking.
+
+
