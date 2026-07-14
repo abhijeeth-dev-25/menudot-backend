@@ -66,7 +66,44 @@ const onboardingReviewSchema = Joi.object({
   }),
 });
 
+const updateRestaurantProfileSchema = Joi.object({
+  name: Joi.string().optional().trim().min(3).max(100),
+  imageUrl: Joi.string().uri().optional().allow(null, ''),
+  location: Joi.object({
+    address: Joi.string().optional().trim(),
+    coordinates: Joi.array().items(Joi.number()).length(2).optional(),
+    city: Joi.string().optional().trim(),
+    state: Joi.string().optional().trim(),
+    pincode: Joi.string().optional().trim().pattern(/^\d{6}$/),
+  }).optional(),
+  schedule: Joi.object({
+    workingDays: Joi.array()
+      .items(Joi.string().valid('MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'))
+      .min(1)
+      .optional(),
+    openTime: Joi.string()
+      .optional()
+      .pattern(/^([01]\d|2[0-3]):([0-5]\d)$/),
+    closeTime: Joi.string()
+      .optional()
+      .pattern(/^([01]\d|2[0-3]):([0-5]\d)$/),
+  }).optional(),
+  outletType: Joi.string()
+    .valid('dine_in_and_delivery', 'dine_in_only', 'delivery_only')
+    .optional(),
+  menuProfile: Joi.object({
+    foodType: Joi.string().valid('veg_only', 'both').optional(),
+    cuisines: Joi.array().items(Joi.string()).min(1).optional(),
+    costForTwo: Joi.number().min(50).optional(),
+    packingCharge: Joi.object({
+      type: Joi.string().valid('flat', 'percent', 'none').optional(),
+      value: Joi.number().min(0).optional(),
+    }).optional(),
+  }).optional(),
+});
+
 module.exports = {
   onboardingSchema,
   onboardingReviewSchema,
+  updateRestaurantProfileSchema,
 };

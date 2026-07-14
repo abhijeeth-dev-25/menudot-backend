@@ -4,6 +4,7 @@ const UserRepository = require('../repositories/user.repository');
 const AppError = require('../exceptions/AppError');
 const { sendEmail } = require('../utils/email');
 const { runTransaction } = require('../utils/transaction');
+const { uploadImage } = require('../utils/imagekit');
 const mongoose = require('mongoose');
 const crypto = require('crypto');
 const logger = require('../utils/logger');
@@ -183,6 +184,49 @@ class RestaurantService {
    */
   async getPendingOnboardings() {
     return RestaurantRepository.findAllPendingOnboarding();
+  }
+
+  /**
+   * Uploads restaurant cover image to ImageKit and saves URL to profile.
+   */
+  async uploadRestaurantImage(restaurantId, fileBuffer, originalName) {
+    const restaurant = await RestaurantRepository.findById(restaurantId);
+    if (!restaurant) {
+      throw new AppError(404, 'Restaurant profile not found.');
+    }
+
+    const { url } = await uploadImage(fileBuffer, `restaurant_${restaurantId}_${originalName}`);
+    const updated = await RestaurantRepository.update(restaurantId, { imageUrl: url });
+    logger.info({ restaurantId, url }, 'Restaurant cover image uploaded successfully');
+    return updated;
+  }
+
+  /**
+   * Updates restaurant profile configuration (Owner/Manager only).
+   */
+  async updateRestaurantProfile(restaurantId, updateData) {
+    const restaurant = await RestaurantRepository.findById(restaurantId);
+    if (!restaurant) {
+      throw new AppError(404, 'Restaurant profile not found.');
+    }
+
+    const updated = await RestaurantRepository.update(restaurantId, updateData);
+    logger.info({ restaurantId }, 'Restaurant profile updated successfully');
+    return updated;
+  }
+
+  /**
+   * Soft deletes a restaurant account (Platform Admin / Developer only).
+   */
+  async deleteRestaurantAdmin(restaurantId) {
+    const restaurant = await RestaurantRepository.findById(restaurantId);
+    if (!restaurant) {
+      throw new AppError(404, 'Restaurant profile not found.');
+    }
+
+    const deleted = await RestaurantRepository.delete(restaurantId);
+    logger.info({ restaurantId }, 'Restaurant account soft-deleted by platform admin');
+    return deleted;
   }
 }
 

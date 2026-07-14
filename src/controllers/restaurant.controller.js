@@ -58,6 +58,40 @@ class RestaurantController {
     const list = await RestaurantService.getPendingOnboardings();
     return sendSuccess(res, 200, 'Pending onboarding applications retrieved successfully', list);
   });
+
+  /**
+   * Update restaurant profile configuration (Owner/Manager only).
+   */
+  updateRestaurantProfile = asyncHandler(async (req, res) => {
+    const restaurantId = req.restaurantId;
+    const updated = await RestaurantService.updateRestaurantProfile(restaurantId, req.body);
+    return sendSuccess(res, 200, 'Restaurant profile updated successfully.', updated);
+  });
+
+  /**
+   * Upload restaurant cover image (Owner only).
+   */
+  uploadRestaurantImage = asyncHandler(async (req, res) => {
+    if (!req.file) {
+      throw new AppError(400, 'No image file provided. Send a multipart/form-data request with field name "image".');
+    }
+    const restaurantId = req.restaurantId;
+    const updated = await RestaurantService.uploadRestaurantImage(
+      restaurantId,
+      req.file.buffer,
+      req.file.originalname
+    );
+    return sendSuccess(res, 200, 'Restaurant cover image uploaded successfully.', { imageUrl: updated.imageUrl });
+  });
+
+  /**
+   * Admin account deletion (Platform Admins / Developers only).
+   */
+  deleteRestaurantAdmin = asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    await RestaurantService.deleteRestaurantAdmin(id);
+    return sendSuccess(res, 200, 'Restaurant account soft-deleted successfully.');
+  });
 }
 
 module.exports = new RestaurantController();

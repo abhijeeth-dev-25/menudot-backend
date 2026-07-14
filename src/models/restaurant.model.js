@@ -158,6 +158,10 @@ const restaurantSchema = new mongoose.Schema(
       },
       renewsAt: { type: Date, default: null },
     },
+    imageUrl: {
+      type: String,
+      default: null,
+    },
     isDeleted: {
       type: Boolean,
       default: false,
