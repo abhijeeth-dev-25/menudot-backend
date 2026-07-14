@@ -22,6 +22,7 @@ const platformIntegrationRoutes = require('./routes/platformIntegration.routes')
 const bookingRoutes = require('./routes/booking.routes');
 const inventoryRoutes = require('./routes/inventory.routes');
 const financeRoutes = require('./routes/finance.routes');
+const feedbackRoutes = require('./routes/feedback.routes');
 const path = require('path');
 
 const app = express();
@@ -113,6 +114,7 @@ app.use('/api/v1/integrations', platformIntegrationRoutes);
 app.use('/api/v1/bookings', bookingRoutes);
 app.use('/api/v1/inventory', inventoryRoutes);
 app.use('/api/v1/finance', financeRoutes);
+app.use('/api/v1/feedback', feedbackRoutes);
 
 // 8. 404 Handler for undefined routes
 app.use((req, res, next) => {

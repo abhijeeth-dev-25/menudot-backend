@@ -407,5 +407,49 @@ All inventory endpoints require authentication (`protect`) and tenant resolution
   ```
 - **Behavior**: Atomically updates item stock in a transaction and registers a transaction ledger entry in `InventoryTransaction`.
 
+---
+
+### Reputation & Feedbacks (Phase 4)
+
+#### `POST /feedback` (Public)
+*Submit internal customer review or complaint.*
+- **Body**:
+  ```json
+  {
+    "restaurantId": "restaurantObjectId",
+    "customerName": "Sam ColdFood",
+    "rating": 2,
+    "comment": "French fries were cold.",
+    "orderId": "orderObjectId"
+  }
+  ```
+- **Behavior**: Auto-classifies as complaint (`isComplaint: true`, `status: 'pending'`) if `rating <= 2`. Auto-escalates to Owner attention (`escalatedToOwner: true`) if `rating === 1`.
+
+#### `GET /feedback`
+*Retrieve logged customer reviews and complaints.*
+- **Headers**: Requires Bearer Token (Owner/Manager/Chef/Server).
+- **Query Filters**: `source` (internal/swiggy/zomato), `isComplaint`, `status`, `escalatedToOwner`.
+
+#### `GET /feedback/analytics`
+*Retrieve restaurant average rating and feedback stats.*
+- **Headers**: Requires Bearer Token (Owner/Manager).
+
+#### `PATCH /feedback/:id/resolve`
+*Resolve customer complaints.*
+- **Headers**: Requires Bearer Token (Owner/Manager).
+- **Body**:
+  ```json
+  {
+    "status": "resolved" || "ignored",
+    "resolutionNotes": "Refunded the customer and spoke to kitchen staff."
+  }
+  ```
+
+#### `POST /feedback/sync/:platform`
+*Simulate reviews fetch/pull from third party aggregators (Swiggy/Zomato).*
+- **Headers**: Requires Bearer Token (Owner/Manager).
+- **Behavior**: Verifies that the `PlatformIntegration` configured in Phase 1 is active. Syncs reviews idempotently checking if `externalReviewId` already exists.
+
+
 
 
