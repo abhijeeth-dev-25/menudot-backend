@@ -895,5 +895,5 @@ Modify campaign settings (budget, dates, CPC, or status).
 ```
 
 ---
-
+*Menudot Backend — © 2026. All rights reserved.*
 
