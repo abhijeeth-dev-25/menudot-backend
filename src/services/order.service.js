@@ -5,6 +5,11 @@ const socketManager = require('../utils/socket');
 const logger = require('../utils/logger');
 
 class OrderService {
+  async getOrders(restaurantId, filter = {}) {
+    logger.info({ restaurantId, filter }, 'Fetching restaurant orders queue');
+    return OrderRepository.findAll(restaurantId, filter);
+  }
+
   /**
    * Updates status of an order and broadcasts live socket event.
    * 

@@ -10,6 +10,9 @@ const router = express.Router();
 router.use(protect);
 router.use(resolveTenant);
 
+// Get orders queue
+router.get('/', OrderController.getOrders);
+
 // Only owners, managers, and chefs can modify order preparation statuses
 router.patch(
   '/:orderId/status',
