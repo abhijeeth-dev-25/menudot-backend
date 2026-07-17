@@ -28,6 +28,24 @@ const addOnGroupSchema = Joi.object({
   options: Joi.array().items(addOnOptionSchema).min(1).required(),
 });
 
+const recipeItemSchema = Joi.object({
+  inventoryItemId: objectId.required(),
+  quantityRequired: Joi.number().min(0).required(),
+});
+
+const platformMappingDetailsSchema = Joi.object({
+  itemId: Joi.string().allow(null, '').optional(),
+  status: Joi.string().valid('active', 'inactive').default('active').optional(),
+  priceOverride: Joi.number().min(0).allow(null).optional(),
+  syncedAt: Joi.date().allow(null).optional(),
+});
+
+const platformMappingsSchema = Joi.object({
+  swiggy: platformMappingDetailsSchema.optional(),
+  zomato: platformMappingDetailsSchema.optional(),
+  magicpin: platformMappingDetailsSchema.optional(),
+});
+
 const createItemSchema = Joi.object({
   categoryId: objectId.required(),
   name: Joi.string().required().trim().min(2).max(100),
@@ -40,6 +58,8 @@ const createItemSchema = Joi.object({
   addOnGroups: Joi.array().items(addOnGroupSchema).optional(),
   status: Joi.string().valid('available', 'out_of_stock', 'inactive').default('available').optional(),
   taxRate: Joi.number().min(0).default(5.0).optional(),
+  recipe: Joi.array().items(recipeItemSchema).optional(),
+  platformMappings: platformMappingsSchema.optional(),
 });
 
 const updateItemSchema = Joi.object({
@@ -54,6 +74,8 @@ const updateItemSchema = Joi.object({
   addOnGroups: Joi.array().items(addOnGroupSchema).optional(),
   status: Joi.string().valid('available', 'out_of_stock', 'inactive').optional(),
   taxRate: Joi.number().min(0).optional(),
+  recipe: Joi.array().items(recipeItemSchema).optional(),
+  platformMappings: platformMappingsSchema.optional(),
 });
 
 const updateItemStatusSchema = Joi.object({
