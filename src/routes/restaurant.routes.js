@@ -29,6 +29,13 @@ router.get(
   RestaurantController.getPendingOnboardings
 );
 
+// Admin list all restaurants
+router.get(
+  '/',
+  restrictToGlobalRole('platform_admin'),
+  RestaurantController.getRestaurants
+);
+
 // Admin review onboarding application
 router.post(
   '/onboarding/:restaurantId/review',

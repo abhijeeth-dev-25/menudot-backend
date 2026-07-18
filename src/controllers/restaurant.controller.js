@@ -85,6 +85,14 @@ class RestaurantController {
   });
 
   /**
+   * Get all registered restaurants (Platform Admins only).
+   */
+  getRestaurants = asyncHandler(async (req, res) => {
+    const list = await RestaurantService.getRestaurants(req.query);
+    return sendSuccess(res, 200, 'Restaurants retrieved successfully', list);
+  });
+
+  /**
    * Admin account deletion (Platform Admins / Developers only).
    */
   deleteRestaurantAdmin = asyncHandler(async (req, res) => {

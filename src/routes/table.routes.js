@@ -19,6 +19,7 @@ const router = express.Router();
 router.post('/scan', validate(customerScanSchema), TableController.processCustomerScan);
 router.post('/call', validate(serviceCallSchema), TableController.triggerServiceCall);
 router.post('/order', validate(placeDineInOrderSchema), TableController.placeDineInOrder);
+router.get('/order/:orderId', TableController.getCustomerOrder);
 
 // ==========================================
 // PROTECTED STAFF ENDPOINTS (Requires Auth & x-restaurant-id)

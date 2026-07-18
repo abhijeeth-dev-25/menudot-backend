@@ -1,6 +1,7 @@
 const UserRepository = require('../repositories/user.repository');
 const RestaurantRepository = require('../repositories/restaurant.repository');
 const ScreenRepository = require('../repositories/screen.repository');
+const RestaurantStaffRepository = require('../repositories/restaurantStaff.repository');
 const AppError = require('../exceptions/AppError');
 const { generateAccessToken, generateRefreshToken, verifyRefreshToken } = require('../utils/jwt.util');
 const { sendEmail } = require('../utils/email');
@@ -245,6 +246,22 @@ class AuthService {
 
     const sanitizedUser = user.toObject();
     delete sanitizedUser.passwordHash;
+
+    if (user.globalRole === 'platform_admin') {
+      sanitizedUser.role = 'platform_admin';
+      sanitizedUser.restaurantId = null;
+    } else {
+      const staffRecords = await RestaurantStaffRepository.findRestaurantsForUser(user._id);
+      if (staffRecords && staffRecords.length > 0) {
+        sanitizedUser.role = staffRecords[0].role;
+        sanitizedUser.restaurantId = (staffRecords[0].restaurantId && staffRecords[0].restaurantId._id) 
+          ? staffRecords[0].restaurantId._id.toString() 
+          : staffRecords[0].restaurantId.toString();
+      } else {
+        sanitizedUser.role = 'restaurant_user';
+        sanitizedUser.restaurantId = null;
+      }
+    }
 
     return {
       user: sanitizedUser,

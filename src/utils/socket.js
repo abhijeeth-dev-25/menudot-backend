@@ -21,6 +21,17 @@ function init(server) {
 
   // Authentication Middleware
   io.use(async (socket, next) => {
+    const isCustomer = socket.handshake.query?.isCustomer === 'true';
+    if (isCustomer) {
+      const restaurantId = socket.handshake.query?.restaurantId;
+      if (!restaurantId) {
+        return next(new Error('Restaurant ID required for customer connections.'));
+      }
+      socket.auth = { type: 'customer', id: 'public-client', role: 'customer' };
+      socket.restaurantId = restaurantId;
+      return next();
+    }
+
     const token = socket.handshake.auth?.token || socket.handshake.query?.token;
     if (!token) {
       return next(new Error('Authentication token required.'));

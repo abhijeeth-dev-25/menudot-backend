@@ -67,6 +67,17 @@ class TableController {
     return sendSuccess(res, 200, `Requested ${serviceType} service successfully.`);
   });
 
+  getCustomerOrder = asyncHandler(async (req, res) => {
+    const { orderId } = req.params;
+    const Order = require('../models/order.model');
+    const order = await Order.findOne({ _id: orderId, isDeleted: false });
+    if (!order) {
+      const AppError = require('../exceptions/AppError');
+      throw new AppError(404, 'Order not found or has been removed.');
+    }
+    return sendSuccess(res, 200, 'Order retrieved successfully', order);
+  });
+
   placeDineInOrder = asyncHandler(async (req, res) => {
     const order = await TableService.placeDineInOrder(req.body);
     return sendSuccess(res, 201, 'Dine-in order placed successfully via QR', order);

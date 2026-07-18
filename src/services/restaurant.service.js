@@ -216,6 +216,18 @@ class RestaurantService {
   }
 
   /**
+   * Fetch all restaurants (Platform Admins only).
+   */
+  async getRestaurants(filter = {}) {
+    const query = {};
+    if (filter.stage) {
+      query['onboarding.stage'] = filter.stage;
+    }
+    const Restaurant = require('../models/restaurant.model');
+    return Restaurant.find(query).sort({ createdAt: -1 });
+  }
+
+  /**
    * Soft deletes a restaurant account (Platform Admin / Developer only).
    */
   async deleteRestaurantAdmin(restaurantId) {
