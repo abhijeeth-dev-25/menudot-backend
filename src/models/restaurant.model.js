@@ -136,11 +136,19 @@ const restaurantSchema = new mongoose.Schema(
     onboarding: {
       stage: {
         type: String,
-        enum: ['draft', 'submitted', 'under_review', 'approved', 'rejected'],
+        enum: ['draft', 'submitted', 'under_review', 'verified', 'approved', 'rejected'],
         default: 'draft',
         index: true,
       },
       submittedAt: { type: Date, default: null },
+      verificationChecklist: {
+        panVerified: { type: Boolean, default: false },
+        gstinVerified: { type: Boolean, default: false },
+        fssaiVerified: { type: Boolean, default: false },
+        bankVerified: { type: Boolean, default: false },
+      },
+      verifiedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User', default: null },
+      verifiedAt: { type: Date, default: null },
       approvedAt: { type: Date, default: null },
       approvedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User', default: null },
       rejectionReason: { type: String, default: null },

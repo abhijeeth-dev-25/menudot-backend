@@ -43,7 +43,7 @@ describe('Restaurant API (/api/v1/restaurants)', () => {
       const restaurant = await createPendingRestaurant(owner);
 
       const res = await request(app)
-        .get('/api/v1/restaurants/onboarding/pending')
+        .get('/api/v1/platform/restaurants/onboarding/pending')
         .set(adminHeaders)
         .expect(200);
 
@@ -56,7 +56,7 @@ describe('Restaurant API (/api/v1/restaurants)', () => {
       const { headers: ownerHeaders } = await registerAndApproveRestaurant();
 
       await request(app)
-        .get('/api/v1/restaurants/onboarding/pending')
+        .get('/api/v1/platform/restaurants/onboarding/pending')
         .set(ownerHeaders)
         .expect(403);
     });
@@ -75,8 +75,12 @@ describe('Restaurant API (/api/v1/restaurants)', () => {
 
       const restaurant = await createPendingRestaurant(owner);
 
+      // Set stage to verified so approval is allowed (Phase 4 requirement)
+      restaurant.onboarding.stage = 'verified';
+      await restaurant.save();
+
       const res = await request(app)
-        .post(`/api/v1/restaurants/onboarding/${restaurant._id}/review`)
+        .post(`/api/v1/platform/restaurants/onboarding/${restaurant._id}/review`)
         .set(adminHeaders)
         .send({ action: 'approve' })
         .expect(200);
@@ -109,7 +113,7 @@ describe('Restaurant API (/api/v1/restaurants)', () => {
       const restaurant = await createPendingRestaurant(owner);
 
       const res = await request(app)
-        .post(`/api/v1/restaurants/onboarding/${restaurant._id}/review`)
+        .post(`/api/v1/platform/restaurants/onboarding/${restaurant._id}/review`)
         .set(adminHeaders)
         .send({ action: 'reject', rejectionReason: 'Documents are unreadable.' })
         .expect(200);

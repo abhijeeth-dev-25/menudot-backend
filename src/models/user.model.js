@@ -42,7 +42,19 @@ const userSchema = new mongoose.Schema(
     ],
     globalRole: {
       type: String,
-      enum: ['restaurant_user', 'platform_admin'],
+      enum: [
+        'restaurant_user',
+        'super_admin',
+        'platform_admin',
+        'operations',
+        'verification',
+        'finance',
+        'support',
+        'safety',
+        'sales',
+        'tech',
+        'audit',
+      ],
       default: 'restaurant_user',
     },
     status: {

@@ -1,0 +1,118 @@
+const PLATFORM_ROLES = {
+  SUPER_ADMIN: 'super_admin',
+  PLATFORM_ADMIN: 'platform_admin',
+  OPERATIONS: 'operations',
+  VERIFICATION: 'verification',
+  FINANCE: 'finance',
+  SUPPORT: 'support',
+  SAFETY: 'safety',
+  SALES: 'sales',
+  TECH: 'tech',
+  AUDIT: 'audit',
+  RESTAURANT_USER: 'restaurant_user',
+};
+
+const PLATFORM_PERMISSIONS = {
+  // Super Admin specific
+  MANAGE_PLATFORM_ADMINS: 'platform:admins:manage',
+  ACCESS_PRODUCTION_SETTINGS: 'platform:settings:production',
+  MANAGE_SYSTEM_CONFIG: 'platform:config:system',
+  ACCESS_DB_TOOLS: 'platform:database:tools',
+  EMERGENCY_CONTROLS: 'platform:emergency',
+  GLOBAL_ANNOUNCEMENTS: 'platform:announcements',
+
+  // Platform Admins & Operations
+  APPROVE_RESTAURANT: 'restaurant:approve',
+  SUSPEND_RESTAURANT: 'restaurant:suspend',
+  ACTIVATE_RESTAURANT: 'restaurant:activate',
+  MANAGE_PLANS: 'subscriptions:manage',
+  VIEW_PLATFORM_ANALYTICS: 'analytics:platform:view',
+  HANDLE_ESCALATIONS: 'support:escalations:handle',
+  MANAGE_PLATFORM_STAFF: 'platform:staff:manage',
+  VIEW_SYSTEM_REPORTS: 'reports:system:view',
+  ACCESS_ALL_AUDIT_LOGS: 'audit:logs:access',
+
+  // Verification Team
+  VERIFY_RESTAURANT_DOCS: 'restaurant:docs:verify',
+
+  // Finance Team
+  MANAGE_PAYOUTS: 'finance:payouts:manage',
+  VIEW_FINANCIAL_REPORTS: 'finance:reports:view',
+
+  // Customer Support Team
+  MANAGE_TICKETS: 'support:tickets:manage',
+
+  // Trust & Safety Team
+  FRAUD_DETECTION: 'safety:fraud:detect',
+
+  // Growth & Sales Team
+  MANAGE_SALES_LEADS: 'sales:leads:manage',
+
+  // Technical Team
+  VIEW_SYSTEM_LOGS: 'tech:logs:view',
+};
+
+const ROLE_PERMISSIONS = {
+  [PLATFORM_ROLES.SUPER_ADMIN]: ['*'], // Super admin bypasses all checks
+  
+  [PLATFORM_ROLES.PLATFORM_ADMIN]: [
+    PLATFORM_PERMISSIONS.APPROVE_RESTAURANT,
+    PLATFORM_PERMISSIONS.SUSPEND_RESTAURANT,
+    PLATFORM_PERMISSIONS.ACTIVATE_RESTAURANT,
+    PLATFORM_PERMISSIONS.MANAGE_PLANS,
+    PLATFORM_PERMISSIONS.VIEW_PLATFORM_ANALYTICS,
+    PLATFORM_PERMISSIONS.HANDLE_ESCALATIONS,
+    PLATFORM_PERMISSIONS.MANAGE_PLATFORM_STAFF,
+    PLATFORM_PERMISSIONS.VIEW_SYSTEM_REPORTS,
+    PLATFORM_PERMISSIONS.ACCESS_ALL_AUDIT_LOGS,
+  ],
+  
+  [PLATFORM_ROLES.OPERATIONS]: [
+    PLATFORM_PERMISSIONS.VIEW_PLATFORM_ANALYTICS,
+    PLATFORM_PERMISSIONS.HANDLE_ESCALATIONS,
+    PLATFORM_PERMISSIONS.VIEW_SYSTEM_REPORTS,
+  ],
+  
+  [PLATFORM_ROLES.VERIFICATION]: [
+    PLATFORM_PERMISSIONS.VERIFY_RESTAURANT_DOCS,
+    PLATFORM_PERMISSIONS.VIEW_SYSTEM_REPORTS,
+  ],
+  
+  [PLATFORM_ROLES.FINANCE]: [
+    PLATFORM_PERMISSIONS.VIEW_PLATFORM_ANALYTICS,
+    PLATFORM_PERMISSIONS.MANAGE_PAYOUTS,
+    PLATFORM_PERMISSIONS.VIEW_FINANCIAL_REPORTS,
+  ],
+  
+  [PLATFORM_ROLES.SUPPORT]: [
+    PLATFORM_PERMISSIONS.MANAGE_TICKETS,
+    PLATFORM_PERMISSIONS.HANDLE_ESCALATIONS,
+  ],
+  
+  [PLATFORM_ROLES.SAFETY]: [
+    PLATFORM_PERMISSIONS.SUSPEND_RESTAURANT,
+    PLATFORM_PERMISSIONS.FRAUD_DETECTION,
+  ],
+  
+  [PLATFORM_ROLES.SALES]: [
+    PLATFORM_PERMISSIONS.MANAGE_SALES_LEADS,
+    PLATFORM_PERMISSIONS.VIEW_PLATFORM_ANALYTICS,
+  ],
+  
+  [PLATFORM_ROLES.TECH]: [
+    PLATFORM_PERMISSIONS.VIEW_SYSTEM_LOGS,
+    PLATFORM_PERMISSIONS.MANAGE_SYSTEM_CONFIG,
+  ],
+  
+  [PLATFORM_ROLES.AUDIT]: [
+    PLATFORM_PERMISSIONS.ACCESS_ALL_AUDIT_LOGS,
+  ],
+
+  [PLATFORM_ROLES.RESTAURANT_USER]: [], // Governed at the restaurant staff/tenant level
+};
+
+module.exports = {
+  PLATFORM_ROLES,
+  PLATFORM_PERMISSIONS,
+  ROLE_PERMISSIONS,
+};

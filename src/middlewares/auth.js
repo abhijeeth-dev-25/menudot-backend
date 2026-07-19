@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 const { verifyAccessToken } = require('../utils/jwt.util');
 const AppError = require('../exceptions/AppError');
 const asyncHandler = require('../utils/asyncHandler');
-const UserRepository = require('../repositories/user.repository');
-const RestaurantStaffRepository = require('../repositories/restaurantStaff.repository');
-const ScreenRepository = require('../repositories/screen.repository');
+const UserRepository = require('../repositories/restaurant/user.repository');
+const RestaurantStaffRepository = require('../repositories/restaurant/restaurantStaff.repository');
+const ScreenRepository = require('../repositories/restaurant/screen.repository');
 
 /**
  * Authentication middleware that verifies JWT and attaches user or screen device context.
@@ -90,10 +90,10 @@ const resolveTenant = asyncHandler(async (req, res, next) => {
   const restaurantId = new mongoose.Types.ObjectId(restaurantIdStr);
   req.restaurantId = restaurantId;
 
-  // 2. If it's a global platform admin, bypass staff membership checks
-  if (req.user && req.user.globalRole === 'platform_admin') {
+  // 2. If it's an internal platform user, bypass staff membership checks
+  if (req.user && req.user.globalRole !== 'restaurant_user') {
     req.staff = {
-      role: 'owner', // Map platform admin to full owner capabilities within this tenant context
+      role: 'owner', // Map platform user to full owner capabilities within this tenant context
       permissions: ['*'], // Access to all actions
     };
     return next();

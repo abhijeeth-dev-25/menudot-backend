@@ -10,20 +10,24 @@ const errorHandler = require('./middlewares/errorHandler');
 const { getDBHealth } = require('./database/db');
 const { sendSuccess } = require('./utils/response');
 
-const authRoutes = require('./routes/auth.routes');
-const restaurantRoutes = require('./routes/restaurant.routes');
-const menuRoutes = require('./routes/menu.routes');
-const webhookRoutes = require('./routes/webhook.routes');
-const tableRoutes = require('./routes/table.routes');
-const staffRoutes = require('./routes/staff.routes');
-const screenRoutes = require('./routes/screen.routes');
-const orderRoutes = require('./routes/order.routes');
-const platformIntegrationRoutes = require('./routes/platformIntegration.routes');
-const bookingRoutes = require('./routes/booking.routes');
-const inventoryRoutes = require('./routes/inventory.routes');
-const financeRoutes = require('./routes/finance.routes');
-const feedbackRoutes = require('./routes/feedback.routes');
-const campaignRoutes = require('./routes/campaign.routes');
+const authRoutes = require('./routes/restaurant/auth.routes');
+const restaurantRoutes = require('./routes/restaurant/restaurant.routes');
+const menuRoutes = require('./routes/restaurant/menu.routes');
+const webhookRoutes = require('./routes/restaurant/webhook.routes');
+const tableRoutes = require('./routes/restaurant/table.routes');
+const staffRoutes = require('./routes/restaurant/staff.routes');
+const screenRoutes = require('./routes/restaurant/screen.routes');
+const orderRoutes = require('./routes/restaurant/order.routes');
+const platformIntegrationRoutes = require('./routes/restaurant/platformIntegration.routes');
+const bookingRoutes = require('./routes/restaurant/booking.routes');
+const inventoryRoutes = require('./routes/restaurant/inventory.routes');
+const financeRoutes = require('./routes/restaurant/finance.routes');
+const feedbackRoutes = require('./routes/restaurant/feedback.routes');
+const campaignRoutes = require('./routes/restaurant/campaign.routes');
+
+// Platform Routes
+const platformRestaurantRoutes = require('./routes/platform/restaurant.routes');
+const platformSystemRoutes = require('./routes/platform/system.routes');
 const path = require('path');
 
 const app = express();
@@ -117,6 +121,10 @@ app.use('/api/v1/inventory', inventoryRoutes);
 app.use('/api/v1/finance', financeRoutes);
 app.use('/api/v1/feedback', feedbackRoutes);
 app.use('/api/v1/campaigns', campaignRoutes);
+
+// Platform administration route handlers
+app.use('/api/v1/platform/restaurants', platformRestaurantRoutes);
+app.use('/api/v1/platform/system', platformSystemRoutes);
 
 // 8. 404 Handler for undefined routes
 app.use((req, res, next) => {
