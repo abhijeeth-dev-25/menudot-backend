@@ -28,6 +28,8 @@ const campaignRoutes = require('./routes/restaurant/campaign.routes');
 // Platform Routes
 const platformRestaurantRoutes = require('./routes/platform/restaurant.routes');
 const platformSystemRoutes = require('./routes/platform/system.routes');
+const platformAdRoutes = require('./routes/platform/ad.routes');
+const platformCouponRoutes = require('./routes/platform/coupon.routes');
 const path = require('path');
 
 const app = express();
@@ -125,6 +127,9 @@ app.use('/api/v1/campaigns', campaignRoutes);
 // Platform administration route handlers
 app.use('/api/v1/platform/restaurants', platformRestaurantRoutes);
 app.use('/api/v1/platform/system', platformSystemRoutes);
+app.use('/api/v1/platform/ads', platformAdRoutes);
+app.use('/api/v1/platform/coupons', platformCouponRoutes);
+app.use('/api/v1/coupons', platformCouponRoutes);
 
 // 8. 404 Handler for undefined routes
 app.use((req, res, next) => {

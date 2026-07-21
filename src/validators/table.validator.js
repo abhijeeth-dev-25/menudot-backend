@@ -32,6 +32,7 @@ const serviceCallSchema = Joi.object({
 const placeDineInOrderSchema = Joi.object({
   code: Joi.string().required().trim(),
   deviceId: Joi.string().required().trim(),
+  couponCode: Joi.string().trim().uppercase().optional(),
   items: Joi.array().items(
     Joi.object({
       itemId: objectId.required(),

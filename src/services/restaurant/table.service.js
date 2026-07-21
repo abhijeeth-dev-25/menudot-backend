@@ -6,6 +6,7 @@ const MenuItem = require('../../models/menuItem.model');
 const OrderRepository = require('../../repositories/restaurant/order.repository');
 const { runTransaction } = require('../../utils/transaction');
 const socketManager = require('../../utils/socket');
+const CouponService = require('../platform/coupon.service');
 const AppError = require('../../exceptions/AppError');
 const logger = require('../../utils/logger');
 
@@ -175,7 +176,7 @@ class TableService {
   }
 
   async placeDineInOrder(orderData) {
-    const { code, deviceId, items } = orderData;
+    const { code, deviceId, items, couponCode } = orderData;
 
     // 1. Resolve table and validate session active state
     const initialTable = await TableRepository.findByQrCode(code);
@@ -258,7 +259,17 @@ class TableService {
       });
     }
 
-    const grandTotal = subtotal + totalTax;
+    let discountAmount = 0;
+    if (couponCode) {
+      const cartItemsForCalc = validatedItems.map(item => ({
+        menuItemId: item.itemId.toString(),
+        quantity: item.quantity,
+      }));
+      const calcResult = await CouponService.applyCoupon(couponCode, restaurantId, cartItemsForCalc);
+      discountAmount = calcResult.discountAmount;
+    }
+
+    const grandTotal = Math.max(0, subtotal + totalTax - discountAmount);
     let finalOrder;
 
     // 3. Save order and update table session in a transaction
@@ -282,7 +293,8 @@ class TableService {
           subtotal,
           tax: totalTax,
           platformCharge: 0,
-          discount: 0,
+          discount: discountAmount,
+          couponCode: couponCode ? couponCode.toUpperCase() : null,
           grandTotal,
         },
         payment: {
@@ -295,6 +307,11 @@ class TableService {
 
       // Create Order
       finalOrder = await OrderRepository.create(restaurantId, finalOrderData, { session });
+
+      // Increment coupon usage atomically
+      if (couponCode) {
+        await CouponService.incrementUsage(couponCode, session);
+      }
 
       // Add Order ID to the table session list
       tableInTx.activeSession.orderIds.push(finalOrder._id);

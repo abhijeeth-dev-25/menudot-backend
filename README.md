@@ -22,7 +22,10 @@
 14. [API — Finance & P&L Reports](#14-api--finance--pl-reports)
 15. [API — Reputation & Feedbacks](#15-api--reputation--feedbacks)
 16. [API — Growth & Ads Campaigns](#16-api--growth--ads-campaigns)
-17. [Error Codes Reference](#17-error-codes-reference)
+17. [API — Platform System Operations](#17-api--platform-system-operations)
+18. [API — Platform Verification Team](#18-api--platform-verification-team)
+19. [API — Coupons (Platform & Restaurant Scope)](#19-api--coupons-platform--restaurant-scope)
+20. [Error Codes Reference](#20-error-codes-reference)
 
 ---
 
@@ -103,6 +106,28 @@ npm start            # Production
 
 ## 3. Architecture Concepts
 
+### Directory Layout & Domain Isolation
+
+MenuDot isolates platform administration concerns from tenant-specific restaurant operations at the file and namespace level. The project directory layout separates these distinct business contexts clearly:
+
+```text
+src/
+├── controllers/
+│   ├── platform/       # B2B platform staff & admin operations (Onboarding, Ads, Coupons, System Stats)
+│   └── restaurant/     # B2C & B2B restaurant operational controllers (Menu, Booking, KDS, Order, Staff)
+├── routes/
+│   ├── platform/       # Administrative route routing
+│   └── restaurant/     # Merchant & Customer facing QR order routes
+├── services/
+│   ├── platform/       # Onboarding document verification checks, global settings services
+│   └── restaurant/     # Restaurant core logic (order status updates, table session controls)
+└── repositories/
+    ├── platform/       # Platform-wide collections logic
+    └── restaurant/     # Tenant-level collections data layers
+```
+
+---
+
 ### Multi-Tenancy & Tenant Isolation
 
 All operational collections use a Mongoose `auditablePlugin` that:
@@ -116,6 +141,8 @@ All operational collections use a Mongoose `auditablePlugin` that:
 
 ### Role-Based Access Control (RBAC)
 
+#### Restaurant-Level Roles
+
 | Role | Who | Access Level |
 |---|---|---|
 | `owner` | Restaurant proprietor | Full access. Can view raw legal/bank secrets. Creates managers. |
@@ -123,7 +150,23 @@ All operational collections use a Mongoose `auditablePlugin` that:
 | `chef` | Kitchen staff | Orders (accept/prepare/complete) + stock toggle. |
 | `server` | Floor staff | Table views + service calls only. |
 | `screen` | Physical KDS/Cashier tablet | Scoped to `allowedServices` and `allowedTables` filters. |
-| `platform_admin` | Menudot internal staff | Cross-tenant access. Reviews onboarding. Can delete accounts. |
+
+#### Platform-Wide Roles & Permissions
+
+Platform administration accounts use permission-scoped access to manage system health, review onboardings, perform verifications, and run system tools.
+
+| Role | Who | Access Level & Permissions |
+|---|---|---|
+| `super_admin` | Platform Owners / DevOps | Root access (`*`). Bypasses all middleware permission checks. Can access DB tools, emergency controls, etc. |
+| `platform_admin` | Core Operations Team | Manages restaurant status, plans, platform advertisements, platform staff, and support escalations. |
+| `operations` | Platform Ops Staff | Views system reports, analytics, and handles support escalations. |
+| `verification` | Document Verification Team | Inspects and verifies KYC / legal documents for onboarding restaurants. |
+| `finance` | Accounting Team | Generates financial analytics reports and manages payouts. |
+| `support` | Customer Support Team | Manages support tickets and handles user escalations. |
+| `safety` | Trust & Safety Team | Suspends malicious restaurant accounts and runs fraud detection tools. |
+| `sales` | Growth & Marketing | Manages sales leads, platform ad campaigns, and campaign metrics. |
+| `tech` | Engineering Team | Views system logs and modifies system configuration parameters. |
+| `audit` | Compliance Officers | Accesses global platform audit logs and transaction history. |
 
 ---
 
@@ -282,30 +325,6 @@ Upload a restaurant cover photo to ImageKit CDN.
 
 ---
 
-### `GET /restaurants/onboarding/pending`
-List all restaurant applications pending admin review.
-
-- **Role**: `platform_admin` only
-
----
-
-### `POST /restaurants/onboarding/:restaurantId/review`
-Approve or reject an onboarding application.
-
-- **Role**: `platform_admin` only
-- **Body**: `{ "action": "approve" | "reject", "rejectionReason": "string (required if reject)" }`
-- **Behavior on approve**: Owner account activated, random temp password generated, RestaurantStaff membership created, credentials emailed to owner.
-
----
-
-### `DELETE /restaurants/admin/:id`
-Soft-delete a restaurant account for legal / compliance reasons.
-
-- **Role**: `platform_admin` only
-- **Behavior**: Sets `isDeleted: true` and `deletedAt` timestamp. Data retained for audit trail.
-
----
-
 ## 6. API — Staff Management
 
 > All routes require `Authorization: Bearer <token>` + `x-restaurant-id`.
@@ -370,6 +389,21 @@ List all configured tables.
 
 ---
 
+### `PUT /tables/:tableId`
+Update configured table parameters (e.g. number or seating capacity).
+
+- **Role**: `owner`, `manager`
+- **Body** (optional): `{ "tableNumber": "T-1-Updated", "capacity": 6 }`
+
+---
+
+### `DELETE /tables/:tableId`
+Soft-delete a table configuration.
+
+- **Role**: `owner`, `manager`
+
+---
+
 ### `PATCH /tables/:tableId/qr/toggle`
 Enable or disable QR scanning on a table.
 
@@ -382,6 +416,14 @@ Enable or disable QR scanning on a table.
 Check out a table session and release it back to vacant.
 
 - **Role**: `owner`, `manager`, `server`
+
+---
+
+### `GET /tables/order/:orderId` *(Public)*
+Retrieve the status and detail of a specific customer order (used for live status updates on mobile).
+
+- **Parameters**: `orderId` in URL
+- **Response**: The complete live order document from the database.
 
 ---
 
@@ -464,8 +506,10 @@ List all menu categories.
 
 ---
 
-### `PATCH /menu/categories/:categoryId`
+### `PUT /menu/categories/:categoryId`
 Update category name or description.
+
+- **Body**: `{ "name": "Desserts Updated", "description": "Updated sweet treats description" }`
 
 ---
 
@@ -499,8 +543,15 @@ List all menu items.
 
 ---
 
-### `PATCH /menu/items/:itemId`
+### `GET /menu/items/:itemId`
+Fetch the detailed fields and settings of a specific menu item.
+
+---
+
+### `PUT /menu/items/:itemId`
 Update menu item details.
+
+**Body** (optional): `{ "name": "Updated Name", "price": 200 }`
 
 ---
 
@@ -516,7 +567,7 @@ Toggle item stock availability.
 
 ---
 
-### `POST /menu/media`
+### `POST /menu/media/upload`
 Upload a menu item image to ImageKit CDN.
 
 - **Content-Type**: `multipart/form-data`
@@ -550,6 +601,21 @@ Create a screen device (KDS, cashier terminal, reception tablet).
 
 ### `GET /screens`
 List all screen devices for the restaurant.
+
+---
+
+### `PUT /screens/:screenId`
+Update an existing screen device configuration.
+
+- **Role**: `owner`, `manager`
+- **Body** (optional): `{ "name": "Updated KDS Name", "allowedTables": ["T-1", "T-2", "T-3"] }`
+
+---
+
+### `DELETE /screens/:screenId`
+Delete a screen device configuration.
+
+- **Role**: `owner`, `manager`
 
 ---
 
@@ -706,6 +772,14 @@ List all inventory items and current stock levels.
 
 ---
 
+### `PATCH /inventory/items/:id`
+Update an inventory item details (thresholds, name, unit, cost, etc.).
+
+- **Role**: `owner`, `manager`
+- **Body** (optional): `{ "reorderThreshold": 5, "costPerUnit": 450 }`
+
+---
+
 ### `POST /inventory/items/:id/adjust`
 Manually adjust stock (restock, wastage, or correction).
 
@@ -751,20 +825,19 @@ Retrieve expense log.
 
 ---
 
-### `GET /finance/report/daily`
-Generate a daily P&L rollup report.
+### `GET /finance/reports/pnl`
+Retrieve daily P&L reports for a specified date range.
 
 - **Role**: `owner` only
-- **Query**: `?date=2026-07-14`
-- **Response**:
-```json
-{
-  "date": "2026-07-14",
-  "revenue": { "dineIn": 12000, "delivery": 4500, "total": 16500 },
-  "expenses": { "total": 3500, "breakdown": { "raw_materials": 3500 } },
-  "netProfit": 13000
-}
-```
+- **Query Filters**: `startDate` (ISO Date), `endDate` (ISO Date)
+
+---
+
+### `POST /finance/reports/pnl/generate`
+Trigger manual generation/rollup of the daily finance report for a specific date.
+
+- **Role**: `owner` only
+- **Body**: `{ "date": "2026-07-14" }`
 
 ---
 
@@ -874,7 +947,265 @@ Modify campaign settings (budget, dates, CPC, or status).
 
 ---
 
-## 17. Error Codes Reference
+### Platform-Wide Universal Ad Server (Third-Party Ads)
+
+MenuDot hosts a universal display ad platform allowing third-party advertisers to serve creatives (banners, widgets, videos) across multi-vertical client apps (dineout QR menus, checkout screens, merchant dashboards) dynamically matched against contextual tags and geography.
+
+#### `POST /platform/ads`
+Provision a new platform-wide display advertisement campaign with creative assets and targeting criteria.
+
+- **Role**: `super_admin`, `platform_admin`, `sales`
+- **Body**:
+```json
+{
+  "campaign": {
+    "name": "Coca Cola Summer Campaign",
+    "pricing": {
+      "model": "CPC" | "CPM",
+      "costPerUnit": 1.5,
+      "totalBudget": 500,
+      "dailyBudget": 50
+    },
+    "schedule": {
+      "startDate": "2026-07-19T00:00:00Z",
+      "endDate": "2026-07-29T23:59:59Z"
+    }
+  },
+  "creative": {
+    "placementKey": "qr_menu_banner" | "merchant_dashboard_sidebar" | "checkout_success",
+    "format": "image" | "html_widget" | "text_banner" | "video",
+    "assets": {
+      "mediaUrl": "https://cdn.coke.com/banner.png",
+      "headingText": "Refresh Yourself",
+      "bodyText": "Get a cold coke now!"
+    },
+    "destinationUrl": "https://coke.com/buy"
+  },
+  "targeting": {
+    "geoScope": {
+      "cities": ["Hyderabad", "Bangalore"],
+      "pincodes": ["500081"]
+    },
+    "targetTags": ["beverages", "cold_drinks"]
+  }
+}
+```
+
+---
+
+#### `GET /platform/ads/serve` *(Public)*
+Serve context-targeted third-party display ads for client views (B2C QR Menus, B2B Dashboards).
+
+- **Query Parameters**:
+  - `placementKey` (required): e.g. `qr_menu_banner`, `merchant_dashboard_sidebar`
+  - `city` / `pincode` / `state` (optional): Geo context
+  - `tags` (optional): Comma-separated context tags (e.g. `veg,healthy`)
+  - `restaurantId` (optional): Allowed/blocked tenant matching
+- **Response**:
+```json
+{
+  "success": true,
+  "statusCode": 200,
+  "message": "Matching ad creative retrieved successfully",
+  "data": {
+    "creative": {
+      "placementKey": "qr_menu_banner",
+      "format": "image",
+      "assets": {
+        "mediaUrl": "https://cdn.coke.com/banner.png",
+        "headingText": "Refresh Yourself",
+        "bodyText": "Get a cold coke now!"
+      },
+      "destinationUrl": "https://coke.com/buy"
+    },
+    "trackingToken": "jwt_signed_event_token"
+  }
+}
+```
+
+---
+
+#### `POST /platform/ads/events` *(Public)*
+Log ad interaction events (clicks or impressions) and deduct/update billing accounts.
+
+- **Body**:
+```json
+{
+  "token": "jwt_signed_event_token",
+  "eventType": "click" | "impression"
+}
+```
+- **Behavior**: Verifies tracking token validity. If event type aligns with the campaign pricing model (`click` for CPC, `impression` for CPM), deducts `costPerUnit` from remaining campaign budgets. Automatically transitions campaign status to `'paused'` or `'completed'` when caps are reached.
+---
+
+## 17. API — Platform System Operations
+
+> Operations and administration endpoints require `Authorization: Bearer <token>` (Platform Staff user).
+
+### `GET /platform/system/stats`
+Fetch database collection names and total document counts.
+
+- **Required Platform Permission**: `platform:database:tools` (Super Admin role by default)
+- **Response**:
+```json
+{
+  "dbName": "menudot",
+  "readyState": 1,
+  "collections": {
+    "users": 15,
+    "restaurants": 4,
+    "orders": 122
+  }
+}
+```
+
+---
+
+### `POST /platform/system/emergency`
+Toggles global maintenance mode flag.
+
+- **Required Platform Permission**: `platform:emergency` (Super Admin role by default)
+- **Body**: `{ "maintenance": true | false }`
+
+---
+
+### `POST /platform/system/users`
+Provision new backend platform administrative/staff users.
+
+- **Required Platform Permission**: `platform:admins:manage` (Super Admin role by default)
+- **Body**:
+```json
+{
+  "fullName": "Jane Tech",
+  "email": "jane@menudot.com",
+  "mobile": "+919876543299",
+  "password": "techpassword",
+  "globalRole": "tech"
+}
+```
+
+---
+
+## 18. API — Platform Verification Team
+
+> Verification endpoints require `Authorization: Bearer <token>` (Platform Staff user).
+
+### `GET /platform/restaurants/verification/pending`
+Fetch the queue of restaurant applications awaiting KYC document checks.
+
+- **Required Platform Permission**: `reports:system:view` or `restaurant:docs:verify` (Verification/Platform Admin role)
+
+---
+
+### `POST /platform/restaurants/onboarding/:restaurantId/verify`
+Verify/approve a specific document field (`pan`, `gstin`, `fssai`, or `bank`) for a restaurant application.
+
+- **Required Platform Permission**: `restaurant:docs:verify` (Verification/Platform Admin role)
+- **Body**:
+```json
+{
+  "docType": "pan" | "gstin" | "fssai" | "bank",
+  "isVerified": true | false
+}
+```
+- **Behavior**: Auto-transitions onboarding stage to `'verified'` once PAN, GSTIN, FSSAI, and Bank details are all verified.
+
+---
+
+### `GET /platform/restaurants/onboarding/pending`
+List all restaurant applications pending final admin activation review.
+
+- **Required Platform Permission**: `reports:system:view` (Platform Admin/Operations role)
+
+---
+
+### `POST /platform/restaurants/onboarding/:restaurantId/review`
+Approve or reject a fully-verified onboarding application to activate the restaurant.
+
+- **Required Platform Permission**: `restaurant:approve` (Platform Admin role)
+- **Body**: `{ "action": "approve" | "reject", "rejectionReason": "string (required if reject)" }`
+- **Behavior on Approve**: Restaurant transitions to `'active'`, owner account activated, credentials emailed to owner.
+
+---
+
+### `DELETE /platform/restaurants/:id`
+Suspend and soft-delete a restaurant tenant account for legal/compliance reasons.
+
+- **Required Platform Permission**: `restaurant:suspend` (Platform Admin/Safety role)
+
+---
+
+## 19. API — Coupons (Platform & Restaurant Scope)
+
+> Manage and apply promotional discounts. Creating coupons requires a valid platform or merchant login session.
+
+### `POST /platform/coupons`
+Create a new promotional coupon code.
+
+- **Authorization**:
+  - For platform-scoped coupons: Platform Admin/Sales role.
+  - For restaurant-scoped coupons: Restaurant Owner/Manager or Platform Admin.
+- **Headers**: `x-restaurant-id` (required if restaurant scoped)
+- **Body**:
+```json
+{
+  "code": "SUMMER50",
+  "scope": "platform" | "restaurant",
+  "discountType": "percentage" | "flat",
+  "discountValue": 50,
+  "minOrderValue": 200,
+  "maxDiscountLimit": 100,
+  "targetType": "cart" | "item" | "category",
+  "applicableItems": ["menuItemObjectId"],
+  "applicableCategories": ["Pizza"],
+  "applicableRestaurants": ["restaurantObjectId"],
+  "usageLimit": 100,
+  "startDate": "2026-07-21T00:00:00Z",
+  "endDate": "2026-08-21T23:59:59Z"
+}
+```
+
+---
+
+### `GET /platform/coupons` or `GET /coupons`
+List active coupons.
+
+- **Headers**: `x-restaurant-id` (optional, to include tenant-scoped coupons)
+- **Query Parameters**: `scope` (optional)
+
+---
+
+### `POST /coupons/apply` *(Public)*
+Apply a coupon code to the current customer checkout cart.
+
+- **Body**:
+```json
+{
+  "couponCode": "SUMMER50",
+  "restaurantId": "restaurantObjectId",
+  "items": [
+    { "menuItemId": "itemObjectId", "quantity": 2 }
+  ]
+}
+```
+- **Response**:
+```json
+{
+  "success": true,
+  "statusCode": 200,
+  "message": "Coupon applied successfully",
+  "data": {
+    "couponCode": "SUMMER50",
+    "discountAmount": 50,
+    "cartSubtotal": 600,
+    "eligibleSubtotal": 600
+  }
+}
+```
+
+---
+
+## 20. Error Codes Reference
 
 | HTTP Status | Meaning | Common Cause |
 |---|---|---|

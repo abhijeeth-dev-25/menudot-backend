@@ -1,0 +1,3350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1784616640481" clover="3.2.0">
+  <project timestamp="1784616640481" name="All files">
+    <metrics statements="2909" coveredstatements="1991" conditionals="1207" coveredconditionals="450" methods="376" coveredmethods="223" elements="4492" coveredelements="2664" complexity="0" loc="2909" ncloc="2909" packages="17" files="128" classes="128"/>
+    <package name="src">
+      <metrics statements="74" coveredstatements="67" conditionals="7" coveredconditionals="4" methods="7" coveredmethods="4"/>
+      <file name="app.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/app.js">
+        <metrics statements="74" coveredstatements="67" conditionals="7" coveredconditionals="4" methods="7" coveredmethods="4"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="5" count="8" type="stmt"/>
+        <line num="6" count="8" type="stmt"/>
+        <line num="7" count="8" type="stmt"/>
+        <line num="8" count="8" type="stmt"/>
+        <line num="9" count="8" type="stmt"/>
+        <line num="10" count="8" type="stmt"/>
+        <line num="11" count="8" type="stmt"/>
+        <line num="13" count="8" type="stmt"/>
+        <line num="14" count="8" type="stmt"/>
+        <line num="15" count="8" type="stmt"/>
+        <line num="16" count="8" type="stmt"/>
+        <line num="17" count="8" type="stmt"/>
+        <line num="18" count="8" type="stmt"/>
+        <line num="19" count="8" type="stmt"/>
+        <line num="20" count="8" type="stmt"/>
+        <line num="21" count="8" type="stmt"/>
+        <line num="22" count="8" type="stmt"/>
+        <line num="23" count="8" type="stmt"/>
+        <line num="24" count="8" type="stmt"/>
+        <line num="25" count="8" type="stmt"/>
+        <line num="26" count="8" type="stmt"/>
+        <line num="29" count="8" type="stmt"/>
+        <line num="30" count="8" type="stmt"/>
+        <line num="31" count="8" type="stmt"/>
+        <line num="32" count="8" type="stmt"/>
+        <line num="33" count="8" type="stmt"/>
+        <line num="35" count="8" type="stmt"/>
+        <line num="38" count="8" type="cond" truecount="1" falsecount="1"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="43" count="8" type="stmt"/>
+        <line num="47" count="95" type="stmt"/>
+        <line num="53" count="95" type="stmt"/>
+        <line num="59" count="95" type="stmt"/>
+        <line num="63" count="0" type="stmt"/>
+        <line num="69" count="8" type="stmt"/>
+        <line num="70" count="8" type="stmt"/>
+        <line num="73" count="8" type="stmt"/>
+        <line num="83" count="8" type="stmt"/>
+        <line num="86" count="8" type="stmt"/>
+        <line num="90" count="74" type="stmt"/>
+        <line num="94" count="8" type="stmt"/>
+        <line num="97" count="8" type="stmt"/>
+        <line num="98" count="0" type="stmt"/>
+        <line num="99" count="0" type="stmt"/>
+        <line num="106" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="107" count="0" type="stmt"/>
+        <line num="111" count="8" type="stmt"/>
+        <line num="112" count="8" type="stmt"/>
+        <line num="113" count="8" type="stmt"/>
+        <line num="114" count="8" type="stmt"/>
+        <line num="115" count="8" type="stmt"/>
+        <line num="116" count="8" type="stmt"/>
+        <line num="117" count="8" type="stmt"/>
+        <line num="118" count="8" type="stmt"/>
+        <line num="119" count="8" type="stmt"/>
+        <line num="120" count="8" type="stmt"/>
+        <line num="121" count="8" type="stmt"/>
+        <line num="122" count="8" type="stmt"/>
+        <line num="123" count="8" type="stmt"/>
+        <line num="124" count="8" type="stmt"/>
+        <line num="125" count="8" type="stmt"/>
+        <line num="128" count="8" type="stmt"/>
+        <line num="129" count="8" type="stmt"/>
+        <line num="130" count="8" type="stmt"/>
+        <line num="131" count="8" type="stmt"/>
+        <line num="132" count="8" type="stmt"/>
+        <line num="135" count="8" type="stmt"/>
+        <line num="136" count="0" type="stmt"/>
+        <line num="140" count="8" type="stmt"/>
+        <line num="142" count="8" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.config">
+      <metrics statements="13" coveredstatements="12" conditionals="2" coveredconditionals="1" methods="0" coveredmethods="0"/>
+      <file name="env.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/config/env.js">
+        <metrics statements="9" coveredstatements="8" conditionals="2" coveredconditionals="1" methods="0" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="6" count="8" type="stmt"/>
+        <line num="8" count="8" type="stmt"/>
+        <line num="33" count="8" type="stmt"/>
+        <line num="37" count="8" type="cond" truecount="1" falsecount="1"/>
+        <line num="38" count="0" type="stmt"/>
+        <line num="41" count="8" type="stmt"/>
+      </file>
+      <file name="platformPermissions.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/config/platformPermissions.js">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="15" count="8" type="stmt"/>
+        <line num="56" count="8" type="stmt"/>
+        <line num="117" count="8" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.controllers.platform">
+      <metrics statements="136" coveredstatements="111" conditionals="66" coveredconditionals="47" methods="15" coveredmethods="11"/>
+      <file name="ad.controller.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/controllers/platform/ad.controller.js">
+        <metrics statements="31" coveredstatements="27" conditionals="19" coveredconditionals="15" methods="3" coveredmethods="3"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="10" count="8" type="stmt"/>
+        <line num="11" count="3" type="stmt"/>
+        <line num="13" count="3" type="cond" truecount="4" falsecount="1"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="18" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="22" count="3" type="stmt"/>
+        <line num="23" count="3" type="stmt"/>
+        <line num="29" count="8" type="stmt"/>
+        <line num="30" count="3" type="stmt"/>
+        <line num="32" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="37" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="39" count="3" type="stmt"/>
+        <line num="47" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="48" count="1" type="stmt"/>
+        <line num="51" count="2" type="stmt"/>
+        <line num="57" count="8" type="stmt"/>
+        <line num="58" count="4" type="stmt"/>
+        <line num="60" count="4" type="cond" truecount="3" falsecount="1"/>
+        <line num="61" count="0" type="stmt"/>
+        <line num="64" count="4" type="stmt"/>
+        <line num="65" count="4" type="cond" truecount="1" falsecount="1"/>
+        <line num="66" count="0" type="stmt"/>
+        <line num="69" count="4" type="stmt"/>
+        <line num="70" count="3" type="stmt"/>
+        <line num="74" count="8" type="stmt"/>
+      </file>
+      <file name="coupon.controller.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/controllers/platform/coupon.controller.js">
+        <metrics statements="37" coveredstatements="29" conditionals="33" coveredconditionals="25" methods="3" coveredmethods="2"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="5" count="8" type="stmt"/>
+        <line num="11" count="8" type="stmt"/>
+        <line num="12" count="5" type="stmt"/>
+        <line num="14" count="5" type="cond" truecount="8" falsecount="1"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="19" count="5" type="stmt"/>
+        <line num="20" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="21" count="1" type="cond" truecount="2" falsecount="2"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="24" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="28" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="29" count="1" type="stmt"/>
+        <line num="34" count="1" type="cond" truecount="3" falsecount="1"/>
+        <line num="35" count="0" type="stmt"/>
+        <line num="38" count="4" type="cond" truecount="1" falsecount="1"/>
+        <line num="40" count="4" type="stmt"/>
+        <line num="41" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="42" count="1" type="stmt"/>
+        <line num="46" count="4" type="stmt"/>
+        <line num="47" count="3" type="stmt"/>
+        <line num="53" count="8" type="stmt"/>
+        <line num="54" count="0" type="stmt"/>
+        <line num="55" count="0" type="stmt"/>
+        <line num="57" count="0" type="stmt"/>
+        <line num="58" count="0" type="stmt"/>
+        <line num="64" count="8" type="stmt"/>
+        <line num="65" count="7" type="stmt"/>
+        <line num="67" count="7" type="cond" truecount="5" falsecount="1"/>
+        <line num="68" count="0" type="stmt"/>
+        <line num="71" count="7" type="stmt"/>
+        <line num="72" count="4" type="stmt"/>
+        <line num="76" count="8" type="stmt"/>
+      </file>
+      <file name="restaurant.controller.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/controllers/platform/restaurant.controller.js">
+        <metrics statements="20" coveredstatements="15" conditionals="2" coveredconditionals="2" methods="4" coveredmethods="2"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="9" count="8" type="stmt"/>
+        <line num="10" count="4" type="stmt"/>
+        <line num="11" count="4" type="stmt"/>
+        <line num="13" count="4" type="stmt"/>
+        <line num="20" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="24" count="3" type="stmt"/>
+        <line num="30" count="8" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
+        <line num="32" count="1" type="stmt"/>
+        <line num="38" count="8" type="stmt"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="40" count="0" type="stmt"/>
+        <line num="46" count="8" type="stmt"/>
+        <line num="47" count="0" type="stmt"/>
+        <line num="48" count="0" type="stmt"/>
+        <line num="49" count="0" type="stmt"/>
+        <line num="53" count="8" type="stmt"/>
+      </file>
+      <file name="system.controller.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/controllers/platform/system.controller.js">
+        <metrics statements="32" coveredstatements="25" conditionals="8" coveredconditionals="2" methods="3" coveredmethods="2"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="5" count="8" type="stmt"/>
+        <line num="8" count="8" type="stmt"/>
+        <line num="14" count="8" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="23" count="21" type="stmt"/>
+        <line num="24" count="21" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="33" count="8" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="35" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="36" count="0" type="stmt"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="40" count="0" type="stmt"/>
+        <line num="48" count="8" type="stmt"/>
+        <line num="49" count="1" type="stmt"/>
+        <line num="51" count="1" type="stmt"/>
+        <line num="64" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="65" count="0" type="stmt"/>
+        <line num="69" count="1" type="stmt"/>
+        <line num="70" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="71" count="0" type="stmt"/>
+        <line num="74" count="1" type="stmt"/>
+        <line num="83" count="1" type="stmt"/>
+        <line num="84" count="1" type="stmt"/>
+        <line num="86" count="1" type="stmt"/>
+        <line num="90" count="8" type="stmt"/>
+      </file>
+      <file name="verification.controller.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/controllers/platform/verification.controller.js">
+        <metrics statements="16" coveredstatements="15" conditionals="4" coveredconditionals="3" methods="2" coveredmethods="2"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="10" count="8" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="18" count="8" type="stmt"/>
+        <line num="19" count="4" type="stmt"/>
+        <line num="20" count="4" type="stmt"/>
+        <line num="22" count="4" type="cond" truecount="3" falsecount="1"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="26" count="4" type="stmt"/>
+        <line num="33" count="4" type="stmt"/>
+        <line num="34" count="4" type="stmt"/>
+        <line num="38" count="8" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.controllers.restaurant">
+      <metrics statements="358" coveredstatements="235" conditionals="38" coveredconditionals="11" methods="68" coveredmethods="34"/>
+      <file name="auth.controller.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/controllers/restaurant/auth.controller.js">
+        <metrics statements="21" coveredstatements="21" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="5"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="9" count="8" type="stmt"/>
+        <line num="10" count="4" type="stmt"/>
+        <line num="11" count="3" type="stmt"/>
+        <line num="17" count="8" type="stmt"/>
+        <line num="18" count="4" type="stmt"/>
+        <line num="19" count="4" type="stmt"/>
+        <line num="20" count="2" type="stmt"/>
+        <line num="26" count="8" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="28" count="1" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
+        <line num="35" count="8" type="stmt"/>
+        <line num="36" count="2" type="stmt"/>
+        <line num="37" count="2" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+        <line num="44" count="8" type="stmt"/>
+        <line num="47" count="1" type="stmt"/>
+        <line num="51" count="8" type="stmt"/>
+      </file>
+      <file name="booking.controller.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/controllers/restaurant/booking.controller.js">
+        <metrics statements="27" coveredstatements="20" conditionals="10" coveredconditionals="3" methods="4" coveredmethods="3"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="7" count="8" type="stmt"/>
+        <line num="8" count="5" type="cond" truecount="2" falsecount="1"/>
+        <line num="9" count="5" type="cond" truecount="1" falsecount="1"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="12" count="5" type="stmt"/>
+        <line num="13" count="3" type="stmt"/>
+        <line num="16" count="8" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="22" count="8" type="stmt"/>
+        <line num="23" count="3" type="stmt"/>
+        <line num="24" count="3" type="stmt"/>
+        <line num="25" count="3" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="29" count="8" type="stmt"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="32" count="0" type="cond" truecount="0" falsecount="3"/>
+        <line num="34" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="35" count="0" type="stmt"/>
+        <line num="38" count="0" type="stmt"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="43" count="8" type="stmt"/>
+      </file>
+      <file name="campaign.controller.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/controllers/restaurant/campaign.controller.js">
+        <metrics statements="26" coveredstatements="19" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="3"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="6" count="8" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="12" count="8" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="18" count="8" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="25" count="8" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="28" count="1" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
+        <line num="32" count="8" type="stmt"/>
+        <line num="34" count="1" type="stmt"/>
+        <line num="35" count="1" type="stmt"/>
+        <line num="36" count="1" type="stmt"/>
+        <line num="37" count="1" type="stmt"/>
+        <line num="41" count="8" type="stmt"/>
+      </file>
+      <file name="feedback.controller.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/controllers/restaurant/feedback.controller.js">
+        <metrics statements="27" coveredstatements="20" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="3"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="6" count="8" type="stmt"/>
+        <line num="8" count="2" type="stmt"/>
+        <line num="9" count="2" type="stmt"/>
+        <line num="10" count="2" type="stmt"/>
+        <line num="13" count="8" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="19" count="8" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
+        <line num="32" count="8" type="stmt"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="35" count="0" type="stmt"/>
+        <line num="36" count="0" type="stmt"/>
+        <line num="39" count="8" type="stmt"/>
+        <line num="40" count="0" type="stmt"/>
+        <line num="41" count="0" type="stmt"/>
+        <line num="42" count="0" type="stmt"/>
+        <line num="46" count="8" type="stmt"/>
+      </file>
+      <file name="finance.controller.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/controllers/restaurant/finance.controller.js">
+        <metrics statements="22" coveredstatements="18" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="3"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="6" count="8" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="12" count="8" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="18" count="8" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="25" count="8" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="28" count="1" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
+        <line num="33" count="8" type="stmt"/>
+      </file>
+      <file name="inventory.controller.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/controllers/restaurant/inventory.controller.js">
+        <metrics statements="22" coveredstatements="15" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="2"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="6" count="8" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="12" count="8" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="18" count="8" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="25" count="8" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="28" count="1" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
+        <line num="33" count="8" type="stmt"/>
+      </file>
+      <file name="menu.controller.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/controllers/restaurant/menu.controller.js">
+        <metrics statements="51" coveredstatements="22" conditionals="8" coveredconditionals="0" methods="11" coveredmethods="3"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="11" count="8" type="stmt"/>
+        <line num="13" count="2" type="stmt"/>
+        <line num="14" count="2" type="stmt"/>
+        <line num="17" count="8" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="22" count="8" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="28" count="8" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="38" count="8" type="stmt"/>
+        <line num="39" count="2" type="stmt"/>
+        <line num="40" count="2" type="stmt"/>
+        <line num="43" count="8" type="stmt"/>
+        <line num="45" count="0" type="stmt"/>
+        <line num="46" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="47" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="48" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="50" count="0" type="stmt"/>
+        <line num="51" count="0" type="stmt"/>
+        <line num="54" count="8" type="stmt"/>
+        <line num="55" count="0" type="stmt"/>
+        <line num="56" count="0" type="stmt"/>
+        <line num="57" count="0" type="stmt"/>
+        <line num="60" count="8" type="stmt"/>
+        <line num="61" count="0" type="stmt"/>
+        <line num="62" count="0" type="stmt"/>
+        <line num="63" count="0" type="stmt"/>
+        <line num="66" count="8" type="stmt"/>
+        <line num="67" count="0" type="stmt"/>
+        <line num="68" count="0" type="stmt"/>
+        <line num="69" count="0" type="stmt"/>
+        <line num="72" count="8" type="stmt"/>
+        <line num="73" count="0" type="stmt"/>
+        <line num="74" count="0" type="stmt"/>
+        <line num="75" count="0" type="stmt"/>
+        <line num="76" count="0" type="stmt"/>
+        <line num="83" count="8" type="stmt"/>
+        <line num="84" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="85" count="0" type="stmt"/>
+        <line num="88" count="0" type="stmt"/>
+        <line num="95" count="0" type="stmt"/>
+        <line num="99" count="8" type="stmt"/>
+      </file>
+      <file name="order.controller.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/controllers/restaurant/order.controller.js">
+        <metrics statements="17" coveredstatements="10" conditionals="6" coveredconditionals="0" methods="2" coveredmethods="1"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="6" count="8" type="stmt"/>
+        <line num="7" count="0" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="9" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="10" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="11" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="17" count="8" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="28" count="8" type="stmt"/>
+      </file>
+      <file name="platformIntegration.controller.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/controllers/restaurant/platformIntegration.controller.js">
+        <metrics statements="23" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="6" count="8" type="stmt"/>
+        <line num="7" count="0" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="12" count="8" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="19" count="8" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="26" count="8" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="34" count="8" type="stmt"/>
+      </file>
+      <file name="restaurant.controller.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/controllers/restaurant/restaurant.controller.js">
+        <metrics statements="27" coveredstatements="26" conditionals="10" coveredconditionals="7" methods="3" coveredmethods="3"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="10" count="8" type="stmt"/>
+        <line num="11" count="2" type="stmt"/>
+        <line num="13" count="2" type="stmt"/>
+        <line num="16" count="2" type="cond" truecount="4" falsecount="0"/>
+        <line num="17" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="22" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="28" count="2" type="stmt"/>
+        <line num="34" count="8" type="stmt"/>
+        <line num="35" count="1" type="stmt"/>
+        <line num="36" count="1" type="stmt"/>
+        <line num="37" count="1" type="stmt"/>
+        <line num="43" count="8" type="stmt"/>
+        <line num="44" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="45" count="0" type="stmt"/>
+        <line num="47" count="1" type="stmt"/>
+        <line num="48" count="1" type="stmt"/>
+        <line num="53" count="1" type="stmt"/>
+        <line num="57" count="8" type="stmt"/>
+      </file>
+      <file name="screen.controller.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/controllers/restaurant/screen.controller.js">
+        <metrics statements="18" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="1"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="6" count="8" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="11" count="8" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="16" count="8" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="22" count="8" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="29" count="8" type="stmt"/>
+      </file>
+      <file name="staff.controller.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/controllers/restaurant/staff.controller.js">
+        <metrics statements="18" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="2"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="6" count="8" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="16" count="8" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="21" count="8" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="32" count="8" type="stmt"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="35" count="0" type="stmt"/>
+        <line num="39" count="8" type="stmt"/>
+      </file>
+      <file name="table.controller.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/controllers/restaurant/table.controller.js">
+        <metrics statements="46" coveredstatements="27" conditionals="4" coveredconditionals="1" methods="10" coveredmethods="5"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="10" count="8" type="stmt"/>
+        <line num="11" count="3" type="stmt"/>
+        <line num="12" count="3" type="stmt"/>
+        <line num="15" count="8" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="20" count="8" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="26" count="8" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="32" count="8" type="stmt"/>
+        <line num="33" count="1" type="stmt"/>
+        <line num="34" count="1" type="stmt"/>
+        <line num="35" count="1" type="stmt"/>
+        <line num="36" count="1" type="stmt"/>
+        <line num="44" count="8" type="stmt"/>
+        <line num="45" count="1" type="stmt"/>
+        <line num="46" count="1" type="stmt"/>
+        <line num="47" count="1" type="stmt"/>
+        <line num="54" count="8" type="stmt"/>
+        <line num="55" count="1" type="stmt"/>
+        <line num="56" count="1" type="stmt"/>
+        <line num="59" count="8" type="stmt"/>
+        <line num="60" count="0" type="stmt"/>
+        <line num="61" count="0" type="stmt"/>
+        <line num="63" count="0" type="stmt"/>
+        <line num="67" count="0" type="stmt"/>
+        <line num="70" count="8" type="stmt"/>
+        <line num="71" count="0" type="stmt"/>
+        <line num="72" count="0" type="stmt"/>
+        <line num="73" count="0" type="stmt"/>
+        <line num="74" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="75" count="0" type="stmt"/>
+        <line num="76" count="0" type="stmt"/>
+        <line num="78" count="0" type="stmt"/>
+        <line num="81" count="8" type="stmt"/>
+        <line num="82" count="2" type="stmt"/>
+        <line num="83" count="2" type="stmt"/>
+        <line num="87" count="8" type="stmt"/>
+      </file>
+      <file name="webhook.controller.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/controllers/restaurant/webhook.controller.js">
+        <metrics statements="13" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="6" count="8" type="stmt"/>
+        <line num="7" count="0" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="11" count="8" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="16" count="8" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="22" count="8" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.database">
+      <metrics statements="55" coveredstatements="40" conditionals="12" coveredconditionals="3" methods="7" coveredmethods="3"/>
+      <file name="db.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/database/db.js">
+        <metrics statements="55" coveredstatements="40" conditionals="12" coveredconditionals="3" methods="7" coveredmethods="3"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="5" count="8" type="stmt"/>
+        <line num="6" count="8" type="stmt"/>
+        <line num="12" count="8" type="stmt"/>
+        <line num="25" count="8" type="stmt"/>
+        <line num="27" count="8" type="stmt"/>
+        <line num="29" count="8" type="stmt"/>
+        <line num="30" count="8" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="35" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="36" count="0" type="stmt"/>
+        <line num="42" count="8" type="stmt"/>
+        <line num="43" count="8" type="stmt"/>
+        <line num="44" count="8" type="stmt"/>
+        <line num="45" count="8" type="stmt"/>
+        <line num="46" count="8" type="stmt"/>
+        <line num="47" count="8" type="cond" truecount="1" falsecount="1"/>
+        <line num="48" count="8" type="stmt"/>
+        <line num="57" count="8" type="stmt"/>
+        <line num="61" count="8" type="stmt"/>
+        <line num="62" count="8" type="stmt"/>
+        <line num="63" count="8" type="cond" truecount="1" falsecount="1"/>
+        <line num="64" count="8" type="stmt"/>
+        <line num="65" count="8" type="cond" truecount="1" falsecount="1"/>
+        <line num="66" count="8" type="stmt"/>
+        <line num="77" count="8" type="stmt"/>
+        <line num="130" count="8" type="stmt"/>
+        <line num="131" count="8" type="stmt"/>
+        <line num="145" count="8" type="stmt"/>
+        <line num="146" count="8" type="stmt"/>
+        <line num="153" count="8" type="stmt"/>
+        <line num="161" count="8" type="stmt"/>
+        <line num="162" count="8" type="stmt"/>
+        <line num="217" count="8" type="stmt"/>
+        <line num="218" count="8" type="stmt"/>
+        <line num="228" count="8" type="stmt"/>
+        <line num="231" count="0" type="stmt"/>
+        <line num="235" count="8" type="stmt"/>
+        <line num="236" count="0" type="stmt"/>
+        <line num="239" count="8" type="stmt"/>
+        <line num="240" count="8" type="stmt"/>
+        <line num="246" count="8" type="stmt"/>
+        <line num="247" count="0" type="stmt"/>
+        <line num="256" count="0" type="stmt"/>
+        <line num="257" count="0" type="stmt"/>
+        <line num="264" count="0" type="stmt"/>
+        <line num="274" count="0" type="stmt"/>
+        <line num="275" count="0" type="stmt"/>
+        <line num="277" count="0" type="stmt"/>
+        <line num="278" count="0" type="stmt"/>
+        <line num="279" count="0" type="stmt"/>
+        <line num="281" count="0" type="stmt"/>
+        <line num="285" count="8" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.exceptions">
+      <metrics statements="6" coveredstatements="6" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+      <file name="AppError.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/exceptions/AppError.js">
+        <metrics statements="6" coveredstatements="6" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <line num="14" count="22" type="stmt"/>
+        <line num="16" count="22" type="stmt"/>
+        <line num="17" count="22" type="stmt"/>
+        <line num="18" count="22" type="stmt"/>
+        <line num="21" count="22" type="stmt"/>
+        <line num="25" count="8" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.middlewares">
+      <metrics statements="179" coveredstatements="97" conditionals="122" coveredconditionals="47" methods="19" coveredmethods="12"/>
+      <file name="auth.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/middlewares/auth.js">
+        <metrics statements="81" coveredstatements="43" conditionals="61" coveredconditionals="22" methods="9" coveredmethods="4"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="5" count="8" type="stmt"/>
+        <line num="6" count="8" type="stmt"/>
+        <line num="7" count="8" type="stmt"/>
+        <line num="12" count="8" type="stmt"/>
+        <line num="16" count="55" type="cond" truecount="3" falsecount="1"/>
+        <line num="17" count="55" type="stmt"/>
+        <line num="20" count="55" type="cond" truecount="1" falsecount="1"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="24" count="55" type="stmt"/>
+        <line num="26" count="55" type="stmt"/>
+        <line num="29" count="55" type="stmt"/>
+        <line num="32" count="55" type="cond" truecount="1" falsecount="1"/>
+        <line num="33" count="55" type="stmt"/>
+        <line num="34" count="55" type="cond" truecount="1" falsecount="1"/>
+        <line num="35" count="0" type="stmt"/>
+        <line num="37" count="55" type="cond" truecount="1" falsecount="1"/>
+        <line num="38" count="0" type="stmt"/>
+        <line num="40" count="55" type="stmt"/>
+        <line num="41" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="44" count="0" type="stmt"/>
+        <line num="45" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="46" count="0" type="stmt"/>
+        <line num="48" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="49" count="0" type="stmt"/>
+        <line num="51" count="0" type="stmt"/>
+        <line num="53" count="0" type="stmt"/>
+        <line num="56" count="55" type="stmt"/>
+        <line num="58" count="0" type="stmt"/>
+        <line num="66" count="8" type="stmt"/>
+        <line num="67" count="31" type="cond" truecount="1" falsecount="1"/>
+        <line num="68" count="0" type="stmt"/>
+        <line num="74" count="31" type="cond" truecount="1" falsecount="1"/>
+        <line num="76" count="0" type="stmt"/>
+        <line num="79" count="31" type="cond" truecount="1" falsecount="2"/>
+        <line num="82" count="31" type="cond" truecount="1" falsecount="1"/>
+        <line num="83" count="0" type="stmt"/>
+        <line num="86" count="31" type="cond" truecount="1" falsecount="1"/>
+        <line num="87" count="0" type="stmt"/>
+        <line num="90" count="31" type="stmt"/>
+        <line num="91" count="31" type="stmt"/>
+        <line num="94" count="31" type="cond" truecount="3" falsecount="1"/>
+        <line num="95" count="0" type="stmt"/>
+        <line num="99" count="0" type="stmt"/>
+        <line num="103" count="31" type="cond" truecount="1" falsecount="1"/>
+        <line num="104" count="31" type="stmt"/>
+        <line num="105" count="31" type="cond" truecount="1" falsecount="1"/>
+        <line num="106" count="0" type="stmt"/>
+        <line num="108" count="31" type="cond" truecount="1" falsecount="1"/>
+        <line num="109" count="0" type="stmt"/>
+        <line num="111" count="31" type="stmt"/>
+        <line num="112" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="115" count="0" type="stmt"/>
+        <line num="121" count="31" type="stmt"/>
+        <line num="129" count="184" type="stmt"/>
+        <line num="130" count="19" type="cond" truecount="1" falsecount="1"/>
+        <line num="131" count="0" type="stmt"/>
+        <line num="134" count="19" type="cond" truecount="1" falsecount="1"/>
+        <line num="135" count="0" type="stmt"/>
+        <line num="138" count="19" type="stmt"/>
+        <line num="139" count="19" type="cond" truecount="2" falsecount="0"/>
+        <line num="140" count="1" type="stmt"/>
+        <line num="143" count="18" type="stmt"/>
+        <line num="152" count="0" type="stmt"/>
+        <line num="153" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="154" count="0" type="stmt"/>
+        <line num="157" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="158" count="0" type="stmt"/>
+        <line num="162" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="163" count="0" type="stmt"/>
+        <line num="165" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="166" count="0" type="stmt"/>
+        <line num="169" count="0" type="stmt"/>
+        <line num="178" count="0" type="stmt"/>
+        <line num="179" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="180" count="0" type="stmt"/>
+        <line num="187" count="0" type="stmt"/>
+        <line num="191" count="8" type="stmt"/>
+      </file>
+      <file name="errorHandler.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/middlewares/errorHandler.js">
+        <metrics statements="33" coveredstatements="21" conditionals="28" coveredconditionals="14" methods="2" coveredmethods="1"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="10" count="22" type="stmt"/>
+        <line num="13" count="22" type="cond" truecount="1" falsecount="1"/>
+        <line num="14" count="22" type="cond" truecount="1" falsecount="1"/>
+        <line num="17" count="22" type="cond" truecount="1" falsecount="1"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="22" count="22" type="cond" truecount="1" falsecount="1"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="26" count="22" type="cond" truecount="1" falsecount="1"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="31" count="22" type="cond" truecount="1" falsecount="1"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="35" count="0" type="stmt"/>
+        <line num="36" count="22" type="cond" truecount="1" falsecount="1"/>
+        <line num="38" count="0" type="stmt"/>
+        <line num="39" count="22" type="cond" truecount="1" falsecount="1"/>
+        <line num="41" count="0" type="stmt"/>
+        <line num="46" count="22" type="stmt"/>
+        <line num="59" count="22" type="cond" truecount="1" falsecount="1"/>
+        <line num="60" count="0" type="stmt"/>
+        <line num="62" count="22" type="stmt"/>
+        <line num="66" count="22" type="stmt"/>
+        <line num="67" count="22" type="cond" truecount="2" falsecount="2"/>
+        <line num="71" count="22" type="cond" truecount="1" falsecount="1"/>
+        <line num="75" count="22" type="stmt"/>
+        <line num="78" count="8" type="stmt"/>
+      </file>
+      <file name="platformAuth.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/middlewares/platformAuth.js">
+        <metrics statements="15" coveredstatements="14" conditionals="8" coveredconditionals="6" methods="3" coveredmethods="3"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="11" count="80" type="stmt"/>
+        <line num="12" count="19" type="cond" truecount="1" falsecount="1"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="16" count="19" type="stmt"/>
+        <line num="19" count="19" type="cond" truecount="2" falsecount="0"/>
+        <line num="20" count="2" type="stmt"/>
+        <line num="24" count="17" type="cond" truecount="1" falsecount="1"/>
+        <line num="27" count="17" type="stmt"/>
+        <line num="28" count="17" type="stmt"/>
+        <line num="31" count="17" type="cond" truecount="2" falsecount="0"/>
+        <line num="32" count="4" type="stmt"/>
+        <line num="40" count="13" type="stmt"/>
+        <line num="44" count="8" type="stmt"/>
+      </file>
+      <file name="validate.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/middlewares/validate.js">
+        <metrics statements="14" coveredstatements="13" conditionals="7" coveredconditionals="5" methods="3" coveredmethods="3"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="10" count="288" type="cond" truecount="1" falsecount="0"/>
+        <line num="11" count="48" type="cond" truecount="1" falsecount="1"/>
+        <line num="12" count="48" type="stmt"/>
+        <line num="18" count="48" type="cond" truecount="2" falsecount="0"/>
+        <line num="19" count="2" type="stmt"/>
+        <line num="20" count="2" type="stmt"/>
+        <line num="21" count="2" type="stmt"/>
+        <line num="24" count="2" type="stmt"/>
+        <line num="28" count="46" type="cond" truecount="1" falsecount="1"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="31" count="46" type="stmt"/>
+        <line num="33" count="46" type="stmt"/>
+        <line num="36" count="8" type="stmt"/>
+      </file>
+      <file name="webhookAuth.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/middlewares/webhookAuth.js">
+        <metrics statements="36" coveredstatements="6" conditionals="18" coveredconditionals="0" methods="2" coveredmethods="1"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="13" count="24" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="17" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="20" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="23" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="31" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="32" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="42" count="0" type="stmt"/>
+        <line num="43" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="44" count="0" type="stmt"/>
+        <line num="47" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="48" count="0" type="stmt"/>
+        <line num="57" count="0" type="stmt"/>
+        <line num="58" count="0" type="stmt"/>
+        <line num="59" count="0" type="stmt"/>
+        <line num="61" count="0" type="stmt"/>
+        <line num="64" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="65" count="0" type="stmt"/>
+        <line num="66" count="0" type="stmt"/>
+        <line num="69" count="0" type="stmt"/>
+        <line num="73" count="8" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.models">
+      <metrics statements="196" coveredstatements="190" conditionals="20" coveredconditionals="12" methods="14" coveredmethods="11"/>
+      <file name="adCreative.model.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/models/adCreative.model.js">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="49" count="8" type="stmt"/>
+        <line num="51" count="8" type="stmt"/>
+      </file>
+      <file name="adTargetingRule.model.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/models/adTargetingRule.model.js">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="32" count="8" type="stmt"/>
+        <line num="38" count="8" type="stmt"/>
+      </file>
+      <file name="booking.model.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/models/booking.model.js">
+        <metrics statements="12" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="21" count="8" type="stmt"/>
+        <line num="34" count="8" type="stmt"/>
+        <line num="80" count="0" type="stmt"/>
+        <line num="84" count="0" type="stmt"/>
+        <line num="93" count="8" type="stmt"/>
+        <line num="96" count="8" type="stmt"/>
+        <line num="105" count="8" type="stmt"/>
+        <line num="113" count="8" type="stmt"/>
+        <line num="115" count="8" type="stmt"/>
+      </file>
+      <file name="campaign.model.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/models/campaign.model.js">
+        <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="9" count="8" type="stmt"/>
+        <line num="71" count="1" type="stmt"/>
+        <line num="80" count="8" type="stmt"/>
+        <line num="83" count="8" type="stmt"/>
+        <line num="85" count="8" type="stmt"/>
+        <line num="87" count="8" type="stmt"/>
+      </file>
+      <file name="coupon.model.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/models/coupon.model.js">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="105" count="8" type="stmt"/>
+        <line num="107" count="8" type="stmt"/>
+      </file>
+      <file name="dailyFinanceReport.model.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/models/dailyFinanceReport.model.js">
+        <metrics statements="11" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="9" count="8" type="stmt"/>
+        <line num="15" count="8" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="28" count="1" type="stmt"/>
+        <line num="41" count="8" type="stmt"/>
+        <line num="44" count="8" type="stmt"/>
+        <line num="46" count="8" type="stmt"/>
+        <line num="52" count="8" type="stmt"/>
+      </file>
+      <file name="expense.model.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/models/expense.model.js">
+        <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="34" count="8" type="stmt"/>
+        <line num="37" count="8" type="stmt"/>
+        <line num="39" count="8" type="stmt"/>
+        <line num="41" count="8" type="stmt"/>
+      </file>
+      <file name="feedback.model.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/models/feedback.model.js">
+        <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="81" count="8" type="stmt"/>
+        <line num="84" count="8" type="stmt"/>
+        <line num="93" count="8" type="stmt"/>
+        <line num="95" count="8" type="stmt"/>
+        <line num="97" count="8" type="stmt"/>
+      </file>
+      <file name="inventoryItem.model.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/models/inventoryItem.model.js">
+        <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="39" count="8" type="stmt"/>
+        <line num="42" count="8" type="stmt"/>
+        <line num="44" count="8" type="stmt"/>
+        <line num="46" count="8" type="stmt"/>
+      </file>
+      <file name="inventoryTransaction.model.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/models/inventoryTransaction.model.js">
+        <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="40" count="8" type="stmt"/>
+        <line num="43" count="8" type="stmt"/>
+        <line num="45" count="8" type="stmt"/>
+        <line num="51" count="8" type="stmt"/>
+      </file>
+      <file name="mediaAsset.model.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/models/mediaAsset.model.js">
+        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="28" count="8" type="stmt"/>
+        <line num="30" count="8" type="stmt"/>
+        <line num="32" count="8" type="stmt"/>
+      </file>
+      <file name="menuCategory.model.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/models/menuCategory.model.js">
+        <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="39" count="8" type="stmt"/>
+        <line num="41" count="8" type="stmt"/>
+        <line num="44" count="8" type="stmt"/>
+        <line num="46" count="8" type="stmt"/>
+        <line num="48" count="8" type="stmt"/>
+      </file>
+      <file name="menuItem.model.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/models/menuItem.model.js">
+        <metrics statements="11" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="21" count="8" type="stmt"/>
+        <line num="40" count="8" type="stmt"/>
+        <line num="53" count="8" type="stmt"/>
+        <line num="143" count="8" type="stmt"/>
+        <line num="145" count="8" type="stmt"/>
+        <line num="148" count="8" type="stmt"/>
+        <line num="150" count="8" type="stmt"/>
+        <line num="152" count="8" type="stmt"/>
+      </file>
+      <file name="order.model.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/models/order.model.js">
+        <metrics statements="10" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="32" count="8" type="stmt"/>
+        <line num="83" count="8" type="stmt"/>
+        <line num="89" count="8" type="stmt"/>
+        <line num="90" count="8" type="stmt"/>
+        <line num="93" count="8" type="stmt"/>
+        <line num="95" count="8" type="stmt"/>
+        <line num="97" count="8" type="stmt"/>
+      </file>
+      <file name="platformCampaign.model.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/models/platformCampaign.model.js">
+        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="72" count="8" type="stmt"/>
+        <line num="74" count="8" type="stmt"/>
+        <line num="80" count="8" type="stmt"/>
+      </file>
+      <file name="platformIntegration.model.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/models/platformIntegration.model.js">
+        <metrics statements="10" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="19" count="8" type="stmt"/>
+        <line num="34" count="8" type="stmt"/>
+        <line num="52" count="0" type="stmt"/>
+        <line num="71" count="8" type="stmt"/>
+        <line num="74" count="8" type="stmt"/>
+        <line num="76" count="8" type="stmt"/>
+        <line num="78" count="8" type="stmt"/>
+      </file>
+      <file name="restaurant.model.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/models/restaurant.model.js">
+        <metrics statements="17" coveredstatements="15" conditionals="10" coveredconditionals="6" methods="2" coveredmethods="2"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="195" count="8" type="stmt"/>
+        <line num="198" count="8" type="stmt"/>
+        <line num="199" count="48" type="cond" truecount="2" falsecount="0"/>
+        <line num="200" count="6" type="cond" truecount="1" falsecount="1"/>
+        <line num="203" count="48" type="cond" truecount="2" falsecount="2"/>
+        <line num="204" count="0" type="stmt"/>
+        <line num="210" count="48" type="stmt"/>
+        <line num="214" count="8" type="stmt"/>
+        <line num="215" count="33" type="cond" truecount="1" falsecount="1"/>
+        <line num="216" count="0" type="stmt"/>
+        <line num="218" count="33" type="stmt"/>
+        <line num="219" count="33" type="stmt"/>
+        <line num="222" count="8" type="stmt"/>
+        <line num="224" count="8" type="stmt"/>
+      </file>
+      <file name="restaurantStaff.model.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/models/restaurantStaff.model.js">
+        <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="47" count="8" type="stmt"/>
+        <line num="50" count="8" type="stmt"/>
+        <line num="51" count="8" type="stmt"/>
+        <line num="52" count="8" type="stmt"/>
+        <line num="54" count="8" type="stmt"/>
+        <line num="56" count="8" type="stmt"/>
+      </file>
+      <file name="screen.model.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/models/screen.model.js">
+        <metrics statements="16" coveredstatements="16" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="2"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="5" count="8" type="stmt"/>
+        <line num="65" count="8" type="stmt"/>
+        <line num="68" count="8" type="stmt"/>
+        <line num="71" count="8" type="stmt"/>
+        <line num="72" count="1" type="stmt"/>
+        <line num="74" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="75" count="1" type="stmt"/>
+        <line num="76" count="1" type="stmt"/>
+        <line num="79" count="1" type="stmt"/>
+        <line num="83" count="8" type="stmt"/>
+        <line num="84" count="1" type="stmt"/>
+        <line num="87" count="8" type="stmt"/>
+        <line num="89" count="8" type="stmt"/>
+      </file>
+      <file name="table.model.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/models/table.model.js">
+        <metrics statements="11" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="5" count="8" type="stmt"/>
+        <line num="38" count="8" type="stmt"/>
+        <line num="60" count="11" type="stmt"/>
+        <line num="77" count="8" type="stmt"/>
+        <line num="79" count="8" type="stmt"/>
+        <line num="82" count="8" type="stmt"/>
+        <line num="84" count="8" type="stmt"/>
+        <line num="86" count="8" type="stmt"/>
+      </file>
+      <file name="user.model.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/models/user.model.js">
+        <metrics statements="20" coveredstatements="19" conditionals="8" coveredconditionals="5" methods="3" coveredmethods="3"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="89" count="8" type="stmt"/>
+        <line num="90" count="79" type="stmt"/>
+        <line num="92" count="79" type="cond" truecount="1" falsecount="1"/>
+        <line num="93" count="79" type="stmt"/>
+        <line num="94" count="79" type="stmt"/>
+        <line num="97" count="79" type="cond" truecount="2" falsecount="0"/>
+        <line num="98" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="101" count="79" type="stmt"/>
+        <line num="105" count="8" type="stmt"/>
+        <line num="106" count="3" type="stmt"/>
+        <line num="110" count="8" type="stmt"/>
+        <line num="111" count="97" type="cond" truecount="1" falsecount="1"/>
+        <line num="112" count="0" type="stmt"/>
+        <line num="114" count="97" type="stmt"/>
+        <line num="115" count="97" type="stmt"/>
+        <line num="118" count="8" type="stmt"/>
+        <line num="120" count="8" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.models.plugins">
+      <metrics statements="20" coveredstatements="13" conditionals="10" coveredconditionals="4" methods="5" coveredmethods="3"/>
+      <file name="auditable.plugin.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/models/plugins/auditable.plugin.js">
+        <metrics statements="20" coveredstatements="13" conditionals="10" coveredconditionals="4" methods="5" coveredmethods="3"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="10" count="120" type="stmt"/>
+        <line num="44" count="120" type="stmt"/>
+        <line num="47" count="120" type="stmt"/>
+        <line num="48" count="166" type="cond" truecount="2" falsecount="0"/>
+        <line num="49" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="51" count="166" type="stmt"/>
+        <line num="55" count="120" type="stmt"/>
+        <line num="57" count="112" type="cond" truecount="1" falsecount="1"/>
+        <line num="58" count="0" type="stmt"/>
+        <line num="61" count="112" type="stmt"/>
+        <line num="62" count="112" type="stmt"/>
+        <line num="66" count="120" type="stmt"/>
+        <line num="67" count="0" type="stmt"/>
+        <line num="70" count="0" type="stmt"/>
+        <line num="71" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="74" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="75" count="0" type="stmt"/>
+        <line num="78" count="0" type="stmt"/>
+        <line num="82" count="8" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.repositories.restaurant">
+      <metrics statements="156" coveredstatements="108" conditionals="63" coveredconditionals="28" methods="91" coveredmethods="51"/>
+      <file name="booking.repository.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/repositories/restaurant/booking.repository.js">
+        <metrics statements="17" coveredstatements="15" conditionals="11" coveredconditionals="7" methods="6" coveredmethods="5"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="8" count="3" type="stmt"/>
+        <line num="12" count="3" type="stmt"/>
+        <line num="19" count="3" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="37" count="4" type="stmt"/>
+        <line num="45" count="4" type="cond" truecount="1" falsecount="1"/>
+        <line num="46" count="4" type="stmt"/>
+        <line num="48" count="4" type="cond" truecount="1" falsecount="1"/>
+        <line num="49" count="4" type="stmt"/>
+        <line num="52" count="4" type="cond" truecount="1" falsecount="1"/>
+        <line num="53" count="0" type="stmt"/>
+        <line num="56" count="4" type="stmt"/>
+        <line num="63" count="1" type="stmt"/>
+        <line num="64" count="1" type="stmt"/>
+        <line num="71" count="1" type="stmt"/>
+        <line num="79" count="8" type="stmt"/>
+      </file>
+      <file name="campaign.repository.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/repositories/restaurant/campaign.repository.js">
+        <metrics statements="8" coveredstatements="5" conditionals="5" coveredconditionals="2" methods="4" coveredmethods="2"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="30" count="8" type="stmt"/>
+      </file>
+      <file name="dailyFinanceReport.repository.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/repositories/restaurant/dailyFinanceReport.repository.js">
+        <metrics statements="5" coveredstatements="3" conditionals="1" coveredconditionals="1" methods="3" coveredmethods="1"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="24" count="8" type="stmt"/>
+      </file>
+      <file name="expense.repository.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/repositories/restaurant/expense.repository.js">
+        <metrics statements="9" coveredstatements="6" conditionals="5" coveredconditionals="2" methods="4" coveredmethods="2"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="38" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="42" count="8" type="stmt"/>
+      </file>
+      <file name="feedback.repository.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/repositories/restaurant/feedback.repository.js">
+        <metrics statements="9" coveredstatements="8" conditionals="4" coveredconditionals="3" methods="5" coveredmethods="4"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="5" count="2" type="stmt"/>
+        <line num="9" count="2" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="34" count="8" type="stmt"/>
+      </file>
+      <file name="inventoryItem.repository.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/repositories/restaurant/inventoryItem.repository.js">
+        <metrics statements="9" coveredstatements="7" conditionals="4" coveredconditionals="1" methods="6" coveredmethods="4"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="28" count="1" type="stmt"/>
+        <line num="36" count="0" type="stmt"/>
+        <line num="44" count="8" type="stmt"/>
+      </file>
+      <file name="inventoryTransaction.repository.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/repositories/restaurant/inventoryTransaction.repository.js">
+        <metrics statements="6" coveredstatements="4" conditionals="3" coveredconditionals="0" methods="2" coveredmethods="1"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="18" count="8" type="stmt"/>
+      </file>
+      <file name="mediaAsset.repository.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/repositories/restaurant/mediaAsset.repository.js">
+        <metrics statements="7" coveredstatements="2" conditionals="1" coveredconditionals="0" methods="4" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="42" count="0" type="stmt"/>
+        <line num="46" count="8" type="stmt"/>
+      </file>
+      <file name="menuCategory.repository.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/repositories/restaurant/menuCategory.repository.js">
+        <metrics statements="10" coveredstatements="8" conditionals="4" coveredconditionals="2" methods="7" coveredmethods="5"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="11" count="2" type="stmt"/>
+        <line num="15" count="2" type="stmt"/>
+        <line num="25" count="2" type="stmt"/>
+        <line num="34" count="2" type="stmt"/>
+        <line num="43" count="2" type="stmt"/>
+        <line num="54" count="1" type="stmt"/>
+        <line num="65" count="0" type="stmt"/>
+        <line num="79" count="0" type="stmt"/>
+        <line num="87" count="8" type="stmt"/>
+      </file>
+      <file name="menuItem.repository.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/repositories/restaurant/menuItem.repository.js">
+        <metrics statements="11" coveredstatements="5" conditionals="5" coveredconditionals="1" methods="7" coveredmethods="2"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="11" count="2" type="stmt"/>
+        <line num="15" count="2" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="34" count="2" type="stmt"/>
+        <line num="46" count="0" type="stmt"/>
+        <line num="47" count="0" type="stmt"/>
+        <line num="56" count="0" type="stmt"/>
+        <line num="67" count="0" type="stmt"/>
+        <line num="81" count="0" type="stmt"/>
+        <line num="89" count="8" type="stmt"/>
+      </file>
+      <file name="order.repository.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/repositories/restaurant/order.repository.js">
+        <metrics statements="9" coveredstatements="6" conditionals="4" coveredconditionals="2" methods="5" coveredmethods="3"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="11" count="2" type="stmt"/>
+        <line num="15" count="2" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="36" count="0" type="stmt"/>
+        <line num="45" count="0" type="stmt"/>
+        <line num="46" count="0" type="stmt"/>
+        <line num="57" count="1" type="stmt"/>
+        <line num="65" count="8" type="stmt"/>
+      </file>
+      <file name="platformIntegration.repository.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/repositories/restaurant/platformIntegration.repository.js">
+        <metrics statements="9" coveredstatements="2" conditionals="4" coveredconditionals="0" methods="6" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="42" count="0" type="stmt"/>
+        <line num="53" count="0" type="stmt"/>
+        <line num="67" count="0" type="stmt"/>
+        <line num="75" count="8" type="stmt"/>
+      </file>
+      <file name="restaurant.repository.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/repositories/restaurant/restaurant.repository.js">
+        <metrics statements="9" coveredstatements="8" conditionals="3" coveredconditionals="2" methods="6" coveredmethods="5"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="11" count="3" type="stmt"/>
+        <line num="12" count="3" type="stmt"/>
+        <line num="22" count="12" type="stmt"/>
+        <line num="31" count="3" type="stmt"/>
+        <line num="42" count="5" type="stmt"/>
+        <line num="55" count="0" type="stmt"/>
+        <line num="67" count="1" type="stmt"/>
+        <line num="71" count="8" type="stmt"/>
+      </file>
+      <file name="restaurantStaff.repository.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/repositories/restaurant/restaurantStaff.repository.js">
+        <metrics statements="10" coveredstatements="7" conditionals="2" coveredconditionals="0" methods="7" coveredmethods="4"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="11" count="3" type="stmt"/>
+        <line num="15" count="3" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="35" count="31" type="stmt"/>
+        <line num="45" count="1" type="stmt"/>
+        <line num="56" count="2" type="stmt"/>
+        <line num="67" count="0" type="stmt"/>
+        <line num="81" count="0" type="stmt"/>
+        <line num="89" count="8" type="stmt"/>
+      </file>
+      <file name="screen.repository.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/repositories/restaurant/screen.repository.js">
+        <metrics statements="9" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="3"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="35" count="2" type="stmt"/>
+        <line num="44" count="0" type="stmt"/>
+        <line num="55" count="1" type="stmt"/>
+        <line num="69" count="0" type="stmt"/>
+        <line num="77" count="8" type="stmt"/>
+      </file>
+      <file name="table.repository.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/repositories/restaurant/table.repository.js">
+        <metrics statements="10" coveredstatements="8" conditionals="4" coveredconditionals="3" methods="7" coveredmethods="5"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="11" count="3" type="stmt"/>
+        <line num="15" count="3" type="stmt"/>
+        <line num="25" count="2" type="stmt"/>
+        <line num="34" count="9" type="stmt"/>
+        <line num="45" count="3" type="stmt"/>
+        <line num="53" count="0" type="stmt"/>
+        <line num="64" count="3" type="stmt"/>
+        <line num="78" count="0" type="stmt"/>
+        <line num="86" count="8" type="stmt"/>
+      </file>
+      <file name="user.repository.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/repositories/restaurant/user.repository.js">
+        <metrics statements="9" coveredstatements="8" conditionals="3" coveredconditionals="2" methods="6" coveredmethods="5"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="11" count="4" type="stmt"/>
+        <line num="12" count="4" type="stmt"/>
+        <line num="22" count="58" type="stmt"/>
+        <line num="31" count="9" type="stmt"/>
+        <line num="40" count="4" type="stmt"/>
+        <line num="50" count="3" type="stmt"/>
+        <line num="63" count="0" type="stmt"/>
+        <line num="71" count="8" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.routes.platform">
+      <metrics statements="46" coveredstatements="46" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="ad.routes.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/routes/platform/ad.routes.js">
+        <metrics statements="10" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="5" count="8" type="stmt"/>
+        <line num="7" count="8" type="stmt"/>
+        <line num="10" count="8" type="stmt"/>
+        <line num="11" count="8" type="stmt"/>
+        <line num="14" count="8" type="stmt"/>
+        <line num="21" count="8" type="stmt"/>
+      </file>
+      <file name="coupon.routes.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/routes/platform/coupon.routes.js">
+        <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="5" count="8" type="stmt"/>
+        <line num="8" count="8" type="stmt"/>
+        <line num="9" count="8" type="stmt"/>
+        <line num="12" count="8" type="stmt"/>
+        <line num="14" count="8" type="stmt"/>
+      </file>
+      <file name="restaurant.routes.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/routes/platform/restaurant.routes.js">
+        <metrics statements="17" coveredstatements="17" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="5" count="8" type="stmt"/>
+        <line num="6" count="8" type="stmt"/>
+        <line num="7" count="8" type="stmt"/>
+        <line num="8" count="8" type="stmt"/>
+        <line num="10" count="8" type="stmt"/>
+        <line num="13" count="8" type="stmt"/>
+        <line num="17" count="8" type="stmt"/>
+        <line num="24" count="8" type="stmt"/>
+        <line num="31" count="8" type="stmt"/>
+        <line num="38" count="8" type="stmt"/>
+        <line num="46" count="8" type="stmt"/>
+        <line num="53" count="8" type="stmt"/>
+        <line num="59" count="8" type="stmt"/>
+      </file>
+      <file name="system.routes.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/routes/platform/system.routes.js">
+        <metrics statements="11" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="5" count="8" type="stmt"/>
+        <line num="7" count="8" type="stmt"/>
+        <line num="10" count="8" type="stmt"/>
+        <line num="13" count="8" type="stmt"/>
+        <line num="20" count="8" type="stmt"/>
+        <line num="27" count="8" type="stmt"/>
+        <line num="33" count="8" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.routes.restaurant">
+      <metrics statements="208" coveredstatements="202" conditionals="11" coveredconditionals="4" methods="3" coveredmethods="2"/>
+      <file name="auth.routes.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/routes/restaurant/auth.routes.js">
+        <metrics statements="11" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="9" count="8" type="stmt"/>
+        <line num="11" count="8" type="stmt"/>
+        <line num="14" count="8" type="stmt"/>
+        <line num="15" count="8" type="stmt"/>
+        <line num="16" count="8" type="stmt"/>
+        <line num="17" count="8" type="stmt"/>
+        <line num="18" count="8" type="stmt"/>
+        <line num="20" count="8" type="stmt"/>
+      </file>
+      <file name="booking.routes.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/routes/restaurant/booking.routes.js">
+        <metrics statements="11" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="5" count="8" type="stmt"/>
+        <line num="7" count="8" type="stmt"/>
+        <line num="13" count="8" type="stmt"/>
+        <line num="16" count="8" type="stmt"/>
+        <line num="21" count="8" type="stmt"/>
+        <line num="29" count="8" type="stmt"/>
+        <line num="38" count="8" type="stmt"/>
+      </file>
+      <file name="campaign.routes.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/routes/restaurant/campaign.routes.js">
+        <metrics statements="24" coveredstatements="22" conditionals="7" coveredconditionals="3" methods="1" coveredmethods="1"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="8" count="8" type="stmt"/>
+        <line num="10" count="8" type="stmt"/>
+        <line num="12" count="8" type="stmt"/>
+        <line num="13" count="8" type="stmt"/>
+        <line num="16" count="8" type="stmt"/>
+        <line num="17" count="2" type="cond" truecount="1" falsecount="2"/>
+        <line num="18" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="21" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="24" count="2" type="stmt"/>
+        <line num="25" count="2" type="stmt"/>
+        <line num="29" count="8" type="stmt"/>
+        <line num="35" count="8" type="stmt"/>
+        <line num="42" count="8" type="stmt"/>
+        <line num="43" count="8" type="stmt"/>
+        <line num="45" count="8" type="stmt"/>
+        <line num="52" count="8" type="stmt"/>
+        <line num="58" count="8" type="stmt"/>
+        <line num="65" count="8" type="stmt"/>
+      </file>
+      <file name="feedback.routes.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/routes/restaurant/feedback.routes.js">
+        <metrics statements="14" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="8" count="8" type="stmt"/>
+        <line num="10" count="8" type="stmt"/>
+        <line num="13" count="8" type="stmt"/>
+        <line num="20" count="8" type="stmt"/>
+        <line num="21" count="8" type="stmt"/>
+        <line num="24" count="8" type="stmt"/>
+        <line num="31" count="8" type="stmt"/>
+        <line num="38" count="8" type="stmt"/>
+        <line num="46" count="8" type="stmt"/>
+        <line num="52" count="8" type="stmt"/>
+      </file>
+      <file name="finance.routes.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/routes/restaurant/finance.routes.js">
+        <metrics statements="13" coveredstatements="13" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="9" count="8" type="stmt"/>
+        <line num="11" count="8" type="stmt"/>
+        <line num="14" count="8" type="stmt"/>
+        <line num="15" count="8" type="stmt"/>
+        <line num="18" count="8" type="stmt"/>
+        <line num="25" count="8" type="stmt"/>
+        <line num="32" count="8" type="stmt"/>
+        <line num="39" count="8" type="stmt"/>
+        <line num="46" count="8" type="stmt"/>
+      </file>
+      <file name="inventory.routes.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/routes/restaurant/inventory.routes.js">
+        <metrics statements="13" coveredstatements="13" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="9" count="8" type="stmt"/>
+        <line num="11" count="8" type="stmt"/>
+        <line num="14" count="8" type="stmt"/>
+        <line num="15" count="8" type="stmt"/>
+        <line num="18" count="8" type="stmt"/>
+        <line num="25" count="8" type="stmt"/>
+        <line num="33" count="8" type="stmt"/>
+        <line num="40" count="8" type="stmt"/>
+        <line num="47" count="8" type="stmt"/>
+      </file>
+      <file name="menu.routes.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/routes/restaurant/menu.routes.js">
+        <metrics statements="26" coveredstatements="22" conditionals="2" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="5" count="8" type="stmt"/>
+        <line num="12" count="8" type="stmt"/>
+        <line num="14" count="8" type="stmt"/>
+        <line num="17" count="8" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="24" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="33" count="8" type="stmt"/>
+        <line num="34" count="8" type="stmt"/>
+        <line num="39" count="8" type="stmt"/>
+        <line num="40" count="8" type="stmt"/>
+        <line num="41" count="8" type="stmt"/>
+        <line num="42" count="8" type="stmt"/>
+        <line num="47" count="8" type="stmt"/>
+        <line num="48" count="8" type="stmt"/>
+        <line num="49" count="8" type="stmt"/>
+        <line num="50" count="8" type="stmt"/>
+        <line num="51" count="8" type="stmt"/>
+        <line num="52" count="8" type="stmt"/>
+        <line num="57" count="8" type="stmt"/>
+        <line num="59" count="8" type="stmt"/>
+      </file>
+      <file name="order.routes.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/routes/restaurant/order.routes.js">
+        <metrics statements="11" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="5" count="8" type="stmt"/>
+        <line num="7" count="8" type="stmt"/>
+        <line num="10" count="8" type="stmt"/>
+        <line num="11" count="8" type="stmt"/>
+        <line num="14" count="8" type="stmt"/>
+        <line num="17" count="8" type="stmt"/>
+        <line num="24" count="8" type="stmt"/>
+      </file>
+      <file name="platformIntegration.routes.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/routes/restaurant/platformIntegration.routes.js">
+        <metrics statements="14" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="8" count="8" type="stmt"/>
+        <line num="10" count="8" type="stmt"/>
+        <line num="13" count="8" type="stmt"/>
+        <line num="14" count="8" type="stmt"/>
+        <line num="17" count="8" type="stmt"/>
+        <line num="19" count="8" type="stmt"/>
+        <line num="20" count="8" type="stmt"/>
+        <line num="21" count="8" type="stmt"/>
+        <line num="22" count="8" type="stmt"/>
+        <line num="24" count="8" type="stmt"/>
+      </file>
+      <file name="restaurant.routes.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/routes/restaurant/restaurant.routes.js">
+        <metrics statements="16" coveredstatements="16" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="5" count="8" type="stmt"/>
+        <line num="6" count="8" type="stmt"/>
+        <line num="9" count="8" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="14" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="20" count="8" type="stmt"/>
+        <line num="23" count="8" type="stmt"/>
+        <line num="24" count="8" type="stmt"/>
+        <line num="27" count="8" type="stmt"/>
+        <line num="30" count="8" type="stmt"/>
+        <line num="38" count="8" type="stmt"/>
+        <line num="45" count="8" type="stmt"/>
+      </file>
+      <file name="screen.routes.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/routes/restaurant/screen.routes.js">
+        <metrics statements="14" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="5" count="8" type="stmt"/>
+        <line num="7" count="8" type="stmt"/>
+        <line num="10" count="8" type="stmt"/>
+        <line num="11" count="8" type="stmt"/>
+        <line num="12" count="8" type="stmt"/>
+        <line num="14" count="8" type="stmt"/>
+        <line num="15" count="8" type="stmt"/>
+        <line num="16" count="8" type="stmt"/>
+        <line num="17" count="8" type="stmt"/>
+        <line num="19" count="8" type="stmt"/>
+      </file>
+      <file name="staff.routes.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/routes/restaurant/staff.routes.js">
+        <metrics statements="14" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="5" count="8" type="stmt"/>
+        <line num="7" count="8" type="stmt"/>
+        <line num="10" count="8" type="stmt"/>
+        <line num="11" count="8" type="stmt"/>
+        <line num="14" count="8" type="stmt"/>
+        <line num="16" count="8" type="stmt"/>
+        <line num="17" count="8" type="stmt"/>
+        <line num="18" count="8" type="stmt"/>
+        <line num="19" count="8" type="stmt"/>
+        <line num="21" count="8" type="stmt"/>
+      </file>
+      <file name="table.routes.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/routes/restaurant/table.routes.js">
+        <metrics statements="19" coveredstatements="19" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="12" count="8" type="stmt"/>
+        <line num="14" count="8" type="stmt"/>
+        <line num="19" count="8" type="stmt"/>
+        <line num="20" count="8" type="stmt"/>
+        <line num="21" count="8" type="stmt"/>
+        <line num="22" count="8" type="stmt"/>
+        <line num="27" count="8" type="stmt"/>
+        <line num="28" count="8" type="stmt"/>
+        <line num="30" count="8" type="stmt"/>
+        <line num="31" count="8" type="stmt"/>
+        <line num="32" count="8" type="stmt"/>
+        <line num="33" count="8" type="stmt"/>
+        <line num="34" count="8" type="stmt"/>
+        <line num="35" count="8" type="stmt"/>
+        <line num="37" count="8" type="stmt"/>
+      </file>
+      <file name="webhook.routes.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/routes/restaurant/webhook.routes.js">
+        <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="5" count="8" type="stmt"/>
+        <line num="8" count="8" type="stmt"/>
+        <line num="9" count="8" type="stmt"/>
+        <line num="10" count="8" type="stmt"/>
+        <line num="12" count="8" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.services.platform">
+      <metrics statements="187" coveredstatements="155" conditionals="111" coveredconditionals="66" methods="22" coveredmethods="16"/>
+      <file name="ad.service.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/services/platform/ad.service.js">
+        <metrics statements="73" coveredstatements="68" conditionals="63" coveredconditionals="37" methods="8" coveredmethods="7"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="5" count="8" type="stmt"/>
+        <line num="6" count="8" type="stmt"/>
+        <line num="7" count="8" type="stmt"/>
+        <line num="8" count="8" type="stmt"/>
+        <line num="9" count="8" type="stmt"/>
+        <line num="16" count="3" type="stmt"/>
+        <line num="18" count="3" type="stmt"/>
+        <line num="19" count="3" type="stmt"/>
+        <line num="22" count="3" type="stmt"/>
+        <line num="26" count="3" type="stmt"/>
+        <line num="29" count="3" type="stmt"/>
+        <line num="33" count="3" type="stmt"/>
+        <line num="35" count="3" type="stmt"/>
+        <line num="50" count="3" type="cond" truecount="0" falsecount="1"/>
+        <line num="53" count="3" type="stmt"/>
+        <line num="54" count="3" type="stmt"/>
+        <line num="60" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="62" count="3" type="stmt"/>
+        <line num="65" count="3" type="stmt"/>
+        <line num="70" count="3" type="stmt"/>
+        <line num="71" count="3" type="stmt"/>
+        <line num="73" count="3" type="stmt"/>
+        <line num="74" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="75" count="3" type="cond" truecount="5" falsecount="0"/>
+        <line num="76" count="2" type="cond" truecount="2" falsecount="3"/>
+        <line num="77" count="2" type="cond" truecount="2" falsecount="3"/>
+        <line num="81" count="2" type="cond" truecount="4" falsecount="0"/>
+        <line num="82" count="1" type="stmt"/>
+        <line num="83" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="87" count="2" type="stmt"/>
+        <line num="88" count="2" type="cond" truecount="3" falsecount="1"/>
+        <line num="89" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="90" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="93" count="2" type="stmt"/>
+        <line num="96" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="99" count="2" type="stmt"/>
+        <line num="104" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="107" count="2" type="stmt"/>
+        <line num="108" count="2" type="stmt"/>
+        <line num="109" count="2" type="stmt"/>
+        <line num="110" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="114" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="117" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="118" count="2" type="stmt"/>
+        <line num="122" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="126" count="2" type="stmt"/>
+        <line num="127" count="2" type="stmt"/>
+        <line num="130" count="2" type="stmt"/>
+        <line num="140" count="2" type="stmt"/>
+        <line num="151" count="4" type="stmt"/>
+        <line num="152" count="4" type="stmt"/>
+        <line num="154" count="1" type="stmt"/>
+        <line num="157" count="3" type="stmt"/>
+        <line num="158" count="3" type="stmt"/>
+        <line num="159" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="160" count="0" type="stmt"/>
+        <line num="165" count="3" type="cond" truecount="4" falsecount="0"/>
+        <line num="168" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="170" count="2" type="stmt"/>
+        <line num="171" count="2" type="stmt"/>
+        <line num="174" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="175" count="1" type="stmt"/>
+        <line num="176" count="1" type="stmt"/>
+        <line num="177" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="178" count="0" type="stmt"/>
+        <line num="179" count="0" type="stmt"/>
+        <line num="182" count="2" type="stmt"/>
+        <line num="185" count="3" type="stmt"/>
+        <line num="195" count="8" type="stmt"/>
+      </file>
+      <file name="coupon.service.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/services/platform/coupon.service.js">
+        <metrics statements="28" coveredstatements="20" conditionals="12" coveredconditionals="4" methods="5" coveredmethods="4"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="11" count="4" type="stmt"/>
+        <line num="14" count="4" type="stmt"/>
+        <line num="15" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="19" count="3" type="stmt"/>
+        <line num="23" count="3" type="stmt"/>
+        <line num="24" count="3" type="stmt"/>
+        <line num="31" count="8" type="stmt"/>
+        <line num="38" count="0" type="stmt"/>
+        <line num="39" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="41" count="0" type="stmt"/>
+        <line num="45" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="46" count="0" type="stmt"/>
+        <line num="48" count="0" type="stmt"/>
+        <line num="55" count="8" type="stmt"/>
+        <line num="56" count="8" type="cond" truecount="1" falsecount="1"/>
+        <line num="57" count="0" type="stmt"/>
+        <line num="60" count="8" type="stmt"/>
+        <line num="62" count="5" type="stmt"/>
+        <line num="74" count="1" type="stmt"/>
+        <line num="79" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="80" count="0" type="stmt"/>
+        <line num="82" count="1" type="stmt"/>
+        <line num="86" count="8" type="stmt"/>
+      </file>
+      <file name="restaurant.service.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/services/platform/restaurant.service.js">
+        <metrics statements="57" coveredstatements="41" conditionals="22" coveredconditionals="14" methods="7" coveredmethods="3"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="5" count="8" type="stmt"/>
+        <line num="6" count="8" type="stmt"/>
+        <line num="7" count="8" type="stmt"/>
+        <line num="8" count="8" type="stmt"/>
+        <line num="22" count="4" type="stmt"/>
+        <line num="23" count="4" type="cond" truecount="1" falsecount="1"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="27" count="4" type="cond" truecount="4" falsecount="1"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="34" count="4" type="cond" truecount="4" falsecount="0"/>
+        <line num="35" count="1" type="stmt"/>
+        <line num="41" count="3" type="stmt"/>
+        <line num="42" count="3" type="stmt"/>
+        <line num="43" count="3" type="stmt"/>
+        <line num="47" count="3" type="stmt"/>
+        <line num="49" count="3" type="stmt"/>
+        <line num="50" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="52" count="2" type="stmt"/>
+        <line num="55" count="2" type="stmt"/>
+        <line num="56" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="57" count="0" type="stmt"/>
+        <line num="60" count="2" type="stmt"/>
+        <line num="61" count="2" type="stmt"/>
+        <line num="62" count="2" type="stmt"/>
+        <line num="65" count="2" type="stmt"/>
+        <line num="74" count="2" type="stmt"/>
+        <line num="84" count="1" type="stmt"/>
+        <line num="90" count="1" type="stmt"/>
+        <line num="95" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="96" count="2" type="stmt"/>
+        <line num="97" count="2" type="stmt"/>
+        <line num="114" count="2" type="stmt"/>
+        <line num="127" count="2" type="stmt"/>
+        <line num="132" count="0" type="stmt"/>
+        <line num="135" count="1" type="stmt"/>
+        <line num="136" count="1" type="stmt"/>
+        <line num="151" count="1" type="stmt"/>
+        <line num="164" count="1" type="stmt"/>
+        <line num="169" count="0" type="stmt"/>
+        <line num="172" count="3" type="stmt"/>
+        <line num="179" count="1" type="stmt"/>
+        <line num="186" count="0" type="stmt"/>
+        <line num="187" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="188" count="0" type="stmt"/>
+        <line num="190" count="0" type="stmt"/>
+        <line num="191" count="0" type="stmt"/>
+        <line num="198" count="0" type="stmt"/>
+        <line num="199" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="200" count="0" type="stmt"/>
+        <line num="203" count="0" type="stmt"/>
+        <line num="204" count="0" type="stmt"/>
+        <line num="205" count="0" type="stmt"/>
+        <line num="209" count="8" type="stmt"/>
+      </file>
+      <file name="verification.service.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/services/platform/verification.service.js">
+        <metrics statements="29" coveredstatements="26" conditionals="14" coveredconditionals="11" methods="2" coveredmethods="2"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="27" count="4" type="stmt"/>
+        <line num="28" count="4" type="cond" truecount="1" falsecount="1"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="32" count="4" type="stmt"/>
+        <line num="33" count="4" type="cond" truecount="1" falsecount="1"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="37" count="4" type="stmt"/>
+        <line num="38" count="4" type="cond" truecount="3" falsecount="1"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="43" count="4" type="stmt"/>
+        <line num="44" count="4" type="stmt"/>
+        <line num="47" count="4" type="stmt"/>
+        <line num="50" count="4" type="stmt"/>
+        <line num="51" count="4" type="cond" truecount="4" falsecount="0"/>
+        <line num="53" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="54" count="1" type="stmt"/>
+        <line num="55" count="1" type="stmt"/>
+        <line num="56" count="1" type="stmt"/>
+        <line num="57" count="1" type="stmt"/>
+        <line num="60" count="3" type="stmt"/>
+        <line num="61" count="3" type="stmt"/>
+        <line num="65" count="4" type="stmt"/>
+        <line num="66" count="4" type="stmt"/>
+        <line num="70" count="8" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.services.restaurant">
+      <metrics statements="866" coveredstatements="431" conditionals="559" coveredconditionals="138" methods="81" coveredmethods="41"/>
+      <file name="auth.service.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/services/restaurant/auth.service.js">
+        <metrics statements="94" coveredstatements="73" conditionals="59" coveredconditionals="33" methods="6" coveredmethods="5"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="5" count="8" type="stmt"/>
+        <line num="6" count="8" type="stmt"/>
+        <line num="7" count="8" type="stmt"/>
+        <line num="8" count="8" type="stmt"/>
+        <line num="9" count="8" type="stmt"/>
+        <line num="10" count="8" type="stmt"/>
+        <line num="33" count="4" type="stmt"/>
+        <line num="36" count="4" type="stmt"/>
+        <line num="37" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="38" count="1" type="stmt"/>
+        <line num="41" count="3" type="stmt"/>
+        <line num="42" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="47" count="3" type="stmt"/>
+        <line num="53" count="3" type="stmt"/>
+        <line num="54" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="55" count="0" type="stmt"/>
+        <line num="59" count="3" type="stmt"/>
+        <line num="65" count="3" type="stmt"/>
+        <line num="67" count="3" type="stmt"/>
+        <line num="76" count="3" type="stmt"/>
+        <line num="117" count="3" type="stmt"/>
+        <line num="118" count="3" type="stmt"/>
+        <line num="133" count="3" type="stmt"/>
+        <line num="151" count="3" type="stmt"/>
+        <line num="156" count="0" type="stmt"/>
+        <line num="159" count="3" type="stmt"/>
+        <line num="177" count="4" type="cond" truecount="3" falsecount="1"/>
+        <line num="178" count="0" type="stmt"/>
+        <line num="182" count="4" type="cond" truecount="1" falsecount="1"/>
+        <line num="183" count="4" type="stmt"/>
+        <line num="185" count="0" type="stmt"/>
+        <line num="188" count="4" type="cond" truecount="1" falsecount="1"/>
+        <line num="189" count="0" type="stmt"/>
+        <line num="192" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="193" count="1" type="stmt"/>
+        <line num="196" count="3" type="stmt"/>
+        <line num="197" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="198" count="1" type="stmt"/>
+        <line num="202" count="2" type="stmt"/>
+        <line num="204" count="2" type="stmt"/>
+        <line num="205" count="2" type="stmt"/>
+        <line num="207" count="2" type="stmt"/>
+        <line num="208" count="2" type="stmt"/>
+        <line num="210" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="211" count="0" type="stmt"/>
+        <line num="212" count="0" type="stmt"/>
+        <line num="214" count="2" type="stmt"/>
+        <line num="215" count="2" type="cond" truecount="3" falsecount="1"/>
+        <line num="216" count="0" type="stmt"/>
+        <line num="217" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="221" count="2" type="stmt"/>
+        <line num="222" count="2" type="stmt"/>
+        <line num="226" count="2" type="stmt"/>
+        <line num="242" count="1" type="cond" truecount="4" falsecount="1"/>
+        <line num="243" count="0" type="stmt"/>
+        <line num="246" count="1" type="stmt"/>
+        <line num="247" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="248" count="0" type="stmt"/>
+        <line num="251" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="252" count="0" type="stmt"/>
+        <line num="255" count="1" type="stmt"/>
+        <line num="256" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="257" count="0" type="stmt"/>
+        <line num="261" count="1" type="stmt"/>
+        <line num="263" count="1" type="stmt"/>
+        <line num="264" count="1" type="stmt"/>
+        <line num="266" count="1" type="stmt"/>
+        <line num="267" count="1" type="stmt"/>
+        <line num="269" count="1" type="stmt"/>
+        <line num="283" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="284" count="0" type="stmt"/>
+        <line num="287" count="2" type="stmt"/>
+        <line num="288" count="2" type="stmt"/>
+        <line num="290" count="1" type="stmt"/>
+        <line num="292" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="293" count="1" type="stmt"/>
+        <line num="294" count="1" type="cond" truecount="3" falsecount="1"/>
+        <line num="295" count="0" type="stmt"/>
+        <line num="297" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="298" count="0" type="stmt"/>
+        <line num="299" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="300" count="0" type="stmt"/>
+        <line num="303" count="0" type="stmt"/>
+        <line num="307" count="1" type="stmt"/>
+        <line num="308" count="1" type="stmt"/>
+        <line num="310" count="1" type="stmt"/>
+        <line num="317" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="318" count="1" type="stmt"/>
+        <line num="323" count="8" type="stmt"/>
+      </file>
+      <file name="booking.service.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/services/restaurant/booking.service.js">
+        <metrics statements="73" coveredstatements="45" conditionals="61" coveredconditionals="23" methods="4" coveredmethods="3"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="11" count="5" type="stmt"/>
+        <line num="14" count="5" type="stmt"/>
+        <line num="16" count="5" type="stmt"/>
+        <line num="17" count="5" type="stmt"/>
+        <line num="19" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="20" count="4" type="stmt"/>
+        <line num="21" count="4" type="cond" truecount="1" falsecount="1"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="25" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="33" count="3" type="stmt"/>
+        <line num="41" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="42" count="1" type="stmt"/>
+        <line num="45" count="2" type="stmt"/>
+        <line num="46" count="2" type="stmt"/>
+        <line num="49" count="3" type="stmt"/>
+        <line num="69" count="3" type="stmt"/>
+        <line num="70" count="3" type="stmt"/>
+        <line num="71" count="3" type="stmt"/>
+        <line num="78" count="1" type="stmt"/>
+        <line num="80" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="81" count="0" type="stmt"/>
+        <line num="83" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="84" count="0" type="stmt"/>
+        <line num="86" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="87" count="0" type="stmt"/>
+        <line num="90" count="1" type="stmt"/>
+        <line num="97" count="3" type="stmt"/>
+        <line num="98" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="99" count="0" type="stmt"/>
+        <line num="102" count="3" type="stmt"/>
+        <line num="104" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="105" count="1" type="stmt"/>
+        <line num="108" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="109" count="2" type="stmt"/>
+        <line num="110" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="111" count="0" type="stmt"/>
+        <line num="114" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="115" count="1" type="stmt"/>
+        <line num="122" count="1" type="stmt"/>
+        <line num="130" count="1" type="cond" truecount="3" falsecount="1"/>
+        <line num="131" count="1" type="stmt"/>
+        <line num="134" count="0" type="stmt"/>
+        <line num="135" count="0" type="stmt"/>
+        <line num="138" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="139" count="0" type="stmt"/>
+        <line num="145" count="1" type="stmt"/>
+        <line num="146" count="1" type="stmt"/>
+        <line num="147" count="1" type="stmt"/>
+        <line num="154" count="0" type="stmt"/>
+        <line num="156" count="0" type="cond" truecount="0" falsecount="7"/>
+        <line num="157" count="0" type="stmt"/>
+        <line num="161" count="0" type="stmt"/>
+        <line num="162" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="163" count="0" type="stmt"/>
+        <line num="164" count="0" type="stmt"/>
+        <line num="167" count="0" type="stmt"/>
+        <line num="169" count="0" type="stmt"/>
+        <line num="170" count="0" type="stmt"/>
+        <line num="172" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="173" count="0" type="stmt"/>
+        <line num="174" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="175" count="0" type="stmt"/>
+        <line num="176" count="0" type="stmt"/>
+        <line num="180" count="0" type="stmt"/>
+        <line num="200" count="0" type="stmt"/>
+        <line num="201" count="0" type="stmt"/>
+        <line num="202" count="0" type="stmt"/>
+        <line num="206" count="8" type="stmt"/>
+      </file>
+      <file name="campaign.service.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/services/restaurant/campaign.service.js">
+        <metrics statements="47" coveredstatements="29" conditionals="20" coveredconditionals="8" methods="5" coveredmethods="3"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="5" count="8" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="15" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="16" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="20" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
+        <line num="32" count="1" type="stmt"/>
+        <line num="33" count="1" type="stmt"/>
+        <line num="40" count="0" type="stmt"/>
+        <line num="41" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="42" count="0" type="stmt"/>
+        <line num="44" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="45" count="0" type="stmt"/>
+        <line num="47" count="0" type="stmt"/>
+        <line num="54" count="0" type="stmt"/>
+        <line num="55" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="56" count="0" type="stmt"/>
+        <line num="59" count="0" type="stmt"/>
+        <line num="60" count="0" type="stmt"/>
+        <line num="61" count="0" type="stmt"/>
+        <line num="68" count="1" type="stmt"/>
+        <line num="71" count="1" type="stmt"/>
+        <line num="80" count="1" type="stmt"/>
+        <line num="81" count="1" type="stmt"/>
+        <line num="87" count="1" type="stmt"/>
+        <line num="88" count="1" type="stmt"/>
+        <line num="95" count="1" type="stmt"/>
+        <line num="96" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="97" count="0" type="stmt"/>
+        <line num="100" count="1" type="cond" truecount="3" falsecount="1"/>
+        <line num="101" count="0" type="stmt"/>
+        <line num="104" count="1" type="stmt"/>
+        <line num="105" count="1" type="stmt"/>
+        <line num="110" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="111" count="0" type="stmt"/>
+        <line num="112" count="0" type="stmt"/>
+        <line num="115" count="1" type="stmt"/>
+        <line num="121" count="1" type="stmt"/>
+        <line num="125" count="8" type="stmt"/>
+      </file>
+      <file name="feedback.service.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/services/restaurant/feedback.service.js">
+        <metrics statements="77" coveredstatements="30" conditionals="42" coveredconditionals="11" methods="5" coveredmethods="3"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="5" count="8" type="stmt"/>
+        <line num="6" count="8" type="stmt"/>
+        <line num="13" count="2" type="stmt"/>
+        <line num="19" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="25" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="30" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="32" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="37" count="2" type="stmt"/>
+        <line num="38" count="2" type="stmt"/>
+        <line num="39" count="2" type="stmt"/>
+        <line num="46" count="1" type="stmt"/>
+        <line num="47" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="48" count="0" type="stmt"/>
+        <line num="50" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="51" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="53" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="54" count="0" type="stmt"/>
+        <line num="56" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="57" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="59" count="1" type="stmt"/>
+        <line num="66" count="1" type="stmt"/>
+        <line num="67" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="68" count="0" type="stmt"/>
+        <line num="71" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="72" count="0" type="stmt"/>
+        <line num="75" count="1" type="stmt"/>
+        <line num="82" count="1" type="stmt"/>
+        <line num="83" count="1" type="stmt"/>
+        <line num="84" count="1" type="stmt"/>
+        <line num="92" count="0" type="stmt"/>
+        <line num="98" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="99" count="0" type="stmt"/>
+        <line num="106" count="0" type="stmt"/>
+        <line num="127" count="0" type="stmt"/>
+        <line num="129" count="0" type="stmt"/>
+        <line num="131" count="0" type="stmt"/>
+        <line num="137" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="138" count="0" type="stmt"/>
+        <line num="142" count="0" type="stmt"/>
+        <line num="151" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="152" count="0" type="stmt"/>
+        <line num="153" count="0" type="stmt"/>
+        <line num="157" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="158" count="0" type="stmt"/>
+        <line num="161" count="0" type="stmt"/>
+        <line num="162" count="0" type="stmt"/>
+        <line num="165" count="0" type="stmt"/>
+        <line num="170" count="0" type="stmt"/>
+        <line num="181" count="0" type="stmt"/>
+        <line num="183" count="0" type="stmt"/>
+        <line num="184" count="0" type="stmt"/>
+        <line num="185" count="0" type="stmt"/>
+        <line num="186" count="0" type="stmt"/>
+        <line num="188" count="0" type="stmt"/>
+        <line num="189" count="0" type="stmt"/>
+        <line num="191" count="0" type="stmt"/>
+        <line num="192" count="0" type="stmt"/>
+        <line num="193" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="194" count="0" type="stmt"/>
+        <line num="196" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="197" count="0" type="stmt"/>
+        <line num="198" count="0" type="stmt"/>
+        <line num="200" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="201" count="0" type="stmt"/>
+        <line num="205" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="206" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="208" count="0" type="stmt"/>
+        <line num="219" count="8" type="stmt"/>
+      </file>
+      <file name="finance.service.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/services/restaurant/finance.service.js">
+        <metrics statements="55" coveredstatements="44" conditionals="14" coveredconditionals="5" methods="4" coveredmethods="3"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="5" count="8" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="28" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="31" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="34" count="1" type="stmt"/>
+        <line num="41" count="1" type="stmt"/>
+        <line num="43" count="1" type="stmt"/>
+        <line num="44" count="1" type="stmt"/>
+        <line num="45" count="1" type="stmt"/>
+        <line num="48" count="1" type="stmt"/>
+        <line num="55" count="1" type="stmt"/>
+        <line num="56" count="1" type="stmt"/>
+        <line num="58" count="1" type="stmt"/>
+        <line num="59" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="60" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="61" count="0" type="stmt"/>
+        <line num="63" count="0" type="stmt"/>
+        <line num="68" count="1" type="stmt"/>
+        <line num="69" count="1" type="stmt"/>
+        <line num="72" count="1" type="stmt"/>
+        <line num="78" count="1" type="stmt"/>
+        <line num="79" count="1" type="stmt"/>
+        <line num="80" count="1" type="stmt"/>
+        <line num="82" count="1" type="stmt"/>
+        <line num="83" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="84" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="85" count="0" type="stmt"/>
+        <line num="86" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="87" count="0" type="stmt"/>
+        <line num="89" count="1" type="stmt"/>
+        <line num="93" count="1" type="stmt"/>
+        <line num="94" count="1" type="stmt"/>
+        <line num="95" count="1" type="stmt"/>
+        <line num="98" count="1" type="stmt"/>
+        <line num="99" count="1" type="stmt"/>
+        <line num="100" count="1" type="stmt"/>
+        <line num="102" count="1" type="stmt"/>
+        <line num="115" count="1" type="stmt"/>
+        <line num="121" count="1" type="stmt"/>
+        <line num="126" count="1" type="stmt"/>
+        <line num="133" count="0" type="stmt"/>
+        <line num="134" count="0" type="stmt"/>
+        <line num="135" count="0" type="stmt"/>
+        <line num="139" count="8" type="stmt"/>
+      </file>
+      <file name="inventory.service.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/services/restaurant/inventory.service.js">
+        <metrics statements="63" coveredstatements="26" conditionals="34" coveredconditionals="6" methods="6" coveredmethods="3"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="5" count="8" type="stmt"/>
+        <line num="6" count="8" type="stmt"/>
+        <line num="7" count="8" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="15" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="35" count="0" type="stmt"/>
+        <line num="36" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="40" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="41" count="0" type="stmt"/>
+        <line num="42" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="47" count="0" type="stmt"/>
+        <line num="48" count="0" type="stmt"/>
+        <line num="49" count="0" type="stmt"/>
+        <line num="56" count="1" type="stmt"/>
+        <line num="58" count="1" type="stmt"/>
+        <line num="59" count="1" type="stmt"/>
+        <line num="60" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="61" count="0" type="stmt"/>
+        <line num="64" count="1" type="stmt"/>
+        <line num="66" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="67" count="0" type="stmt"/>
+        <line num="68" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="69" count="1" type="stmt"/>
+        <line num="70" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="72" count="0" type="stmt"/>
+        <line num="75" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="76" count="0" type="stmt"/>
+        <line num="83" count="1" type="stmt"/>
+        <line num="91" count="1" type="stmt"/>
+        <line num="102" count="1" type="stmt"/>
+        <line num="107" count="1" type="stmt"/>
+        <line num="115" count="0" type="stmt"/>
+        <line num="117" count="0" type="stmt"/>
+        <line num="118" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="119" count="0" type="stmt"/>
+        <line num="120" count="0" type="stmt"/>
+        <line num="123" count="0" type="stmt"/>
+        <line num="124" count="0" type="stmt"/>
+        <line num="125" count="0" type="cond" truecount="0" falsecount="5"/>
+        <line num="126" count="0" type="stmt"/>
+        <line num="129" count="0" type="stmt"/>
+        <line num="130" count="0" type="stmt"/>
+        <line num="132" count="0" type="stmt"/>
+        <line num="138" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="139" count="0" type="stmt"/>
+        <line num="143" count="0" type="stmt"/>
+        <line num="146" count="0" type="stmt"/>
+        <line num="149" count="0" type="stmt"/>
+        <line num="157" count="0" type="stmt"/>
+        <line num="170" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="171" count="0" type="stmt"/>
+        <line num="187" count="8" type="stmt"/>
+      </file>
+      <file name="menu.service.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/services/restaurant/menu.service.js">
+        <metrics statements="81" coveredstatements="23" conditionals="45" coveredconditionals="4" methods="12" coveredmethods="3"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="5" count="8" type="stmt"/>
+        <line num="6" count="8" type="stmt"/>
+        <line num="7" count="8" type="stmt"/>
+        <line num="8" count="8" type="stmt"/>
+        <line num="16" count="2" type="stmt"/>
+        <line num="19" count="2" type="stmt"/>
+        <line num="20" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="24" count="2" type="stmt"/>
+        <line num="30" count="2" type="stmt"/>
+        <line num="31" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="35" count="2" type="stmt"/>
+        <line num="42" count="1" type="stmt"/>
+        <line num="46" count="0" type="stmt"/>
+        <line num="47" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="48" count="0" type="stmt"/>
+        <line num="51" count="0" type="stmt"/>
+        <line num="53" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="54" count="0" type="stmt"/>
+        <line num="55" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="56" count="0" type="stmt"/>
+        <line num="59" count="0" type="stmt"/>
+        <line num="65" count="0" type="stmt"/>
+        <line num="66" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="67" count="0" type="stmt"/>
+        <line num="70" count="0" type="stmt"/>
+        <line num="73" count="0" type="stmt"/>
+        <line num="77" count="0" type="stmt"/>
+        <line num="78" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="79" count="0" type="stmt"/>
+        <line num="83" count="0" type="stmt"/>
+        <line num="84" count="0" type="stmt"/>
+        <line num="87" count="0" type="stmt"/>
+        <line num="94" count="0" type="stmt"/>
+        <line num="102" count="2" type="stmt"/>
+        <line num="105" count="2" type="stmt"/>
+        <line num="106" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="107" count="0" type="stmt"/>
+        <line num="111" count="2" type="stmt"/>
+        <line num="112" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="113" count="0" type="stmt"/>
+        <line num="116" count="2" type="stmt"/>
+        <line num="120" count="0" type="stmt"/>
+        <line num="124" count="0" type="stmt"/>
+        <line num="125" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="126" count="0" type="stmt"/>
+        <line num="128" count="0" type="stmt"/>
+        <line num="132" count="0" type="stmt"/>
+        <line num="133" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="134" count="0" type="stmt"/>
+        <line num="137" count="0" type="stmt"/>
+        <line num="139" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="140" count="0" type="stmt"/>
+        <line num="141" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="142" count="0" type="stmt"/>
+        <line num="146" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="147" count="0" type="stmt"/>
+        <line num="148" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="149" count="0" type="stmt"/>
+        <line num="153" count="0" type="stmt"/>
+        <line num="157" count="0" type="stmt"/>
+        <line num="158" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="159" count="0" type="stmt"/>
+        <line num="163" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="164" count="0" type="stmt"/>
+        <line num="165" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="166" count="0" type="stmt"/>
+        <line num="167" count="0" type="stmt"/>
+        <line num="171" count="0" type="stmt"/>
+        <line num="175" count="0" type="stmt"/>
+        <line num="176" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="177" count="0" type="stmt"/>
+        <line num="179" count="0" type="stmt"/>
+        <line num="188" count="0" type="stmt"/>
+        <line num="191" count="0" type="stmt"/>
+        <line num="200" count="8" type="stmt"/>
+      </file>
+      <file name="order.service.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/services/restaurant/order.service.js">
+        <metrics statements="20" coveredstatements="14" conditionals="7" coveredconditionals="3" methods="2" coveredmethods="1"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="5" count="8" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="22" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
+        <line num="35" count="1" type="cond" truecount="2" falsecount="2"/>
+        <line num="36" count="0" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="44" count="1" type="stmt"/>
+        <line num="46" count="1" type="stmt"/>
+        <line num="50" count="8" type="stmt"/>
+      </file>
+      <file name="platformIntegration.service.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/services/restaurant/platformIntegration.service.js">
+        <metrics statements="59" coveredstatements="6" conditionals="41" coveredconditionals="0" methods="5" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="5" count="8" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="24" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="38" count="0" type="stmt"/>
+        <line num="45" count="0" type="stmt"/>
+        <line num="52" count="0" type="stmt"/>
+        <line num="54" count="0" type="stmt"/>
+        <line num="55" count="0" type="stmt"/>
+        <line num="57" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="59" count="0" type="stmt"/>
+        <line num="68" count="0" type="stmt"/>
+        <line num="75" count="0" type="stmt"/>
+        <line num="83" count="0" type="stmt"/>
+        <line num="84" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="85" count="0" type="stmt"/>
+        <line num="88" count="0" type="stmt"/>
+        <line num="90" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="91" count="0" type="stmt"/>
+        <line num="97" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="98" count="0" type="stmt"/>
+        <line num="101" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="102" count="0" type="stmt"/>
+        <line num="105" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="106" count="0" type="stmt"/>
+        <line num="119" count="0" type="stmt"/>
+        <line num="120" count="0" type="stmt"/>
+        <line num="128" count="0" type="stmt"/>
+        <line num="129" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="130" count="0" type="stmt"/>
+        <line num="133" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="134" count="0" type="stmt"/>
+        <line num="137" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="138" count="0" type="stmt"/>
+        <line num="141" count="0" type="stmt"/>
+        <line num="144" count="0" type="stmt"/>
+        <line num="146" count="0" type="stmt"/>
+        <line num="147" count="0" type="stmt"/>
+        <line num="149" count="0" type="stmt"/>
+        <line num="150" count="0" type="stmt"/>
+        <line num="151" count="0" type="cond" truecount="0" falsecount="5"/>
+        <line num="152" count="0" type="stmt"/>
+        <line num="153" count="0" type="stmt"/>
+        <line num="154" count="0" type="stmt"/>
+        <line num="155" count="0" type="stmt"/>
+        <line num="160" count="0" type="stmt"/>
+        <line num="161" count="0" type="stmt"/>
+        <line num="163" count="0" type="stmt"/>
+        <line num="168" count="0" type="stmt"/>
+        <line num="175" count="8" type="stmt"/>
+      </file>
+      <file name="restaurant.service.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/services/restaurant/restaurant.service.js">
+        <metrics statements="22" coveredstatements="19" conditionals="6" coveredconditionals="3" methods="3" coveredmethods="3"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="12" count="2" type="stmt"/>
+        <line num="13" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="16" count="2" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="24" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="28" count="1" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
+        <line num="30" count="1" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+        <line num="39" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="40" count="0" type="stmt"/>
+        <line num="43" count="1" type="stmt"/>
+        <line num="44" count="1" type="stmt"/>
+        <line num="45" count="1" type="stmt"/>
+        <line num="49" count="8" type="stmt"/>
+      </file>
+      <file name="screen.service.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/services/restaurant/screen.service.js">
+        <metrics statements="40" coveredstatements="16" conditionals="31" coveredconditionals="9" methods="4" coveredmethods="1"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="6" count="8" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="19" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="24" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="26" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="32" count="1" type="cond" truecount="2" falsecount="1"/>
+        <line num="34" count="1" type="stmt"/>
+        <line num="47" count="1" type="stmt"/>
+        <line num="49" count="1" type="stmt"/>
+        <line num="50" count="1" type="stmt"/>
+        <line num="51" count="1" type="stmt"/>
+        <line num="56" count="0" type="stmt"/>
+        <line num="60" count="0" type="stmt"/>
+        <line num="61" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="62" count="0" type="stmt"/>
+        <line num="66" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="67" count="0" type="stmt"/>
+        <line num="68" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="69" count="0" type="stmt"/>
+        <line num="73" count="0" type="stmt"/>
+        <line num="76" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="77" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="78" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="82" count="0" type="stmt"/>
+        <line num="83" count="0" type="stmt"/>
+        <line num="84" count="0" type="stmt"/>
+        <line num="85" count="0" type="stmt"/>
+        <line num="89" count="0" type="stmt"/>
+        <line num="90" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="91" count="0" type="stmt"/>
+        <line num="94" count="0" type="stmt"/>
+        <line num="98" count="8" type="stmt"/>
+      </file>
+      <file name="staff.service.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/services/restaurant/staff.service.js">
+        <metrics statements="54" coveredstatements="19" conditionals="54" coveredconditionals="6" methods="6" coveredmethods="3"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="5" count="8" type="stmt"/>
+        <line num="7" count="8" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="20" count="1" type="cond" truecount="2" falsecount="3"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="26" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="30" count="1" type="stmt"/>
+        <line num="31" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+        <line num="40" count="1" type="stmt"/>
+        <line num="53" count="1" type="stmt"/>
+        <line num="70" count="1" type="stmt"/>
+        <line num="75" count="1" type="stmt"/>
+        <line num="88" count="1" type="stmt"/>
+        <line num="92" count="0" type="stmt"/>
+        <line num="93" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="94" count="0" type="stmt"/>
+        <line num="98" count="0" type="stmt"/>
+        <line num="99" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="100" count="0" type="stmt"/>
+        <line num="104" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="105" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="106" count="0" type="stmt"/>
+        <line num="108" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="109" count="0" type="stmt"/>
+        <line num="113" count="0" type="stmt"/>
+        <line num="116" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="117" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="118" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="124" count="0" type="stmt"/>
+        <line num="126" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="127" count="0" type="stmt"/>
+        <line num="131" count="0" type="stmt"/>
+        <line num="132" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="133" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="134" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="135" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="136" count="0" type="stmt"/>
+        <line num="139" count="0" type="stmt"/>
+        <line num="142" count="0" type="stmt"/>
+        <line num="146" count="0" type="stmt"/>
+        <line num="147" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="148" count="0" type="stmt"/>
+        <line num="152" count="0" type="cond" truecount="0" falsecount="5"/>
+        <line num="153" count="0" type="stmt"/>
+        <line num="157" count="0" type="stmt"/>
+        <line num="161" count="8" type="stmt"/>
+      </file>
+      <file name="table.service.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/services/restaurant/table.service.js">
+        <metrics statements="118" coveredstatements="80" conditionals="57" coveredconditionals="27" methods="14" coveredmethods="10"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="5" count="8" type="stmt"/>
+        <line num="6" count="8" type="stmt"/>
+        <line num="7" count="8" type="stmt"/>
+        <line num="8" count="8" type="stmt"/>
+        <line num="9" count="8" type="stmt"/>
+        <line num="10" count="8" type="stmt"/>
+        <line num="11" count="8" type="stmt"/>
+        <line num="15" count="3" type="stmt"/>
+        <line num="18" count="3" type="stmt"/>
+        <line num="19" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="23" count="3" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="32" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="36" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="38" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="47" count="0" type="stmt"/>
+        <line num="48" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="49" count="0" type="stmt"/>
+        <line num="52" count="0" type="stmt"/>
+        <line num="56" count="1" type="stmt"/>
+        <line num="57" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="58" count="0" type="stmt"/>
+        <line num="62" count="1" type="stmt"/>
+        <line num="70" count="1" type="stmt"/>
+        <line num="73" count="1" type="stmt"/>
+        <line num="74" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="75" count="0" type="stmt"/>
+        <line num="78" count="1" type="stmt"/>
+        <line num="81" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="82" count="0" type="stmt"/>
+        <line num="86" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="87" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="88" count="0" type="stmt"/>
+        <line num="92" count="0" type="stmt"/>
+        <line num="99" count="0" type="stmt"/>
+        <line num="103" count="1" type="stmt"/>
+        <line num="112" count="1" type="stmt"/>
+        <line num="121" count="1" type="stmt"/>
+        <line num="127" count="1" type="stmt"/>
+        <line num="134" count="1" type="stmt"/>
+        <line num="135" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="136" count="0" type="stmt"/>
+        <line num="139" count="1" type="stmt"/>
+        <line num="141" count="1" type="stmt"/>
+        <line num="153" count="1" type="stmt"/>
+        <line num="154" count="1" type="stmt"/>
+        <line num="155" count="1" type="stmt"/>
+        <line num="158" count="1" type="stmt"/>
+        <line num="159" count="1" type="stmt"/>
+        <line num="160" count="1" type="stmt"/>
+        <line num="166" count="1" type="stmt"/>
+        <line num="179" count="2" type="stmt"/>
+        <line num="182" count="2" type="stmt"/>
+        <line num="183" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="184" count="0" type="stmt"/>
+        <line num="187" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="188" count="0" type="stmt"/>
+        <line num="191" count="2" type="cond" truecount="3" falsecount="1"/>
+        <line num="192" count="0" type="stmt"/>
+        <line num="195" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="196" count="0" type="stmt"/>
+        <line num="199" count="2" type="stmt"/>
+        <line num="202" count="2" type="stmt"/>
+        <line num="203" count="2" type="stmt"/>
+        <line num="204" count="2" type="stmt"/>
+        <line num="206" count="2" type="stmt"/>
+        <line num="207" count="2" type="stmt"/>
+        <line num="214" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="215" count="0" type="stmt"/>
+        <line num="218" count="2" type="stmt"/>
+        <line num="219" count="2" type="stmt"/>
+        <line num="220" count="2" type="stmt"/>
+        <line num="223" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="224" count="0" type="stmt"/>
+        <line num="225" count="0" type="stmt"/>
+        <line num="226" count="0" type="stmt"/>
+        <line num="227" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="228" count="0" type="stmt"/>
+        <line num="229" count="0" type="stmt"/>
+        <line num="233" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="234" count="0" type="stmt"/>
+        <line num="240" count="0" type="stmt"/>
+        <line num="244" count="0" type="stmt"/>
+        <line num="247" count="2" type="stmt"/>
+        <line num="248" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="250" count="2" type="stmt"/>
+        <line num="251" count="2" type="stmt"/>
+        <line num="253" count="2" type="stmt"/>
+        <line num="262" count="2" type="stmt"/>
+        <line num="263" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="264" count="1" type="stmt"/>
+        <line num="268" count="1" type="stmt"/>
+        <line num="269" count="1" type="stmt"/>
+        <line num="272" count="2" type="stmt"/>
+        <line num="276" count="2" type="stmt"/>
+        <line num="278" count="2" type="stmt"/>
+        <line num="279" count="2" type="cond" truecount="4" falsecount="1"/>
+        <line num="280" count="0" type="stmt"/>
+        <line num="283" count="2" type="stmt"/>
+        <line num="309" count="2" type="stmt"/>
+        <line num="312" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="313" count="1" type="stmt"/>
+        <line num="317" count="2" type="stmt"/>
+        <line num="318" count="2" type="stmt"/>
+        <line num="321" count="2" type="stmt"/>
+        <line num="327" count="2" type="stmt"/>
+        <line num="329" count="2" type="stmt"/>
+        <line num="333" count="8" type="stmt"/>
+      </file>
+      <file name="webhook.service.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/services/restaurant/webhook.service.js">
+        <metrics statements="63" coveredstatements="7" conditionals="88" coveredconditionals="0" methods="5" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="5" count="8" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="17" count="0" type="cond" truecount="0" falsecount="6"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="23" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="37" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="38" count="0" type="stmt"/>
+        <line num="44" count="0" type="stmt"/>
+        <line num="49" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="57" count="0" type="stmt"/>
+        <line num="81" count="0" type="stmt"/>
+        <line num="82" count="0" type="stmt"/>
+        <line num="83" count="0" type="stmt"/>
+        <line num="84" count="0" type="stmt"/>
+        <line num="94" count="0" type="stmt"/>
+        <line num="96" count="0" type="cond" truecount="0" falsecount="6"/>
+        <line num="97" count="0" type="stmt"/>
+        <line num="100" count="0" type="stmt"/>
+        <line num="101" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="102" count="0" type="stmt"/>
+        <line num="103" count="0" type="stmt"/>
+        <line num="106" count="0" type="stmt"/>
+        <line num="107" count="0" type="stmt"/>
+        <line num="108" count="0" type="stmt"/>
+        <line num="113" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="114" count="0" type="stmt"/>
+        <line num="120" count="0" type="stmt"/>
+        <line num="125" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="132" count="0" type="stmt"/>
+        <line num="156" count="0" type="stmt"/>
+        <line num="157" count="0" type="stmt"/>
+        <line num="158" count="0" type="stmt"/>
+        <line num="159" count="0" type="stmt"/>
+        <line num="169" count="0" type="stmt"/>
+        <line num="171" count="0" type="cond" truecount="0" falsecount="6"/>
+        <line num="172" count="0" type="stmt"/>
+        <line num="175" count="0" type="stmt"/>
+        <line num="176" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="177" count="0" type="stmt"/>
+        <line num="178" count="0" type="stmt"/>
+        <line num="181" count="0" type="stmt"/>
+        <line num="182" count="0" type="stmt"/>
+        <line num="183" count="0" type="stmt"/>
+        <line num="188" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="189" count="0" type="stmt"/>
+        <line num="195" count="0" type="stmt"/>
+        <line num="204" count="0" type="stmt"/>
+        <line num="228" count="0" type="stmt"/>
+        <line num="229" count="0" type="stmt"/>
+        <line num="230" count="0" type="stmt"/>
+        <line num="231" count="0" type="stmt"/>
+        <line num="236" count="8" type="stmt"/>
+        <line num="238" count="8" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.utils">
+      <metrics statements="295" coveredstatements="165" conditionals="178" coveredconditionals="80" methods="35" coveredmethods="27"/>
+      <file name="asyncHandler.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/utils/asyncHandler.js">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="5" count="680" type="stmt"/>
+        <line num="6" count="174" type="stmt"/>
+        <line num="9" count="8" type="stmt"/>
+      </file>
+      <file name="email.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/utils/email.js">
+        <metrics statements="39" coveredstatements="21" conditionals="22" coveredconditionals="9" methods="2" coveredmethods="2"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="5" count="8" type="stmt"/>
+        <line num="8" count="8" type="stmt"/>
+        <line num="9" count="8" type="cond" truecount="1" falsecount="1"/>
+        <line num="10" count="8" type="cond" truecount="1" falsecount="1"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="20" count="6" type="stmt"/>
+        <line num="21" count="6" type="stmt"/>
+        <line num="22" count="6" type="stmt"/>
+        <line num="23" count="6" type="stmt"/>
+        <line num="25" count="6" type="cond" truecount="5" falsecount="1"/>
+        <line num="26" count="6" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="48" count="6" type="cond" truecount="1" falsecount="1"/>
+        <line num="49" count="6" type="stmt"/>
+        <line num="50" count="6" type="stmt"/>
+        <line num="52" count="6" type="cond" truecount="1" falsecount="1"/>
+        <line num="53" count="6" type="stmt"/>
+        <line num="54" count="6" type="stmt"/>
+        <line num="61" count="0" type="stmt"/>
+        <line num="62" count="0" type="stmt"/>
+        <line num="64" count="0" type="stmt"/>
+        <line num="65" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="71" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="72" count="0" type="stmt"/>
+        <line num="73" count="0" type="stmt"/>
+        <line num="74" count="0" type="stmt"/>
+        <line num="76" count="0" type="stmt"/>
+        <line num="90" count="0" type="stmt"/>
+        <line num="91" count="0" type="stmt"/>
+        <line num="92" count="0" type="stmt"/>
+        <line num="94" count="0" type="stmt"/>
+        <line num="98" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="99" count="0" type="stmt"/>
+        <line num="103" count="0" type="stmt"/>
+        <line num="106" count="8" type="stmt"/>
+      </file>
+      <file name="fieldEncryption.util.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/utils/fieldEncryption.util.js">
+        <metrics statements="34" coveredstatements="27" conditionals="12" coveredconditionals="9" methods="2" coveredmethods="2"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="5" count="8" type="stmt"/>
+        <line num="6" count="8" type="stmt"/>
+        <line num="7" count="8" type="stmt"/>
+        <line num="16" count="210" type="cond" truecount="4" falsecount="1"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="20" count="210" type="stmt"/>
+        <line num="21" count="210" type="stmt"/>
+        <line num="22" count="210" type="stmt"/>
+        <line num="24" count="210" type="stmt"/>
+        <line num="25" count="210" type="stmt"/>
+        <line num="27" count="210" type="stmt"/>
+        <line num="30" count="210" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="44" count="60" type="cond" truecount="4" falsecount="1"/>
+        <line num="45" count="0" type="stmt"/>
+        <line num="48" count="60" type="stmt"/>
+        <line num="49" count="60" type="stmt"/>
+        <line num="50" count="60" type="cond" truecount="1" falsecount="1"/>
+        <line num="52" count="0" type="stmt"/>
+        <line num="55" count="60" type="stmt"/>
+        <line num="56" count="60" type="stmt"/>
+        <line num="57" count="60" type="stmt"/>
+        <line num="59" count="60" type="stmt"/>
+        <line num="60" count="60" type="stmt"/>
+        <line num="62" count="60" type="stmt"/>
+        <line num="63" count="60" type="stmt"/>
+        <line num="65" count="60" type="stmt"/>
+        <line num="67" count="0" type="stmt"/>
+        <line num="69" count="0" type="stmt"/>
+        <line num="73" count="8" type="stmt"/>
+      </file>
+      <file name="imagekit.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/utils/imagekit.js">
+        <metrics statements="54" coveredstatements="27" conditionals="32" coveredconditionals="12" methods="3" coveredmethods="2"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="5" count="8" type="stmt"/>
+        <line num="6" count="8" type="stmt"/>
+        <line num="9" count="8" type="stmt"/>
+        <line num="12" count="8" type="cond" truecount="1" falsecount="1"/>
+        <line num="13" count="8" type="cond" truecount="1" falsecount="1"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="22" count="8" type="cond" truecount="1" falsecount="1"/>
+        <line num="23" count="8" type="cond" truecount="1" falsecount="1"/>
+        <line num="24" count="8" type="cond" truecount="1" falsecount="1"/>
+        <line num="26" count="8" type="stmt"/>
+        <line num="39" count="8" type="stmt"/>
+        <line num="40" count="8" type="cond" truecount="1" falsecount="1"/>
+        <line num="41" count="0" type="stmt"/>
+        <line num="56" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="57" count="0" type="stmt"/>
+        <line num="58" count="0" type="stmt"/>
+        <line num="59" count="0" type="stmt"/>
+        <line num="64" count="0" type="stmt"/>
+        <line num="65" count="0" type="stmt"/>
+        <line num="70" count="0" type="stmt"/>
+        <line num="71" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="76" count="1" type="stmt"/>
+        <line num="77" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="78" count="1" type="stmt"/>
+        <line num="79" count="1" type="stmt"/>
+        <line num="81" count="1" type="stmt"/>
+        <line num="82" count="1" type="stmt"/>
+        <line num="83" count="1" type="stmt"/>
+        <line num="84" count="1" type="stmt"/>
+        <line num="85" count="1" type="stmt"/>
+        <line num="86" count="1" type="stmt"/>
+        <line num="91" count="0" type="stmt"/>
+        <line num="92" count="0" type="stmt"/>
+        <line num="102" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="104" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="106" count="0" type="stmt"/>
+        <line num="107" count="0" type="stmt"/>
+        <line num="108" count="0" type="stmt"/>
+        <line num="109" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="110" count="0" type="stmt"/>
+        <line num="111" count="0" type="stmt"/>
+        <line num="114" count="0" type="stmt"/>
+        <line num="116" count="0" type="stmt"/>
+        <line num="119" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="120" count="0" type="stmt"/>
+        <line num="121" count="0" type="stmt"/>
+        <line num="122" count="0" type="stmt"/>
+        <line num="123" count="0" type="stmt"/>
+        <line num="125" count="0" type="stmt"/>
+        <line num="131" count="8" type="stmt"/>
+      </file>
+      <file name="jwt.util.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/utils/jwt.util.js">
+        <metrics statements="17" coveredstatements="17" conditionals="6" coveredconditionals="5" methods="4" coveredmethods="4"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="11" count="50" type="stmt"/>
+        <line num="16" count="50" type="cond" truecount="2" falsecount="0"/>
+        <line num="17" count="49" type="stmt"/>
+        <line num="18" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="24" count="50" type="stmt"/>
+        <line num="36" count="4" type="stmt"/>
+        <line num="41" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="42" count="1" type="stmt"/>
+        <line num="45" count="4" type="stmt"/>
+        <line num="56" count="55" type="stmt"/>
+        <line num="65" count="2" type="stmt"/>
+        <line num="68" count="8" type="stmt"/>
+      </file>
+      <file name="logger.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/utils/logger.js">
+        <metrics statements="5" coveredstatements="5" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="25" count="48" type="stmt"/>
+        <line num="30" count="8" type="stmt"/>
+      </file>
+      <file name="pricingCalculator.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/utils/pricingCalculator.js">
+        <metrics statements="51" coveredstatements="44" conditionals="50" coveredconditionals="38" methods="11" coveredmethods="10"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="16" count="8" type="cond" truecount="3" falsecount="1"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="20" count="8" type="stmt"/>
+        <line num="21" count="8" type="cond" truecount="4" falsecount="0"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="25" count="7" type="cond" truecount="4" falsecount="0"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="30" count="6" type="cond" truecount="2" falsecount="0"/>
+        <line num="31" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="34" count="5" type="cond" truecount="1" falsecount="1"/>
+        <line num="35" count="5" type="cond" truecount="1" falsecount="1"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="44" count="8" type="stmt"/>
+        <line num="45" count="6" type="stmt"/>
+        <line num="47" count="6" type="cond" truecount="1" falsecount="1"/>
+        <line num="48" count="0" type="stmt"/>
+        <line num="52" count="6" type="stmt"/>
+        <line num="53" count="10" type="stmt"/>
+        <line num="54" count="8" type="stmt"/>
+        <line num="63" count="6" type="stmt"/>
+        <line num="64" count="6" type="cond" truecount="2" falsecount="0"/>
+        <line num="65" count="4" type="stmt"/>
+        <line num="66" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="67" count="1" type="stmt"/>
+        <line num="68" count="2" type="stmt"/>
+        <line num="69" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="70" count="1" type="stmt"/>
+        <line num="71" count="1" type="stmt"/>
+        <line num="73" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="74" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="78" count="6" type="cond" truecount="1" falsecount="1"/>
+        <line num="79" count="0" type="stmt"/>
+        <line num="83" count="6" type="stmt"/>
+        <line num="86" count="8" type="stmt"/>
+        <line num="88" count="6" type="cond" truecount="2" falsecount="0"/>
+        <line num="89" count="1" type="stmt"/>
+        <line num="93" count="5" type="stmt"/>
+        <line num="94" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="95" count="2" type="stmt"/>
+        <line num="96" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="97" count="3" type="stmt"/>
+        <line num="98" count="3" type="cond" truecount="4" falsecount="0"/>
+        <line num="99" count="1" type="stmt"/>
+        <line num="104" count="5" type="cond" truecount="1" falsecount="1"/>
+        <line num="105" count="0" type="stmt"/>
+        <line num="108" count="5" type="stmt"/>
+        <line num="116" count="8" type="stmt"/>
+      </file>
+      <file name="response.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/utils/response.js">
+        <metrics statements="9" coveredstatements="8" conditionals="6" coveredconditionals="4" methods="2" coveredmethods="2"/>
+        <line num="14" count="73" type="stmt"/>
+        <line num="20" count="73" type="cond" truecount="1" falsecount="1"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="24" count="73" type="stmt"/>
+        <line num="35" count="22" type="stmt"/>
+        <line num="40" count="22" type="cond" truecount="2" falsecount="0"/>
+        <line num="41" count="2" type="stmt"/>
+        <line num="44" count="22" type="stmt"/>
+        <line num="47" count="8" type="stmt"/>
+      </file>
+      <file name="socket.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/utils/socket.js">
+        <metrics statements="69" coveredstatements="8" conditionals="46" coveredconditionals="1" methods="7" coveredmethods="1"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="6" count="8" type="stmt"/>
+        <line num="7" count="8" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="25" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="27" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="35" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="36" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="40" count="0" type="stmt"/>
+        <line num="41" count="0" type="stmt"/>
+        <line num="42" count="0" type="stmt"/>
+        <line num="45" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="46" count="0" type="stmt"/>
+        <line num="47" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="48" count="0" type="stmt"/>
+        <line num="51" count="0" type="stmt"/>
+        <line num="58" count="0" type="stmt"/>
+        <line num="59" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="61" count="0" type="stmt"/>
+        <line num="62" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="63" count="0" type="stmt"/>
+        <line num="67" count="0" type="stmt"/>
+        <line num="69" count="0" type="stmt"/>
+        <line num="70" count="0" type="stmt"/>
+        <line num="74" count="0" type="stmt"/>
+        <line num="75" count="0" type="stmt"/>
+        <line num="76" count="0" type="stmt"/>
+        <line num="86" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="87" count="0" type="stmt"/>
+        <line num="88" count="0" type="stmt"/>
+        <line num="92" count="0" type="stmt"/>
+        <line num="93" count="0" type="stmt"/>
+        <line num="94" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="96" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="97" count="0" type="stmt"/>
+        <line num="99" count="0" type="stmt"/>
+        <line num="100" count="0" type="stmt"/>
+        <line num="101" count="0" type="stmt"/>
+        <line num="105" count="0" type="stmt"/>
+        <line num="106" count="0" type="stmt"/>
+        <line num="107" count="0" type="stmt"/>
+        <line num="111" count="0" type="stmt"/>
+        <line num="118" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="119" count="0" type="stmt"/>
+        <line num="133" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="135" count="0" type="stmt"/>
+        <line num="136" count="0" type="stmt"/>
+        <line num="142" count="0" type="stmt"/>
+        <line num="144" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="145" count="0" type="stmt"/>
+        <line num="149" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="150" count="0" type="stmt"/>
+        <line num="153" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="154" count="0" type="stmt"/>
+        <line num="158" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="159" count="0" type="stmt"/>
+        <line num="164" count="0" type="stmt"/>
+        <line num="172" count="8" type="stmt"/>
+      </file>
+      <file name="transaction.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/utils/transaction.js">
+        <metrics statements="14" coveredstatements="5" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="13" count="13" type="stmt"/>
+        <line num="15" count="13" type="cond" truecount="1" falsecount="1"/>
+        <line num="17" count="13" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="35" count="8" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.validators">
+      <metrics statements="78" coveredstatements="77" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
+      <file name="auth.validator.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/validators/auth.validator.js">
+        <metrics statements="10" coveredstatements="9" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="5" count="10" type="cond" truecount="1" falsecount="1"/>
+        <line num="6" count="0" type="stmt"/>
+        <line num="8" count="10" type="stmt"/>
+        <line num="11" count="8" type="stmt"/>
+        <line num="87" count="8" type="stmt"/>
+        <line num="92" count="8" type="stmt"/>
+        <line num="98" count="8" type="stmt"/>
+        <line num="102" count="8" type="stmt"/>
+      </file>
+      <file name="booking.validator.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/validators/booking.validator.js">
+        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="18" count="8" type="stmt"/>
+        <line num="27" count="8" type="stmt"/>
+      </file>
+      <file name="campaign.validator.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/validators/campaign.validator.js">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="18" count="8" type="stmt"/>
+        <line num="34" count="8" type="stmt"/>
+      </file>
+      <file name="feedback.validator.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/validators/feedback.validator.js">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="22" count="8" type="stmt"/>
+        <line num="27" count="8" type="stmt"/>
+      </file>
+      <file name="finance.validator.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/validators/finance.validator.js">
+        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="12" count="8" type="stmt"/>
+        <line num="17" count="8" type="stmt"/>
+        <line num="21" count="8" type="stmt"/>
+      </file>
+      <file name="inventory.validator.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/validators/inventory.validator.js">
+        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="11" count="8" type="stmt"/>
+        <line num="19" count="8" type="stmt"/>
+        <line num="25" count="8" type="stmt"/>
+      </file>
+      <file name="menu.validator.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/validators/menu.validator.js">
+        <metrics statements="13" coveredstatements="13" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="11" count="8" type="stmt"/>
+        <line num="18" count="8" type="stmt"/>
+        <line num="24" count="8" type="stmt"/>
+        <line num="31" count="8" type="stmt"/>
+        <line num="36" count="8" type="stmt"/>
+        <line num="43" count="8" type="stmt"/>
+        <line num="49" count="8" type="stmt"/>
+        <line num="65" count="8" type="stmt"/>
+        <line num="81" count="8" type="stmt"/>
+        <line num="85" count="8" type="stmt"/>
+      </file>
+      <file name="order.validator.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/validators/order.validator.js">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="7" count="8" type="stmt"/>
+      </file>
+      <file name="platformIntegration.validator.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/validators/platformIntegration.validator.js">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="18" count="8" type="stmt"/>
+        <line num="33" count="8" type="stmt"/>
+      </file>
+      <file name="restaurant.validator.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/validators/restaurant.validator.js">
+        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="60" count="8" type="stmt"/>
+        <line num="69" count="8" type="stmt"/>
+        <line num="105" count="8" type="stmt"/>
+      </file>
+      <file name="screen.validator.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/validators/screen.validator.js">
+        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="16" count="8" type="stmt"/>
+        <line num="27" count="8" type="stmt"/>
+        <line num="33" count="8" type="stmt"/>
+      </file>
+      <file name="staff.validator.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/validators/staff.validator.js">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="12" count="8" type="stmt"/>
+        <line num="20" count="8" type="stmt"/>
+      </file>
+      <file name="table.validator.js" path="/Users/abhijeethkar/Desktop/menudot-backend/src/validators/table.validator.js">
+        <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="9" count="8" type="stmt"/>
+        <line num="14" count="8" type="stmt"/>
+        <line num="18" count="8" type="stmt"/>
+        <line num="26" count="8" type="stmt"/>
+        <line num="32" count="8" type="stmt"/>
+        <line num="50" count="8" type="stmt"/>
+      </file>
+    </package>
+    <package name="tests">
+      <metrics statements="36" coveredstatements="36" conditionals="4" coveredconditionals="2" methods="7" coveredmethods="6"/>
+      <file name="helpers.js" path="/Users/abhijeethkar/Desktop/menudot-backend/tests/helpers.js">
+        <metrics statements="36" coveredstatements="36" conditionals="4" coveredconditionals="2" methods="7" coveredmethods="6"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="6" count="8" type="stmt"/>
+        <line num="7" count="8" type="stmt"/>
+        <line num="8" count="8" type="stmt"/>
+        <line num="9" count="8" type="stmt"/>
+        <line num="10" count="8" type="stmt"/>
+        <line num="11" count="8" type="stmt"/>
+        <line num="12" count="8" type="stmt"/>
+        <line num="15" count="8" type="stmt"/>
+        <line num="25" count="8" type="cond" truecount="1" falsecount="1"/>
+        <line num="26" count="8" type="stmt"/>
+        <line num="29" count="8" type="cond" truecount="1" falsecount="1"/>
+        <line num="30" count="8" type="stmt"/>
+        <line num="38" count="8" type="stmt"/>
+        <line num="45" count="53" type="stmt"/>
+        <line num="46" count="53" type="stmt"/>
+        <line num="47" count="1113" type="stmt"/>
+        <line num="55" count="3" type="stmt"/>
+        <line num="64" count="3" type="stmt"/>
+        <line num="65" count="3" type="stmt"/>
+        <line num="67" count="3" type="stmt"/>
+        <line num="68" count="3" type="stmt"/>
+        <line num="83" count="16" type="stmt"/>
+        <line num="91" count="16" type="stmt"/>
+        <line num="93" count="16" type="stmt"/>
+        <line num="140" count="16" type="stmt"/>
+        <line num="143" count="16" type="stmt"/>
+        <line num="151" count="16" type="stmt"/>
+        <line num="153" count="16" type="stmt"/>
+        <line num="154" count="16" type="stmt"/>
+        <line num="166" count="3" type="stmt"/>
+        <line num="211" count="3" type="stmt"/>
+        <line num="212" count="3" type="stmt"/>
+        <line num="215" count="8" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>

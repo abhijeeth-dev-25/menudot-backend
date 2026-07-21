@@ -69,6 +69,7 @@ const orderSchema = new mongoose.Schema({
     tax: { type: Number, default: 0, min: 0 },
     platformCharge: { type: Number, default: 0, min: 0 },
     discount: { type: Number, default: 0, min: 0 },
+    couponCode: { type: String, default: null },
     grandTotal: { type: Number, required: true, min: 0 },
   },
   payment: {
