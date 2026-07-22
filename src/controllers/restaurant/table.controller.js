@@ -47,6 +47,17 @@ class TableController {
     return sendSuccess(res, 200, 'Table checked out and vacant successfully', table);
   });
 
+  unlockTableAccess = asyncHandler(async (req, res) => {
+    const { tableId } = req.params;
+    const table = await TableService.unlockTableAccess(req.restaurantId, tableId, req.body);
+    return sendSuccess(res, 200, 'Table QR ordering access unlocked successfully', table);
+  });
+
+  getPendingUnlockRequests = asyncHandler(async (req, res) => {
+    const tables = await TableService.getPendingUnlockRequests(req.restaurantId);
+    return sendSuccess(res, 200, 'Pending table unlock requests retrieved', tables);
+  });
+
   // ==========================================
   // PUBLIC CUSTOMER ACTIONS
   // ==========================================

@@ -47,6 +47,13 @@ const placeDineInOrderSchema = Joi.object({
   ).min(1).required(),
 });
 
+const unlockAccessSchema = Joi.object({
+  customerName: Joi.string().optional().trim().allow(''),
+  numberOfPeople: Joi.number().integer().min(1).optional(),
+  deviceId: Joi.string().optional().trim().allow(''),
+  deviceDetails: Joi.string().optional().trim().allow(''),
+});
+
 module.exports = {
   createTableSchema,
   updateTableSchema,
@@ -54,4 +61,5 @@ module.exports = {
   customerScanSchema,
   serviceCallSchema,
   placeDineInOrderSchema,
+  unlockAccessSchema,
 };

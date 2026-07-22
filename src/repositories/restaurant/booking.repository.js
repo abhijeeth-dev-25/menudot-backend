@@ -16,7 +16,11 @@ class BookingRepository {
    * Finds a booking by ID.
    */
   async findById(restaurantId, id, options = {}) {
-    return Booking.findOne({ _id: id, restaurantId }, null, options);
+    const query = { _id: id };
+    if (restaurantId) {
+      query.restaurantId = restaurantId;
+    }
+    return Booking.findOne(query, null, options);
   }
 
   /**
@@ -62,6 +66,51 @@ class BookingRepository {
   async findAll(restaurantId, filters = {}, options = {}) {
     const query = { restaurantId, ...filters };
     return Booking.find(query, null, options).sort({ bookingDate: 1, timeSlot: 1 });
+  }
+
+  /**
+   * Finds a booking by verification coupon code.
+   */
+  async findByCouponCode(restaurantId, couponCode) {
+    const query = { couponCode: couponCode.trim().toUpperCase() };
+    if (restaurantId) {
+      query.restaurantId = restaurantId;
+    }
+    return Booking.findOne(query);
+  }
+
+  /**
+   * Finds a booking by payment ID.
+   */
+  async findByPaymentId(restaurantId, paymentId) {
+    const query = { paymentId };
+    if (restaurantId) {
+      query.restaurantId = restaurantId;
+    }
+    return Booking.findOne(query);
+  }
+
+  /**
+   * Finds upcoming confirmed bookings for a date range.
+   */
+  async findUpcomingConfirmedBookings(restaurantId, startDate, endDate) {
+    return Booking.find({
+      restaurantId,
+      status: 'confirmed',
+      bookingDate: { $gte: startDate, $lte: endDate },
+    });
+  }
+
+  /**
+   * Finds active seated booking for a table to apply bill discount credit.
+   */
+  async findActiveSeatedBookingForTable(restaurantId, tableId) {
+    return Booking.findOne({
+      restaurantId,
+      tableId,
+      status: 'seated',
+      couponActivated: true,
+    });
   }
 
   /**

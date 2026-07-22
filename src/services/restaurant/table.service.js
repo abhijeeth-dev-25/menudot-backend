@@ -79,20 +79,60 @@ class TableService {
 
     // 2. Enforce QR scanning is active/enabled by staff
     if (!table.qrCode.isActive) {
-      throw new AppError(403, 'Ordering is currently disabled for this table. Please ask a server to activate it.');
+      // Record pending walk-in QR unlock request on table
+      await TableRepository.update(restaurantId, table._id, {
+        qrUnlockRequest: {
+          requested: true,
+          customerName: customerName || 'Walk-in Guest',
+          numberOfPeople: numberOfPeople || 1,
+          deviceId: deviceId || '',
+          requestedAt: new Date(),
+        },
+      });
+
+      // Dispatch real-time WebSocket alert to staff/KDS/POS terminals
+      socketManager.emitToRestaurantRoom(restaurantId, 'staff:qr_unlock_request', {
+        tableId: table._id,
+        tableNumber,
+        customerName: customerName || 'Walk-in Guest',
+        numberOfPeople: numberOfPeople || 1,
+        deviceId: deviceId || '',
+        requestedAt: new Date(),
+      });
+
+      logger.info(
+        { restaurantId, tableNumber, customerName, deviceId },
+        'Walk-in customer scanned inactive QR code - staff unlock request dispatched'
+      );
+
+      const err = new AppError(
+        403,
+        `Table "${tableNumber}" ordering is currently locked. Restaurant staff has been notified to activate your table.`,
+        true,
+        {
+          status: 'activation_pending',
+          tableId: table._id,
+          tableNumber,
+          requestedAt: new Date(),
+        }
+      );
+      throw err;
     }
 
     // 3. Enforce device session lock
     if (table.activeSession) {
-      if (table.activeSession.deviceId !== deviceId) {
+      if (table.activeSession.deviceId !== deviceId && !table.activeSession.deviceId.startsWith('booking_')) {
         throw new AppError(403, 'A customer session is already active at this table. Only one device can order at a time.');
       }
       
-      // If same device scans again, renew timestamp and keep session active
+      // Adopt session with customer deviceId and renew timestamp
       const updatedTable = await TableRepository.update(
         restaurantId,
         table._id,
-        { 'activeSession.scannedAt': new Date() }
+        {
+          'activeSession.deviceId': deviceId,
+          'activeSession.scannedAt': new Date(),
+        }
       );
       
       // Fetch menu catalog for client
@@ -128,12 +168,53 @@ class TableService {
   }
 
   /**
-   * Completes table checkout, clears session info, and turns off QR code scanning.
+   * Completes table checkout, clears session info, turns off QR code scanning,
+   * and credits any pre-paid booking fee discount to final orders.
    */
   async checkoutTable(restaurantId, id) {
+    const BookingRepository = require('../../repositories/restaurant/booking.repository');
     const table = await TableRepository.findById(restaurantId, id);
     if (!table) {
       throw new AppError(404, 'Table not found.');
+    }
+
+    // Check if an active seated booking exists for this table
+    const activeBooking = await BookingRepository.findActiveSeatedBookingForTable(restaurantId, id);
+    if (activeBooking && activeBooking.prepayment && activeBooking.prepayment.amount > 0) {
+      const prepaidCredit = activeBooking.prepayment.amount;
+
+      // Find active orders for the table
+      const activeOrders = await OrderRepository.findAll(restaurantId, {
+        tableId: id,
+        status: { $ne: 'cancelled' },
+      });
+
+      if (activeOrders.length > 0) {
+        // Apply prepaid discount to the latest active order
+        const targetOrder = activeOrders[0];
+        const newDiscount = (targetOrder.totals.discount || 0) + prepaidCredit;
+        const newGrandTotal = Math.max(0, targetOrder.totals.subtotal + targetOrder.totals.tax + (targetOrder.totals.platformCharge || 0) - newDiscount);
+
+        await OrderRepository.update(restaurantId, targetOrder._id, {
+          'totals.discount': newDiscount,
+          'totals.grandTotal': newGrandTotal,
+          status: 'completed',
+        });
+
+        logger.info(
+          { restaurantId, tableNumber: table.tableNumber, prepaidCredit, orderId: targetOrder._id },
+          'Applied pre-paid booking fee discount to final order checkout'
+        );
+
+        await BookingRepository.update(restaurantId, activeBooking._id, {
+          status: 'completed',
+          orderId: targetOrder._id,
+        });
+      } else {
+        await BookingRepository.update(restaurantId, activeBooking._id, {
+          status: 'completed',
+        });
+      }
     }
 
     logger.info({ restaurantId, tableNumber: table.tableNumber }, 'Checking out table session');
@@ -142,7 +223,77 @@ class TableService {
       status: 'vacant',
       'qrCode.isActive': false,
       activeSession: null,
+      qrUnlockRequest: {
+        requested: false,
+        customerName: '',
+        numberOfPeople: 1,
+        deviceId: '',
+        requestedAt: null,
+      },
     });
+  }
+
+  /**
+   * Staff approves walk-in customer QR activation request, sets qrCode.isActive = true,
+   * updates status to occupied, and triggers real-time 'table:qr_unlocked' WebSocket notification to customer.
+   */
+  async unlockTableAccess(restaurantId, id, data = {}) {
+    const table = await TableRepository.findById(restaurantId, id);
+    if (!table) {
+      throw new AppError(404, 'Table not found.');
+    }
+
+    const { customerName, numberOfPeople, deviceId, deviceDetails } = data;
+
+    const payload = {
+      'qrCode.isActive': true,
+      status: 'occupied',
+      qrUnlockRequest: {
+        requested: false,
+        customerName: '',
+        numberOfPeople: 1,
+        deviceId: '',
+        requestedAt: null,
+      },
+    };
+
+    const resolvedName = customerName || table.qrUnlockRequest?.customerName || 'Walk-in Guest';
+    const resolvedPeople = numberOfPeople || table.qrUnlockRequest?.numberOfPeople || 1;
+    const resolvedDeviceId = deviceId || table.qrUnlockRequest?.deviceId || `staff_unlock_${Date.now()}`;
+
+    payload.activeSession = {
+      customerName: resolvedName,
+      numberOfPeople: resolvedPeople,
+      deviceId: resolvedDeviceId,
+      deviceDetails: deviceDetails || '',
+      scannedAt: new Date(),
+      orderIds: [],
+    };
+
+    const updatedTable = await TableRepository.update(restaurantId, id, payload);
+
+    // Notify connected terminals and customer device via WebSockets
+    socketManager.emitToRestaurantRoom(restaurantId, 'table:qr_unlocked', {
+      tableId: id,
+      tableNumber: table.tableNumber,
+      qrCodeActive: true,
+      activeSession: updatedTable.activeSession,
+    });
+
+    logger.info(
+      { restaurantId, tableNumber: table.tableNumber, customerName: resolvedName },
+      'Staff unlocked table QR code access for walk-in guest'
+    );
+
+    return updatedTable;
+  }
+
+  /**
+   * Retrieves all pending table unlock requests for staff dashboard.
+   */
+  async getPendingUnlockRequests(restaurantId) {
+    const tables = await TableRepository.findAll(restaurantId, { 'qrUnlockRequest.requested': true });
+    return tables;
   }
 
   /**

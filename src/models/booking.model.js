@@ -53,6 +53,12 @@ const bookingSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
+    customerEmail: {
+      type: String,
+      required: true,
+      trim: true,
+      lowercase: true,
+    },
     numberOfPeople: {
       type: Number,
       required: true,
@@ -71,9 +77,32 @@ const bookingSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ['pending', 'confirmed', 'completed', 'cancelled', 'no_show'],
-      default: 'confirmed',
+      enum: ['pending_payment', 'pending', 'confirmed', 'seated', 'completed', 'cancelled', 'no_show'],
+      default: 'pending_payment',
       index: true,
+    },
+    couponCode: {
+      type: String,
+      default: null,
+      index: true,
+    },
+    couponActivated: {
+      type: Boolean,
+      default: false,
+    },
+    couponActivatedAt: {
+      type: Date,
+      default: null,
+    },
+    paymentId: {
+      type: String,
+      default: null,
+      index: true,
+    },
+    orderId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Order',
+      default: null,
     },
     prepayment: {
       type: prepaymentSchema,

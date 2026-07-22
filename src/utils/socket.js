@@ -172,5 +172,6 @@ function sendServiceCallNotification(restaurantId, tableNumber, serviceType, not
 module.exports = {
   init,
   broadcastToRestaurant,
+  emitToRestaurantRoom: broadcastToRestaurant,
   sendServiceCallNotification,
 };

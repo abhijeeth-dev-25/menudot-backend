@@ -27,6 +27,7 @@ const envVarsSchema = Joi.object({
   RATE_LIMIT_WINDOW_MS: Joi.number().default(900000),
   RATE_LIMIT_MAX: Joi.number().default(100),
   REDIS_URI: Joi.string().default('redis://localhost:6379').description('Redis connection URI'),
+  PAYMENT_MODE: Joi.string().valid('mock', 'razorpay', 'cashfree', 'stripe', 'phonepe').default('mock'),
 })
   .unknown()
   .required();
@@ -71,5 +72,8 @@ module.exports = {
   },
   redis: {
     url: envVars.REDIS_URI,
+  },
+  payment: {
+    mode: envVars.PAYMENT_MODE,
   },
 };

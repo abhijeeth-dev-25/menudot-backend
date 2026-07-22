@@ -9,6 +9,7 @@ const {
   customerScanSchema,
   serviceCallSchema,
   placeDineInOrderSchema,
+  unlockAccessSchema,
 } = require('../../validators/table.validator');
 
 const router = express.Router();
@@ -29,9 +30,11 @@ router.use(resolveTenant);
 
 router.post('/', validate(createTableSchema), TableController.createTable);
 router.get('/', TableController.getTables);
+router.get('/staff/pending-unlock-requests', TableController.getPendingUnlockRequests);
 router.put('/:tableId', validate(updateTableSchema), TableController.updateTable);
 router.delete('/:tableId', TableController.deleteTable);
 router.patch('/:tableId/qr/toggle', validate(toggleQrSchema), TableController.toggleQrCode);
+router.post('/:tableId/unlock-access', validate(unlockAccessSchema), TableController.unlockTableAccess);
 router.post('/:tableId/checkout', TableController.checkoutTable);
 
 module.exports = router;

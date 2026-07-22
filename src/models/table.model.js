@@ -35,6 +35,30 @@ const activeSessionSchema = new mongoose.Schema({
   ],
 }, { _id: false });
 
+const qrUnlockRequestSchema = new mongoose.Schema({
+  requested: {
+    type: Boolean,
+    default: false,
+  },
+  customerName: {
+    type: String,
+    default: '',
+    trim: true,
+  },
+  numberOfPeople: {
+    type: Number,
+    default: 1,
+  },
+  deviceId: {
+    type: String,
+    default: '',
+  },
+  requestedAt: {
+    type: Date,
+    default: null,
+  },
+}, { _id: false });
+
 const tableSchema = new mongoose.Schema({
   tableNumber: {
     type: String,
@@ -65,6 +89,10 @@ const tableSchema = new mongoose.Schema({
       default: false,
       required: true,
     },
+  },
+  qrUnlockRequest: {
+    type: qrUnlockRequestSchema,
+    default: () => ({ requested: false }),
   },
   activeSession: {
     type: activeSessionSchema,

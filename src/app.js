@@ -24,6 +24,7 @@ const inventoryRoutes = require('./routes/restaurant/inventory.routes');
 const financeRoutes = require('./routes/restaurant/finance.routes');
 const feedbackRoutes = require('./routes/restaurant/feedback.routes');
 const campaignRoutes = require('./routes/restaurant/campaign.routes');
+const paymentRoutes = require('./routes/restaurant/payment.routes');
 
 // Platform Routes
 const platformRestaurantRoutes = require('./routes/platform/restaurant.routes');
@@ -123,6 +124,7 @@ app.use('/api/v1/inventory', inventoryRoutes);
 app.use('/api/v1/finance', financeRoutes);
 app.use('/api/v1/feedback', feedbackRoutes);
 app.use('/api/v1/campaigns', campaignRoutes);
+app.use('/api/v1/payments', paymentRoutes);
 
 // Platform administration route handlers
 app.use('/api/v1/platform/restaurants', platformRestaurantRoutes);

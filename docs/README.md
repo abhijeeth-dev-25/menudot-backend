@@ -22,6 +22,7 @@ This documentation is structured into modular sections for clear reading, easy m
 - [02-4. Kitchen Display System (KDS) & Order Lifecycle](file:///Users/abhijeethkar/Desktop/menudot-backend/docs/02-realtime-workflows/04-kds-order-lifecycle.md) — Real-time state machine (`received` → `preparing` → `ready` → `served` → `completed`).
 - [02-5. Multi-Platform Aggregator Sync](file:///Users/abhijeethkar/Desktop/menudot-backend/docs/02-realtime-workflows/05-aggregator-integrations.md) — Swiggy, Zomato, Magicpin webhooks & unified order ingestion.
 - [02-6. Table Checkout, Inventory & Financial P&L](file:///Users/abhijeethkar/Desktop/menudot-backend/docs/02-realtime-workflows/06-checkout-inventory-finance.md) — Session clearance, auto QR locking, stock deduction, daily P&L.
+- [02-7. Web Slot Booking, Verification Coupon & Walk-In Model](file:///Users/abhijeethkar/Desktop/menudot-backend/docs/02-realtime-workflows/07-web-slot-booking-and-walkin.md) — Anonymous slot pre-payment, email coupon, table assignment & walk-in table allocation.
 
 ### 3. 🔌 API Endpoint Reference
 - [03-1. Authentication API](file:///Users/abhijeethkar/Desktop/menudot-backend/docs/03-api-reference/01-authentication-api.md) — Register, Login, Refresh, Logout.
