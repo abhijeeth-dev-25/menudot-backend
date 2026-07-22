@@ -26,6 +26,7 @@ const envVarsSchema = Joi.object({
   IMAGEKIT_URL_ENDPOINT: Joi.string().allow('').uri().default('https://ik.imagekit.io/mock'),
   RATE_LIMIT_WINDOW_MS: Joi.number().default(900000),
   RATE_LIMIT_MAX: Joi.number().default(100),
+  REDIS_URI: Joi.string().default('redis://localhost:6379').description('Redis connection URI'),
 })
   .unknown()
   .required();
@@ -67,5 +68,8 @@ module.exports = {
   rateLimit: {
     windowMs: envVars.RATE_LIMIT_WINDOW_MS,
     max: envVars.RATE_LIMIT_MAX,
+  },
+  redis: {
+    url: envVars.REDIS_URI,
   },
 };

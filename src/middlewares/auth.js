@@ -22,6 +22,16 @@ const protect = asyncHandler(async (req, res, next) => {
   }
 
   try {
+    // Check if token has been revoked / blacklisted in Redis
+    const { safeRedisCall } = require('../database/redis');
+    const isBlacklisted = await safeRedisCall(async (client) => {
+      return await client.exists(`blacklist:${token}`);
+    }, 0);
+
+    if (isBlacklisted) {
+      return next(new AppError(401, 'Session has been revoked. Please log in again.'));
+    }
+
     // 2. Verify token signature and expiry
     const decoded = verifyAccessToken(token);
 

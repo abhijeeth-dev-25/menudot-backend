@@ -32,10 +32,12 @@ class MenuService {
       throw new AppError(400, 'A category with a similar name/slug already exists.');
     }
 
-    return MenuCategoryRepository.create(restaurantId, {
+    const category = await MenuCategoryRepository.create(restaurantId, {
       ...categoryData,
       slug,
     });
+    await this._invalidateCatalogCache(restaurantId);
+    return category;
   }
 
   async getCategories(restaurantId) {
@@ -70,7 +72,9 @@ class MenuService {
       updates.slug = slug;
     }
 
-    return MenuCategoryRepository.update(restaurantId, id, updates);
+    const updatedCategory = await MenuCategoryRepository.update(restaurantId, id, updates);
+    await this._invalidateCatalogCache(restaurantId);
+    return updatedCategory;
   }
 
   async deleteCategory(restaurantId, id) {
@@ -91,6 +95,7 @@ class MenuService {
       );
     });
 
+    await this._invalidateCatalogCache(restaurantId);
     return { message: 'Category and all associated menu items successfully deleted.' };
   }
 
@@ -113,7 +118,9 @@ class MenuService {
       throw new AppError(400, `A menu item with the name "${name}" already exists.`);
     }
 
-    return MenuItemRepository.create(restaurantId, itemData);
+    const item = await MenuItemRepository.create(restaurantId, itemData);
+    await this._invalidateCatalogCache(restaurantId);
+    return item;
   }
 
   async getItems(restaurantId, filter = {}) {
@@ -150,7 +157,9 @@ class MenuService {
       }
     }
 
-    return MenuItemRepository.update(restaurantId, id, updates);
+    const updatedItem = await MenuItemRepository.update(restaurantId, id, updates);
+    await this._invalidateCatalogCache(restaurantId);
+    return updatedItem;
   }
 
   async deleteItem(restaurantId, id) {
@@ -168,7 +177,9 @@ class MenuService {
       }
     }
 
-    return MenuItemRepository.delete(restaurantId, id);
+    const result = await MenuItemRepository.delete(restaurantId, id);
+    await this._invalidateCatalogCache(restaurantId);
+    return result;
   }
 
   async toggleStockStatus(restaurantId, id, status) {
@@ -176,7 +187,9 @@ class MenuService {
     if (!item) {
       throw new AppError(404, 'Menu item not found.');
     }
-    return MenuItemRepository.update(restaurantId, id, { status });
+    const updatedItem = await MenuItemRepository.update(restaurantId, id, { status });
+    await this._invalidateCatalogCache(restaurantId);
+    return updatedItem;
   }
 
   // ==========================================
@@ -193,6 +206,13 @@ class MenuService {
       fileId,
       filename: originalName,
       size,
+    });
+  }
+
+  async _invalidateCatalogCache(restaurantId) {
+    const { safeRedisCall } = require('../../database/redis');
+    await safeRedisCall(async (client) => {
+      await client.del(`catalog:${restaurantId}`);
     });
   }
 }

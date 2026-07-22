@@ -150,18 +150,39 @@ class TableService {
    * Used on customer scans to load everything in 1 payload.
    */
   async _assembleCustomerCatalog(restaurantId, table) {
-    const restaurant = await Restaurant.findById(restaurantId).select('name slug location menuProfile');
-    const categories = await MenuCategory.find({ restaurantId, status: 'active' }).sort({ sortOrder: 1 });
-    const items = await MenuItem.find({ restaurantId, status: 'available' });
+    const { safeRedisCall } = require('../../database/redis');
+    const cacheKey = `catalog:${restaurantId}`;
 
-    // Group items by categoryId for easy client-side parsing
-    const menuTree = categories.map((cat) => {
-      const catItems = items.filter((item) => item.categoryId.toString() === cat._id.toString());
-      return {
-        category: cat,
-        items: catItems,
-      };
+    let cachedData = await safeRedisCall(async (client) => {
+      const data = await client.get(cacheKey);
+      return data ? JSON.parse(data) : null;
     });
+
+    let restaurant;
+    let menuTree;
+
+    if (cachedData) {
+      restaurant = cachedData.restaurant;
+      menuTree = cachedData.menu;
+    } else {
+      restaurant = await Restaurant.findById(restaurantId).select('name slug location menuProfile');
+      const categories = await MenuCategory.find({ restaurantId, status: 'active' }).sort({ sortOrder: 1 });
+      const items = await MenuItem.find({ restaurantId, status: 'available' });
+
+      // Group items by categoryId for easy client-side parsing
+      menuTree = categories.map((cat) => {
+        const catItems = items.filter((item) => item.categoryId.toString() === cat._id.toString());
+        return {
+          category: cat,
+          items: catItems,
+        };
+      });
+
+      // Write to cache (TTL: 24 hours)
+      await safeRedisCall(async (client) => {
+        await client.setEx(cacheKey, 86400, JSON.stringify({ restaurant, menu: menuTree }));
+      });
+    }
 
     return {
       table: {

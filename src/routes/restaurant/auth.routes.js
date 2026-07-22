@@ -8,6 +8,8 @@ const {
   refreshSchema,
 } = require('../../validators/auth.validator');
 
+const { protect } = require('../../middlewares/auth');
+
 const router = express.Router();
 
 // Public auth endpoints

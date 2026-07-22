@@ -42,8 +42,28 @@ class AuthController {
    * Logout user session.
    */
   logout = asyncHandler(async (req, res) => {
-    // Statelss JWT logout is primarily managed client-side by purging tokens.
-    // Return standard success to confirm client action.
+    // Stateless JWT logout: write access token to Redis blacklist to revoke it immediately
+    const authHeader = req.headers.authorization;
+    if (authHeader && authHeader.startsWith('Bearer ')) {
+      const token = authHeader.split(' ')[1];
+      const jwt = require('jsonwebtoken');
+      const { safeRedisCall } = require('../../database/redis');
+
+      try {
+        const decoded = jwt.decode(token);
+        if (decoded && decoded.exp) {
+          const remainingLifespan = decoded.exp - Math.floor(Date.now() / 1000);
+          if (remainingLifespan > 0) {
+            await safeRedisCall(async (client) => {
+              await client.setEx(`blacklist:${token}`, remainingLifespan, 'revoked');
+            });
+          }
+        }
+      } catch (err) {
+        // ignore decoding errors
+      }
+    }
+
     return sendSuccess(res, 200, 'User logged out successfully', null);
   });
 }

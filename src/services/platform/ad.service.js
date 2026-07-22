@@ -13,7 +13,7 @@ class AdService {
    * Admin: Provision a new advertisement campaign along with creative assets and targeting parameters.
    */
   async createCampaign({ campaign, creative, targeting }) {
-    return runTransaction(async (session) => {
+    const result = await runTransaction(async (session) => {
       // 1. Save campaign
       const newCampaign = new PlatformCampaign(campaign);
       await newCampaign.save({ session });
@@ -38,6 +38,9 @@ class AdService {
         targeting: newTargeting,
       };
     });
+
+    await this._invalidateAdServeCache();
+    return result;
   }
 
   /**
@@ -48,83 +51,102 @@ class AdService {
    */
   async serveAd(placementKey, context = {}) {
     const { city, pincode, state, tags = [], restaurantId } = context;
+    const { safeRedisCall } = require('../../database/redis');
 
-    // Find all active campaigns
-    const now = new Date();
-    const activeCampaigns = await PlatformCampaign.find({
-      status: 'active',
-      'schedule.startDate': { $lte: now },
-      'schedule.endDate': { $gte: now },
+    const sortedTags = tags.length ? [...tags].sort().join(',') : 'none';
+    const cacheKey = `ad:serve:${placementKey}:${city || 'all'}:${pincode || 'all'}:${state || 'all'}:${sortedTags}:${restaurantId || 'all'}`;
+
+    let cachedWinner = await safeRedisCall(async (client) => {
+      const data = await client.get(cacheKey);
+      return data ? JSON.parse(data) : null;
     });
 
-    if (!activeCampaigns.length) return null;
+    let winner;
 
-    const campaignIds = activeCampaigns.map((c) => c._id);
+    if (cachedWinner) {
+      winner = cachedWinner;
+    } else {
+      // Find all active campaigns
+      const now = new Date();
+      const activeCampaigns = await PlatformCampaign.find({
+        status: 'active',
+        'schedule.startDate': { $lte: now },
+        'schedule.endDate': { $gte: now },
+      });
 
-    // Fetch targeting rules for active campaigns
-    const targetingRules = await AdTargetingRule.find({
-      campaignId: { $in: campaignIds },
-    });
+      if (!activeCampaigns.length) return null;
 
-    // Filter matching campaigns
-    const matchedCampaignIds = [];
-    for (const rule of targetingRules) {
-      // 1. Geo Scope check
-      const geo = rule.geoScope;
-      if (geo) {
-        if (geo.cities?.length && city && !geo.cities.includes(city)) continue;
-        if (geo.pincodes?.length && pincode && !geo.pincodes.includes(pincode)) continue;
-        if (geo.states?.length && state && !geo.states.includes(state)) continue;
+      const campaignIds = activeCampaigns.map((c) => c._id);
+
+      // Fetch targeting rules for active campaigns
+      const targetingRules = await AdTargetingRule.find({
+        campaignId: { $in: campaignIds },
+      });
+
+      // Filter matching campaigns
+      const matchedCampaignIds = [];
+      for (const rule of targetingRules) {
+        // 1. Geo Scope check
+        const geo = rule.geoScope;
+        if (geo) {
+          if (geo.cities?.length && city && !geo.cities.includes(city)) continue;
+          if (geo.pincodes?.length && pincode && !geo.pincodes.includes(pincode)) continue;
+          if (geo.states?.length && state && !geo.states.includes(state)) continue;
+        }
+
+        // 2. Target Tags check
+        if (rule.targetTags?.length && tags.length) {
+          const matchesTag = rule.targetTags.some((t) => tags.includes(t));
+          if (!matchesTag) continue;
+        }
+
+        // 3. Restaurant Scope blocklist/allowlist
+        const restScope = rule.restaurantScope;
+        if (restScope && restaurantId) {
+          if (restScope.allowList?.length && !restScope.allowList.includes(restaurantId)) continue;
+          if (restScope.blockList?.length && restScope.blockList.includes(restaurantId)) continue;
+        }
+
+        matchedCampaignIds.push(rule.campaignId.toString());
       }
 
-      // 2. Target Tags check
-      if (rule.targetTags?.length && tags.length) {
-        const matchesTag = rule.targetTags.some((t) => tags.includes(t));
-        if (!matchesTag) continue;
+      if (!matchedCampaignIds.length) return null;
+
+      // Fetch corresponding creatives that match the requested placementKey
+      const creatives = await AdCreative.find({
+        campaignId: { $in: matchedCampaignIds },
+        placementKey,
+      });
+
+      if (!creatives.length) return null;
+
+      // Filter campaigns to those with remaining budget
+      const finalCandidates = [];
+      for (const creative of creatives) {
+        const campaign = activeCampaigns.find((c) => c._id.toString() === creative.campaignId.toString());
+        if (!campaign) continue;
+
+        // Ensure budget not exhausted
+        const isBudgetExhausted =
+          campaign.pricing.spentTotal >= campaign.pricing.totalBudget ||
+          campaign.pricing.spentDaily >= campaign.pricing.dailyBudget;
+
+        if (!isBudgetExhausted) {
+          finalCandidates.push({ campaign, creative });
+        }
       }
 
-      // 3. Restaurant Scope blocklist/allowlist
-      const restScope = rule.restaurantScope;
-      if (restScope && restaurantId) {
-        if (restScope.allowList?.length && !restScope.allowList.includes(restaurantId)) continue;
-        if (restScope.blockList?.length && restScope.blockList.includes(restaurantId)) continue;
-      }
+      if (!finalCandidates.length) return null;
 
-      matchedCampaignIds.push(rule.campaignId.toString());
+      // Pick campaign: sort by costPerUnit descending (highest bidder wins)
+      finalCandidates.sort((a, b) => b.campaign.pricing.costPerUnit - a.campaign.pricing.costPerUnit);
+      winner = finalCandidates[0];
+
+      // Cache winner for 60 seconds
+      await safeRedisCall(async (client) => {
+        await client.setEx(cacheKey, 60, JSON.stringify(winner));
+      });
     }
-
-    if (!matchedCampaignIds.length) return null;
-
-    // Fetch corresponding creatives that match the requested placementKey
-    const creatives = await AdCreative.find({
-      campaignId: { $in: matchedCampaignIds },
-      placementKey,
-    });
-
-    if (!creatives.length) return null;
-
-    // Filter campaigns to those with remaining budget
-    const finalCandidates = [];
-    for (const creative of creatives) {
-      const campaign = activeCampaigns.find((c) => c._id.toString() === creative.campaignId.toString());
-      if (!campaign) continue;
-
-      // Ensure budget not exhausted
-      const isBudgetExhausted =
-        campaign.pricing.spentTotal >= campaign.pricing.totalBudget ||
-        campaign.pricing.spentDaily >= campaign.pricing.dailyBudget;
-
-      if (!isBudgetExhausted) {
-        finalCandidates.push({ campaign, creative });
-      }
-    }
-
-    if (!finalCandidates.length) return null;
-
-    // Pick campaign (priority / highest bid first, or random selection proportional to costPerUnit)
-    // To be simple and robust: sort by costPerUnit descending (highest bidder wins)
-    finalCandidates.sort((a, b) => b.campaign.pricing.costPerUnit - a.campaign.pricing.costPerUnit);
-    const winner = finalCandidates[0];
 
     // Generate short-lived event tracking token
     const trackingToken = jwt.sign(
@@ -170,16 +192,23 @@ class AdService {
       campaign.pricing.spentTotal += costPerUnit;
       campaign.pricing.spentDaily += costPerUnit;
 
+      let statusChanged = false;
       // Auto-suspend campaign if budget is hit
       if (campaign.pricing.spentTotal >= campaign.pricing.totalBudget) {
         campaign.status = 'completed';
+        statusChanged = true;
         logger.info({ campaignId }, 'Campaign fully completed. Budget limit hit.');
       } else if (campaign.pricing.spentDaily >= campaign.pricing.dailyBudget) {
         campaign.status = 'paused';
+        statusChanged = true;
         logger.info({ campaignId }, 'Campaign paused. Daily budget cap reached.');
       }
 
       await campaign.save();
+
+      if (statusChanged) {
+        await this._invalidateAdServeCache();
+      }
     }
 
     return {
@@ -189,6 +218,20 @@ class AdService {
       currentSpent: campaign.pricing.spentTotal,
       status: campaign.status,
     };
+  }
+
+  async _invalidateAdServeCache() {
+    const { safeRedisCall } = require('../../database/redis');
+    await safeRedisCall(async (client) => {
+      let cursor = '0';
+      do {
+        const reply = await client.scan(cursor, { MATCH: 'ad:serve:*', COUNT: 100 });
+        cursor = reply.cursor;
+        if (reply.keys.length > 0) {
+          await client.del(reply.keys);
+        }
+      } while (cursor !== '0');
+    });
   }
 }
 

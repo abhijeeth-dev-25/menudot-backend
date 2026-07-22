@@ -1,6 +1,7 @@
 const app = require('./app');
 const config = require('./config/env');
 const { connectDB, disconnectDB } = require('./database/db');
+const { connectRedis, disconnectRedis } = require('./database/redis');
 const logger = require('./utils/logger');
 
 let server;
@@ -13,7 +14,10 @@ async function bootstrap() {
     // 1. Connect to MongoDB
     await connectDB();
 
-    // 2. Start listening
+    // 2. Connect to Redis (Graceful fallback wrapper)
+    await connectRedis();
+
+    // 3. Start listening
     server = app.listen(config.port, () => {
       logger.info(
         { port: config.port, env: config.env },
@@ -47,6 +51,7 @@ function gracefulShutdown(signal) {
       
       // Close database connection
       await disconnectDB();
+      await disconnectRedis();
       
       logger.info('Graceful shutdown completed successfully. Exiting.');
       process.exit(0);
@@ -74,6 +79,7 @@ process.on('uncaughtException', (err) => {
   if (server) {
     server.close(async () => {
       await disconnectDB();
+      await disconnectRedis();
       process.exit(1);
     });
   } else {
