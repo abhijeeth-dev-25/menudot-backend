@@ -136,10 +136,13 @@ const restaurantSchema = new mongoose.Schema(
     onboarding: {
       stage: {
         type: String,
-        enum: ['draft', 'submitted', 'under_review', 'verified', 'approved', 'rejected'],
-        default: 'draft',
+        enum: ['draft', 'pending_payment', 'submitted', 'under_review', 'pending_approval', 'verified', 'approved', 'rejected'],
+        default: 'pending_payment',
         index: true,
       },
+      securityFeePaid: { type: Boolean, default: false },
+      feePaymentId: { type: String, default: null },
+      feeAmount: { type: Number, default: 1950 },
       submittedAt: { type: Date, default: null },
       verificationChecklist: {
         panVerified: { type: Boolean, default: false },

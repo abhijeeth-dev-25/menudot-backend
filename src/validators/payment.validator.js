@@ -13,7 +13,37 @@ const createPaymentSchema = Joi.object({
   paymentMethod: Joi.string()
     .valid(PaymentMethod.UPI, PaymentMethod.CARD, PaymentMethod.NETBANKING, PaymentMethod.WALLET, PaymentMethod.MOCK)
     .default(PaymentMethod.MOCK),
+  couponCode: Joi.string().optional().trim().uppercase(),
   metadata: Joi.object().optional().default({}),
+});
+
+const onboardingPaymentSchema = Joi.object({
+  restaurantId: Joi.string().required().trim(),
+  couponCode: Joi.string().optional().trim().uppercase(),
+});
+
+const verifyOnboardingPaymentSchema = Joi.object({
+  restaurantId: Joi.string().required().trim(),
+  paymentId: Joi.string().required().trim(),
+  forceStatus: Joi.string().valid(...Object.values(PaymentStatus)).optional(),
+});
+
+const qrOrderPaymentSchema = Joi.object({
+  orderId: Joi.string().required().trim(),
+  paymentMethod: Joi.string().default('upi'),
+  couponCode: Joi.string().optional().trim().uppercase(),
+});
+
+const campaignPaymentSchema = Joi.object({
+  campaignId: Joi.string().required().trim(),
+  budgetAmount: Joi.number().positive().required(),
+  couponCode: Joi.string().optional().trim().uppercase(),
+});
+
+const subscriptionPaymentSchema = Joi.object({
+  planTier: Joi.string().valid('starter', 'pro', 'enterprise').default('pro'),
+  billingCycle: Joi.string().valid('monthly', 'annual').default('monthly'),
+  couponCode: Joi.string().optional().trim().uppercase(),
 });
 
 const verifyPaymentSchema = Joi.object({
@@ -42,6 +72,11 @@ const mockResultSchema = Joi.object({
 
 module.exports = {
   createPaymentSchema,
+  onboardingPaymentSchema,
+  verifyOnboardingPaymentSchema,
+  qrOrderPaymentSchema,
+  campaignPaymentSchema,
+  subscriptionPaymentSchema,
   verifyPaymentSchema,
   refundPaymentSchema,
   mockResultSchema,

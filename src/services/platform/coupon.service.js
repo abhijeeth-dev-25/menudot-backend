@@ -49,6 +49,46 @@ class CouponService {
   }
 
   /**
+   * Validates coupon code and calculates discount for an amount.
+   */
+  async validateAndCalculateDiscount({ couponCode, orderAmount, restaurantId }) {
+    if (!couponCode) return { discountAmount: 0 };
+    const coupon = await this.getCouponByCode(couponCode);
+    if (!coupon || coupon.status !== 'active') {
+      throw new AppError(404, `Coupon code '${couponCode}' is invalid or expired.`);
+    }
+
+    const now = new Date();
+    if (coupon.startDate > now || coupon.endDate < now) {
+      throw new AppError(400, `Coupon code '${couponCode}' has expired.`);
+    }
+
+    const amount = Number(orderAmount) || 0;
+    if (coupon.minOrderValue && amount < coupon.minOrderValue) {
+      throw new AppError(400, `Minimum order value of ₹${coupon.minOrderValue} required for coupon '${couponCode}'.`);
+    }
+
+    let discountAmount = 0;
+    if (coupon.discountType === 'percentage') {
+      discountAmount = Math.round((amount * (coupon.discountValue / 100)) * 100) / 100;
+      if (coupon.maxDiscountLimit && discountAmount > coupon.maxDiscountLimit) {
+        discountAmount = coupon.maxDiscountLimit;
+      }
+    } else if (coupon.discountType === 'flat') {
+      discountAmount = coupon.discountValue;
+    }
+
+    discountAmount = Math.min(amount, discountAmount);
+
+    return {
+      couponCode: coupon.code,
+      discountAmount,
+      discountType: coupon.discountType,
+      discountValue: coupon.discountValue,
+    };
+  }
+
+  /**
    * Applies coupon and calculates discount.
    */
   async applyCoupon(code, restaurantId, cartItems) {

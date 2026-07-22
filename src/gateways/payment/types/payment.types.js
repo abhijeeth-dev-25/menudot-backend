@@ -32,9 +32,19 @@ const PaymentMode = Object.freeze({
   PHONEPE: 'phonepe',
 });
 
+const PaymentCategory = Object.freeze({
+  ONBOARDING_FEE: 'onboarding_security_fee',
+  TABLE_QR_ORDER: 'table_qr_order',
+  WEB_SLOT_BOOKING: 'web_slot_booking',
+  MERCHANT_AD_CAMPAIGN: 'merchant_ad_campaign',
+  SUBSCRIPTION_FEE: 'subscription_fee',
+  MERCHANT_PAYOUT_SETTLEMENT: 'merchant_payout_settlement',
+});
+
 module.exports = {
   PaymentStatus,
   RefundStatus,
   PaymentMethod,
   PaymentMode,
+  PaymentCategory,
 };

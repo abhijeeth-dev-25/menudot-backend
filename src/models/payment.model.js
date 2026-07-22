@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const auditablePlugin = require('./plugins/auditable.plugin');
-const { PaymentStatus, RefundStatus, PaymentMethod } = require('../gateways/payment/types/payment.types');
+const { PaymentStatus, RefundStatus, PaymentMethod, PaymentCategory } = require('../gateways/payment/types/payment.types');
 
 const paymentSchema = new mongoose.Schema(
   {
@@ -50,6 +50,34 @@ const paymentSchema = new mongoose.Schema(
     transactionId: {
       type: String,
       default: null,
+    },
+    paymentCategory: {
+      type: String,
+      enum: Object.values(PaymentCategory),
+      default: PaymentCategory.TABLE_QR_ORDER,
+      required: true,
+      index: true,
+    },
+    targetEntity: {
+      entityType: { type: String, default: null },
+      entityId: { type: String, default: null },
+    },
+    appliedCoupon: {
+      code: { type: String, default: null },
+      discountAmount: { type: Number, default: 0 },
+      originalAmount: { type: Number, default: 0 },
+    },
+    gstDetails: {
+      baseAmount: { type: Number, default: 0 },
+      cgst: { type: Number, default: 0 },
+      sgst: { type: Number, default: 0 },
+      igst: { type: Number, default: 0 },
+      totalGst: { type: Number, default: 0 },
+    },
+    invoiceNumber: {
+      type: String,
+      default: null,
+      index: true,
     },
     metadata: {
       type: mongoose.Schema.Types.Mixed,
