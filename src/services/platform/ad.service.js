@@ -220,6 +220,27 @@ class AdService {
     };
   }
 
+  /**
+   * Admin: List all campaigns.
+   */
+  async listCampaigns(query = {}) {
+    return PlatformCampaign.find(query).sort({ createdAt: -1 });
+  }
+
+  /**
+   * Admin: Update campaign status (active, paused, completed).
+   */
+  async updateCampaignStatus(campaignId, status) {
+    const campaign = await PlatformCampaign.findById(campaignId);
+    if (!campaign) {
+      throw new AppError(404, 'Campaign not found.');
+    }
+    campaign.status = status;
+    await campaign.save();
+    await this._invalidateAdServeCache();
+    return campaign;
+  }
+
   async _invalidateAdServeCache() {
     const { safeRedisCall } = require('../../database/redis');
     await safeRedisCall(async (client) => {

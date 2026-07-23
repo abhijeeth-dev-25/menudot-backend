@@ -69,6 +69,24 @@ class AdController {
     const result = await AdService.trackEvent(token, eventType);
     return sendSuccess(res, 200, 'Ad event logged successfully', result);
   });
+
+  /**
+   * Admin: List all ad campaigns
+   */
+  listCampaigns = asyncHandler(async (req, res) => {
+    const result = await AdService.listCampaigns(req.query);
+    return sendSuccess(res, 200, 'Ad campaigns retrieved successfully', result);
+  });
+
+  /**
+   * Admin: Update campaign status
+   */
+  updateCampaignStatus = asyncHandler(async (req, res) => {
+    const { campaignId } = req.params;
+    const { status } = req.body;
+    const result = await AdService.updateCampaignStatus(campaignId, status);
+    return sendSuccess(res, 200, `Ad campaign status updated to '${status}'`, result);
+  });
 }
 
 module.exports = new AdController();

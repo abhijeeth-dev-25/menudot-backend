@@ -10,5 +10,7 @@ router.get('/', CouponController.listCoupons);
 
 // --- SECURE MERCHANT / ADMIN ENDPOINTS ---
 router.post('/', protect, CouponController.createCoupon);
+router.patch('/:id', protect, CouponController.updateCoupon);
+router.delete('/:id', protect, CouponController.deleteCoupon);
 
 module.exports = router;

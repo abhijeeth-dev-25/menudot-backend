@@ -121,6 +121,28 @@ class CouponService {
     }
     return updated;
   }
+
+  /**
+   * Update coupon attributes.
+   */
+  async updateCoupon(id, updateData) {
+    const updated = await Coupon.findByIdAndUpdate(id, { $set: updateData }, { new: true, runValidators: true });
+    if (!updated) {
+      throw new AppError(404, 'Coupon not found.');
+    }
+    return updated;
+  }
+
+  /**
+   * Delete a coupon.
+   */
+  async deleteCoupon(id) {
+    const deleted = await Coupon.findByIdAndDelete(id);
+    if (!deleted) {
+      throw new AppError(404, 'Coupon not found.');
+    }
+    return deleted;
+  }
 }
 
 module.exports = new CouponService();

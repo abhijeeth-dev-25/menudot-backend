@@ -64,7 +64,9 @@ class RestaurantRepository {
    * @returns {Promise<Restaurant[]>}
    */
   async findAllPendingOnboarding() {
-    return Restaurant.find({ 'onboarding.stage': 'submitted' }).sort({ 'onboarding.submittedAt': 1 });
+    return Restaurant.find({
+      'onboarding.stage': { $in: ['pending_approval', 'submitted', 'under_review', 'verified'] },
+    }).sort({ 'onboarding.submittedAt': -1, createdAt: -1 });
   }
 }
 

@@ -18,4 +18,18 @@ router.post(
   AdController.createCampaign
 );
 
+router.get(
+  '/campaigns',
+  protect,
+  restrictToPlatformPermission(PLATFORM_PERMISSIONS.MANAGE_PLATFORM_ADS),
+  AdController.listCampaigns
+);
+
+router.patch(
+  '/campaigns/:campaignId/status',
+  protect,
+  restrictToPlatformPermission(PLATFORM_PERMISSIONS.MANAGE_PLATFORM_ADS),
+  AdController.updateCampaignStatus
+);
+
 module.exports = router;

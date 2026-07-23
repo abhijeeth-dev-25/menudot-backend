@@ -24,7 +24,8 @@ class RestaurantPlatformService {
       throw new AppError(404, 'Restaurant onboarding application not found.');
     }
 
-    if (restaurant.onboarding.stage !== 'submitted' && restaurant.onboarding.stage !== 'under_review' && restaurant.onboarding.stage !== 'verified') {
+    const allowedStages = ['pending_approval', 'submitted', 'under_review', 'verified'];
+    if (!allowedStages.includes(restaurant.onboarding.stage)) {
       throw new AppError(
         400,
         `Application cannot be reviewed at current stage (current stage: ${restaurant.onboarding.stage})`

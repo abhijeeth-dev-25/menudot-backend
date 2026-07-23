@@ -45,61 +45,8 @@ function createTransport() {
  * @param {string} options.html - HTML formatted body
  */
 async function sendEmail({ to, subject, text, html }) {
-  const from = process.env.SMTP_FROM || 'noreply@menudot.com';
-  const transport = createTransport();
-  let smtpSuccess = false;
-
-  if (transport) {
-    try {
-      const info = await transport.sendMail({
-        from,
-        to,
-        subject,
-        text,
-        html,
-      });
-      logger.info({ messageId: info.messageId, to }, 'Email sent successfully via SMTP');
-      smtpSuccess = true;
-    } catch (error) {
-      logger.error({ err: error, to }, 'Failed to send email via SMTP');
-      if (config.env === 'production') throw error;
-    }
-  }
-
-  // In non-production environments, we always write a copy of the email to a local HTML log file
-  // so developers can inspect and parse it easily (and so tests don't break).
-  if (config.env !== 'production') {
-    const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-    const logFileName = `email-${to}-${timestamp}.html`;
-    const logFilePath = path.join(EMAIL_LOGS_DIR, logFileName);
-
-    const fileContent = `
-      <!--
-        To: ${to}
-        Subject: ${subject}
-        Date: ${new Date().toISOString()}
-      -->
-      <div style="font-family: sans-serif; border: 1px solid #ccc; padding: 20px; max-width: 600px; margin: 20px auto;">
-        <h2>Subject: ${subject}</h2>
-        <p><strong>To:</strong> ${to}</p>
-        <hr />
-        ${html || `<pre>${text}</pre>`}
-      </div>
-    `;
-
-    try {
-      fs.writeFileSync(logFilePath, fileContent);
-      logger.info({ logFilePath }, `Local email log generated: file://${logFilePath}`);
-    } catch (err) {
-      logger.error({ err }, 'Failed to write local email log file');
-    }
-
-    // Also output to console if SMTP was not used
-    if (!smtpSuccess) {
-      logger.info(`[MOCK EMAIL TO: ${to}] Subject: ${subject}\nBody:\n${text}`);
-    }
-  }
-
+  const { enqueueEmailJob } = require('../queues/workers/emailWorker');
+  await enqueueEmailJob({ to, subject, text, html });
   return true;
 }
 

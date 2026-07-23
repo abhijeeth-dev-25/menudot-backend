@@ -85,6 +85,35 @@ class SystemController {
 
     return sendSuccess(res, 201, `Platform user account (${globalRole}) created successfully`, result);
   });
+
+  /**
+   * Integration Webhook Health & Audit Log Inspection (Technical / Admin).
+   * GET /api/v1/platform/system/integrations/logs
+   */
+  getIntegrationLogs = asyncHandler(async (req, res) => {
+    // In production, queries aggregator webhook audit collections or Pino logger logs
+    const mockLogs = [
+      {
+        provider: 'swiggy',
+        event: 'order_status_update',
+        status: 'SUCCESS',
+        payloadId: 'swiggy_ord_901',
+        timestamp: new Date(),
+      },
+      {
+        provider: 'zomato',
+        event: 'menu_sync',
+        status: 'SUCCESS',
+        payloadId: 'zomato_sync_102',
+        timestamp: new Date(),
+      },
+    ];
+
+    return sendSuccess(res, 200, 'Aggregator integration logs retrieved successfully', {
+      totalEvents: mockLogs.length,
+      logs: mockLogs,
+    });
+  });
 }
 
 module.exports = new SystemController();

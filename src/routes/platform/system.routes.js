@@ -30,4 +30,11 @@ router.post(
   SystemController.createPlatformUser
 );
 
+// 4. Aggregator Integration Webhook Logs
+router.get(
+  '/integrations/logs',
+  restrictToPlatformPermission(PLATFORM_PERMISSIONS.VIEW_SYSTEM_LOGS),
+  SystemController.getIntegrationLogs
+);
+
 module.exports = router;

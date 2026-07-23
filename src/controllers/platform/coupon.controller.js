@@ -71,6 +71,24 @@ class CouponController {
     const result = await CouponService.applyCoupon(couponCode, restaurantId, items);
     return sendSuccess(res, 200, 'Coupon applied successfully', result);
   });
+
+  /**
+   * Admin/Merchant: Update coupon details.
+   */
+  updateCoupon = asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    const result = await CouponService.updateCoupon(id, req.body);
+    return sendSuccess(res, 200, 'Coupon updated successfully', result);
+  });
+
+  /**
+   * Admin/Merchant: Delete coupon.
+   */
+  deleteCoupon = asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    const result = await CouponService.deleteCoupon(id);
+    return sendSuccess(res, 200, 'Coupon deleted successfully', result);
+  });
 }
 
 module.exports = new CouponController();

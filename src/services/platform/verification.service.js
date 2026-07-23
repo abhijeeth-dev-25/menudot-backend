@@ -8,10 +8,10 @@ class VerificationService {
    */
   async getPendingVerifications() {
     const Restaurant = require('../../models/restaurant.model');
-    // Fetch restaurants that are submitted or already being checked (under_review)
+    // Fetch restaurants that are pending approval, submitted, or under_review
     return Restaurant.find({
-      'onboarding.stage': { $in: ['submitted', 'under_review'] },
-    }).sort({ 'onboarding.submittedAt': 1 });
+      'onboarding.stage': { $in: ['pending_approval', 'submitted', 'under_review'] },
+    }).sort({ 'onboarding.submittedAt': 1, createdAt: 1 });
   }
 
   /**
@@ -35,7 +35,8 @@ class VerificationService {
     }
 
     const currentStage = restaurant.onboarding.stage;
-    if (currentStage !== 'submitted' && currentStage !== 'under_review') {
+    const allowedStages = ['pending_approval', 'submitted', 'under_review', 'verified'];
+    if (!allowedStages.includes(currentStage)) {
       throw new AppError(400, `Cannot verify documents for restaurant in stage "${currentStage}".`);
     }
 
