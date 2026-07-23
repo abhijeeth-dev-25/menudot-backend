@@ -52,6 +52,31 @@ class RestaurantTenantController {
     );
     return sendSuccess(res, 200, 'Restaurant cover image uploaded successfully.', { imageUrl: updated.imageUrl });
   });
+
+  /**
+   * Submit formal Legal Amendment Request (Owner only).
+   */
+  submitLegalRequest = asyncHandler(async (req, res) => {
+    const request = await RestaurantService.submitLegalRequest(req.restaurantId, req.user._id, req.body);
+    return sendSuccess(res, 201, 'Legal profile amendment request submitted successfully for verification.', request);
+  });
+
+  /**
+   * Get list of legal amendment requests for restaurant tenant.
+   */
+  getLegalRequests = asyncHandler(async (req, res) => {
+    const requests = await RestaurantService.getLegalRequests(req.restaurantId);
+    return sendSuccess(res, 200, 'Legal profile requests retrieved successfully.', requests);
+  });
+
+  /**
+   * Toggle restaurant operational status (active/open vs inactive/closed).
+   */
+  toggleRestaurantStatus = asyncHandler(async (req, res) => {
+    const { status } = req.body;
+    const updated = await RestaurantService.toggleRestaurantStatus(req.restaurantId, status);
+    return sendSuccess(res, 200, 'Restaurant operational status updated successfully.', updated);
+  });
 }
 
 module.exports = new RestaurantTenantController();

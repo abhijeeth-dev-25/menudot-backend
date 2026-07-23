@@ -20,6 +20,12 @@ const restaurantSchema = new mongoose.Schema(
       trim: true,
       lowercase: true,
     },
+    status: {
+      type: String,
+      enum: ['active', 'inactive', 'closed', 'suspended'],
+      default: 'active',
+      index: true,
+    },
     owner: {
       userId: {
         type: mongoose.Schema.Types.ObjectId,

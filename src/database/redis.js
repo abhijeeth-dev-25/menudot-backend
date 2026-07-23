@@ -14,6 +14,14 @@ async function connectRedis() {
 
   redisClient = redis.createClient({
     url: config.redis?.url || 'redis://localhost:6379',
+    socket: {
+      reconnectStrategy: (retries) => {
+        if (retries > 2) {
+          return false; // Stop retrying after 2 attempts
+        }
+        return 1000;
+      },
+    },
   });
 
   redisClient.on('error', (err) => {

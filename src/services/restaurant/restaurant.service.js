@@ -44,6 +44,68 @@ class RestaurantTenantService {
     logger.info({ restaurantId }, 'Restaurant profile updated successfully');
     return updated;
   }
+
+  /**
+   * Creates a formal Legal Profile Amendment Request for SOC2/GST/FSSAI compliance review.
+   */
+  async submitLegalRequest(restaurantId, userId, payload) {
+    const LegalRequest = require('../../models/legalRequest.model');
+    const restaurant = await RestaurantRepository.findById(restaurantId);
+    if (!restaurant) {
+      throw new AppError(404, 'Restaurant profile not found.');
+    }
+
+    const { requestType, reason, requestedValues, documentProofUrls } = payload;
+    if (!requestType || !reason || !requestedValues) {
+      throw new AppError(400, 'Missing request type, reason, or target requested values.');
+    }
+
+    const currentValues = {
+      legalName: restaurant.name,
+      pan: restaurant.legal?.pan || '',
+      gstin: restaurant.legal?.gstin || '',
+      fssaiNumber: restaurant.legal?.fssaiNumber || '',
+      bankAccount: restaurant.bank?.accountNumber || '',
+      ifsc: restaurant.bank?.ifsc || '',
+    };
+
+    const legalReq = new LegalRequest({
+      restaurantId,
+      requestedBy: userId,
+      requestType,
+      reason,
+      currentValues,
+      requestedValues,
+      documentProofUrls: documentProofUrls || [],
+      status: 'pending_verification',
+    });
+
+    await legalReq.save();
+    logger.info({ restaurantId, legalReqId: legalReq._id }, 'Formal legal amendment request submitted for verification');
+    return legalReq;
+  }
+
+  /**
+   * Fetches status of all legal amendment requests submitted for the tenant.
+   */
+  async getLegalRequests(restaurantId) {
+    const LegalRequest = require('../../models/legalRequest.model');
+    return await LegalRequest.find({ restaurantId }).sort({ createdAt: -1 });
+  }
+
+  /**
+   * Toggles restaurant operational status (active/open vs inactive/closed).
+   */
+  async toggleRestaurantStatus(restaurantId, status) {
+    const restaurant = await RestaurantRepository.findById(restaurantId);
+    if (!restaurant) {
+      throw new AppError(404, 'Restaurant profile not found.');
+    }
+
+    const updated = await RestaurantRepository.update(restaurantId, { status });
+    logger.info({ restaurantId, status }, 'Restaurant operational status updated');
+    return updated;
+  }
 }
 
 module.exports = new RestaurantTenantService();

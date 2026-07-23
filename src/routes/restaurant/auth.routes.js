@@ -19,4 +19,10 @@ router.post('/login/screen', validate(screenLoginSchema), AuthController.loginSc
 router.post('/refresh', validate(refreshSchema), AuthController.refresh);
 router.post('/logout', AuthController.logout);
 
+// Authenticated user profile & security endpoints
+router.get('/me', protect, AuthController.getProfile);
+router.patch('/me', protect, AuthController.updateProfile);
+router.post('/avatar', protect, AuthController.uploadAvatar);
+router.post('/change-password', protect, AuthController.changePassword);
+
 module.exports = router;

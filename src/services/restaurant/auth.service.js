@@ -318,6 +318,89 @@ class AuthService {
       throw new AppError(401, 'Session expired or token is invalid.');
     }
   }
+
+  /**
+   * Get user personal profile details.
+   */
+  async getUserProfile(userId) {
+    const user = await UserRepository.findById(userId);
+    if (!user) {
+      throw new AppError(404, 'User profile not found.');
+    }
+
+    const staffRecords = await RestaurantStaffRepository.findRestaurantsForUser(userId);
+    const sanitized = user.toObject();
+    delete sanitized.passwordHash;
+
+    if (staffRecords && staffRecords.length > 0) {
+      sanitized.role = staffRecords[0].role;
+      sanitized.permissions = staffRecords[0].permissions || [];
+      sanitized.restaurantId = staffRecords[0].restaurantId;
+      sanitized.employment = staffRecords[0].employment;
+    }
+
+    return sanitized;
+  }
+
+  /**
+   * Update personal profile details (fullName, mobile).
+   */
+  async updateUserProfile(userId, { fullName, mobile }) {
+    const updateData = {};
+    if (fullName) updateData.fullName = fullName.trim();
+    if (mobile) updateData.mobile = mobile.trim();
+
+    const user = await UserRepository.update(userId, updateData);
+    if (!user) {
+      throw new AppError(404, 'User profile not found.');
+    }
+
+    const sanitized = user.toObject();
+    delete sanitized.passwordHash;
+    return sanitized;
+  }
+
+  /**
+   * Upload user avatar photo.
+   */
+  async uploadUserAvatar(userId, avatarUrl) {
+    const user = await UserRepository.update(userId, { avatarUrl });
+    if (!user) {
+      throw new AppError(404, 'User profile not found.');
+    }
+
+    const sanitized = user.toObject();
+    delete sanitized.passwordHash;
+    return sanitized;
+  }
+
+  /**
+   * Change user password securely with old password verification.
+   */
+  async changePassword(userId, oldPassword, newPassword) {
+    if (!oldPassword || !newPassword) {
+      throw new AppError(400, 'Current and new password are required.');
+    }
+
+    if (newPassword.length < 6) {
+      throw new AppError(400, 'New password must be at least 6 characters long.');
+    }
+
+    const user = await UserRepository.findById(userId);
+    if (!user) {
+      throw new AppError(404, 'User account not found.');
+    }
+
+    const isMatch = await user.isPasswordMatch(oldPassword);
+    if (!isMatch) {
+      throw new AppError(400, 'Current password provided is incorrect.');
+    }
+
+    user.passwordHash = newPassword;
+    await user.save();
+
+    return { message: 'Password updated successfully.' };
+  }
 }
 
 module.exports = new AuthService();

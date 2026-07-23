@@ -42,4 +42,24 @@ router.post(
   RestaurantController.uploadRestaurantImage
 );
 
+// 4. Legal & Bank Amendment Requests (Owner submitted, Staff viewable)
+router.post(
+  '/legal-request',
+  restrictToRoles('owner'),
+  RestaurantController.submitLegalRequest
+);
+
+router.get(
+  '/legal-requests',
+  restrictToRoles('owner', 'manager'),
+  RestaurantController.getLegalRequests
+);
+
+// 5. Toggle Restaurant Operational Status (Open / Closed)
+router.patch(
+  '/status',
+  restrictToRoles('owner', 'manager'),
+  RestaurantController.toggleRestaurantStatus
+);
+
 module.exports = router;

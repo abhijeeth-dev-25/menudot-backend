@@ -66,6 +66,40 @@ class AuthController {
 
     return sendSuccess(res, 200, 'User logged out successfully', null);
   });
+
+  /**
+   * Fetch authenticated user personal profile.
+   */
+  getProfile = asyncHandler(async (req, res) => {
+    const profile = await AuthService.getUserProfile(req.user._id);
+    return sendSuccess(res, 200, 'User profile fetched successfully', profile);
+  });
+
+  /**
+   * Update authenticated user personal profile (fullName, mobile).
+   */
+  updateProfile = asyncHandler(async (req, res) => {
+    const updated = await AuthService.updateUserProfile(req.user._id, req.body);
+    return sendSuccess(res, 200, 'User profile updated successfully', updated);
+  });
+
+  /**
+   * Upload authenticated user profile photo.
+   */
+  uploadAvatar = asyncHandler(async (req, res) => {
+    const { avatarUrl } = req.body;
+    const updated = await AuthService.uploadUserAvatar(req.user._id, avatarUrl);
+    return sendSuccess(res, 200, 'User avatar updated successfully', updated);
+  });
+
+  /**
+   * Change user password securely.
+   */
+  changePassword = asyncHandler(async (req, res) => {
+    const { oldPassword, newPassword } = req.body;
+    const result = await AuthService.changePassword(req.user._id, oldPassword, newPassword);
+    return sendSuccess(res, 200, 'Password changed successfully', result);
+  });
 }
 
 module.exports = new AuthController();
