@@ -100,11 +100,15 @@ class AdService {
           if (!matchesTag) continue;
         }
 
-        // 3. Restaurant Scope blocklist/allowlist
+        // 3. Restaurant Scope blocklist/allowlist & Rating threshold
         const restScope = rule.restaurantScope;
         if (restScope && restaurantId) {
           if (restScope.allowList?.length && !restScope.allowList.includes(restaurantId)) continue;
           if (restScope.blockList?.length && restScope.blockList.includes(restaurantId)) continue;
+        }
+
+        if (rule.minRating > 0 && context.restaurantRating !== undefined) {
+          if (context.restaurantRating < rule.minRating) continue;
         }
 
         matchedCampaignIds.push(rule.campaignId.toString());

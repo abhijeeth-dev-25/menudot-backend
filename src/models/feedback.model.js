@@ -1,6 +1,37 @@
 const mongoose = require('mongoose');
 const auditablePlugin = require('./plugins/auditable.plugin');
 
+const itemRatingSchema = new mongoose.Schema(
+  {
+    menuItemId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'MenuItem',
+      required: true,
+    },
+    itemName: {
+      type: String,
+      trim: true,
+      default: '',
+    },
+    rating: {
+      type: Number,
+      required: true,
+      min: 1,
+      max: 5,
+    },
+    tags: {
+      type: [String],
+      default: [],
+    },
+    comment: {
+      type: String,
+      default: null,
+      trim: true,
+    },
+  },
+  { _id: false }
+);
+
 const feedbackSchema = new mongoose.Schema(
   {
     source: {
@@ -14,6 +45,28 @@ const feedbackSchema = new mongoose.Schema(
       required: true,
       min: 1,
       max: 5,
+    },
+    serviceRating: {
+      type: Number,
+      default: null,
+      min: 1,
+      max: 5,
+    },
+    restaurantRating: {
+      type: Number,
+      default: null,
+      min: 1,
+      max: 5,
+    },
+    platformRating: {
+      type: Number,
+      default: null,
+      min: 1,
+      max: 5,
+    },
+    itemRatings: {
+      type: [itemRatingSchema],
+      default: [],
     },
     customerName: {
       type: String,

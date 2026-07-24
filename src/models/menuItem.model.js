@@ -99,6 +99,29 @@ const menuItemSchema = new mongoose.Schema({
     min: 0,
     max: 5,
   },
+  ratingCount: {
+    type: Number,
+    default: 0,
+    min: 0,
+  },
+  totalRatingPoints: {
+    type: Number,
+    default: 0,
+    min: 0,
+  },
+  ratingBreakdown: {
+    5: { type: Number, default: 0 },
+    4: { type: Number, default: 0 },
+    3: { type: Number, default: 0 },
+    2: { type: Number, default: 0 },
+    1: { type: Number, default: 0 },
+  },
+  popularTags: [
+    {
+      tag: { type: String, trim: true },
+      count: { type: Number, default: 0 },
+    },
+  ],
   addOnGroups: [addOnGroupSchema],
   status: {
     type: String,

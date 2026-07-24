@@ -1,6 +1,7 @@
 const { Server } = require('socket.io');
 const { verifyAccessToken } = require('./jwt.util');
 const Screen = require('../models/screen.model');
+const Notification = require('../models/notification.model');
 const logger = require('./logger');
 
 let io = null;
@@ -47,21 +48,22 @@ function init(server) {
         if (!screen || screen.status !== 'active') {
           return next(new Error('Screen device is inactive or removed.'));
         }
-        // Save settings directly on socket context for dynamic notifications routing
         socket.screenDetails = {
-          id: screen._id,
+          id: screen._id.toString(),
           name: screen.name,
           screenType: screen.screenType,
           allowedServices: screen.allowedServices || [],
           allowedTables: screen.allowedTables || [],
         };
         socket.restaurantId = screen.restaurantId.toString();
+        socket.role = screen.screenType || 'screen';
       } else if (decoded.type === 'user') {
-        // For standard users, they specify restaurantId in connection parameters
         const queryRestaurantId = socket.handshake.query?.restaurantId;
         if (queryRestaurantId) {
           socket.restaurantId = queryRestaurantId;
         }
+        socket.userId = decoded.id;
+        socket.role = decoded.role || 'staff';
       }
 
       next();
@@ -78,27 +80,92 @@ function init(server) {
         socketId: socket.id,
         type: socket.auth?.type,
         restaurantId: socket.restaurantId,
+        role: socket.role,
       },
       'Client socket connected successfully'
     );
 
-    // Join tenant room if restaurantId is resolved during handshake
+    // 1. Join main restaurant tenant room
     if (socket.restaurantId) {
       socket.join(`restaurant_${socket.restaurantId}`);
-      logger.info({ socketId: socket.id, room: `restaurant_${socket.restaurantId}` }, 'Joined tenant room');
+      
+      // 2. Join role-specific subroom
+      if (socket.role) {
+        socket.join(`restaurant_${socket.restaurantId}:role:${socket.role}`);
+      }
+
+      // 3. Join user room
+      if (socket.userId) {
+        socket.join(`user_${socket.userId}`);
+      }
+
+      // 4. Join screen room
+      if (socket.screenDetails?.id) {
+        socket.join(`screen_${socket.screenDetails.id}`);
+      }
     }
 
     // Dynamic join event for users who switch restaurants in their dashboard
     socket.on('join_restaurant', (data) => {
       const { restaurantId } = data;
       if (restaurantId) {
-        // Leave old restaurant room if any
         if (socket.restaurantId && socket.restaurantId !== restaurantId) {
           socket.leave(`restaurant_${socket.restaurantId}`);
+          if (socket.role) {
+            socket.leave(`restaurant_${socket.restaurantId}:role:${socket.role}`);
+          }
         }
         socket.restaurantId = restaurantId;
         socket.join(`restaurant_${restaurantId}`);
+        if (socket.role) {
+          socket.join(`restaurant_${restaurantId}:role:${socket.role}`);
+        }
         logger.info({ socketId: socket.id, restaurantId }, 'Client switched/joined restaurant room');
+      }
+    });
+
+    // Client reconnection sync (fetch missed notifications)
+    socket.on('sync_missed_notifications', async (data, callback) => {
+      try {
+        const { lastSyncTime } = data || {};
+        if (!socket.restaurantId) return;
+
+        const query = {
+          restaurantId: socket.restaurantId,
+          createdAt: { $gte: new Date(lastSyncTime || Date.now() - 24 * 60 * 60 * 1000) },
+          $or: [
+            { targetType: 'all' },
+            { targetType: 'role', targetId: socket.role },
+            { targetType: 'user', targetId: socket.userId },
+            { targetType: 'screen', targetId: socket.screenDetails?.id },
+          ],
+        };
+
+        const missed = await Notification.find(query)
+          .sort({ createdAt: -1 })
+          .limit(50)
+          .lean();
+
+        if (typeof callback === 'function') {
+          callback({ success: true, notifications: missed });
+        }
+      } catch (err) {
+        logger.error({ err }, 'Error syncing missed notifications');
+        if (typeof callback === 'function') {
+          callback({ success: false, error: err.message });
+        }
+      }
+    });
+
+    // Client delivery ACK
+    socket.on('notification_ack', async (data) => {
+      try {
+        const { notificationId } = data || {};
+        if (notificationId) {
+          await Notification.findByIdAndUpdate(notificationId, { deliveryStatus: 'delivered' });
+        }
+      } catch (err) {
+        logger.warn({ err }, 'Notification ACK update error');
       }
     });
 
@@ -120,47 +187,52 @@ function broadcastToRestaurant(restaurantId, event, data) {
 }
 
 /**
+ * Emits a structured notification to specific target rooms based on targetType.
+ */
+function emitNotification(notification) {
+  if (!io) return;
+
+  const { restaurantId, targetType, targetId } = notification;
+
+  if (targetType === 'all') {
+    io.to(`restaurant_${restaurantId}`).emit('notification_received', notification);
+  } else if (targetType === 'role') {
+    io.to(`restaurant_${restaurantId}:role:${targetId}`).emit('notification_received', notification);
+  } else if (targetType === 'user') {
+    io.to(`user_${targetId}`).emit('notification_received', notification);
+  } else if (targetType === 'screen') {
+    io.to(`screen_${targetId}`).emit('notification_received', notification);
+  }
+}
+
+/**
  * Advanced production-grade notification router for table calls (services).
- * Filters notifications so they are only delivered to screens that are authorized
- * to listen for that specific service type and table number.
- * 
- * @param {string} restaurantId - Target restaurant
- * @param {string} tableNumber - Table requesting service (e.g. "T-1")
- * @param {string} serviceType - Service requested (e.g. "water", "bill")
- * @param {object} notificationPayload - Notification attributes
  */
 function sendServiceCallNotification(restaurantId, tableNumber, serviceType, notificationPayload) {
   if (!io) return;
 
-  const targetRoom = `restaurant_${restaurantId}`;
   logger.info(
     { restaurantId, tableNumber, serviceType },
     'Routing service call to authorized screen terminals'
   );
 
-  // Loop through all active sockets to apply specific filters
   for (const socket of connectedSockets) {
-    // 1. Enforce restaurant isolation
     if (socket.restaurantId !== restaurantId.toString()) {
       continue;
     }
 
-    // 2. Enforce screen-specific service & table filters
     if (socket.screenDetails) {
       const { allowedServices, allowedTables } = socket.screenDetails;
 
-      // Check if this screen blocks this service type (e.g. Chef KDS doesn't need Water alerts)
       if (allowedServices.length > 0 && !allowedServices.includes(serviceType)) {
         continue;
       }
 
-      // Check if this screen is bound to specific tables (e.g. Waiter assigned to T-1 to T-5)
       if (allowedTables.length > 0 && !allowedTables.includes(tableNumber)) {
         continue;
       }
     }
 
-    // 3. Emit notification directly to this socket
     socket.emit('service_call_received', {
       tableNumber,
       serviceType,
@@ -174,4 +246,5 @@ module.exports = {
   broadcastToRestaurant,
   emitToRestaurantRoom: broadcastToRestaurant,
   sendServiceCallNotification,
+  emitNotification,
 };

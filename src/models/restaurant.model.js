@@ -133,6 +133,12 @@ const restaurantSchema = new mongoose.Schema(
         },
       },
     },
+    ratingsSummary: {
+      overallRating: { type: Number, default: 5.0, min: 0, max: 5 },
+      serviceRating: { type: Number, default: 5.0, min: 0, max: 5 },
+      foodQualityRating: { type: Number, default: 5.0, min: 0, max: 5 },
+      totalReviews: { type: Number, default: 0, min: 0 },
+    },
     commercials: {
       commissionPercent: { type: Number, default: 0 },
       onboardingFeePaid: { type: Boolean, default: false },

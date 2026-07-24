@@ -316,13 +316,23 @@ class TableService {
       restaurant = cachedData.restaurant;
       menuTree = cachedData.menu;
     } else {
-      restaurant = await Restaurant.findById(restaurantId).select('name slug location menuProfile');
+      restaurant = await Restaurant.findById(restaurantId).select('name slug location menuProfile ratingsSummary');
       const categories = await MenuCategory.find({ restaurantId, status: 'active' }).sort({ sortOrder: 1 });
       const items = await MenuItem.find({ restaurantId, status: 'available' });
 
       // Group items by categoryId for easy client-side parsing
       menuTree = categories.map((cat) => {
-        const catItems = items.filter((item) => item.categoryId.toString() === cat._id.toString());
+        const catItems = items
+          .filter((item) => item.categoryId.toString() === cat._id.toString())
+          .map((itemObj) => {
+            const item = itemObj.toObject ? itemObj.toObject() : itemObj;
+            // High rating badge logic
+            const isTopRated = (item.rating || 0) >= 4.5 && (item.ratingCount || 0) >= 1;
+            return {
+              ...item,
+              isTopRated,
+            };
+          });
         return {
           category: cat,
           items: catItems,
@@ -497,6 +507,29 @@ class TableService {
 
     // 4. Broadcast order_created event in real-time to restaurant's room (KDS)
     socketManager.broadcastToRestaurant(restaurantId, 'order_created', finalOrder);
+
+    // Publish high-throughput notification
+    try {
+      const NotificationService = require('./notification.service');
+      await NotificationService.publish({
+        restaurantId,
+        targetType: 'role',
+        targetId: 'kitchen',
+        type: 'ORDER_CREATED',
+        title: `🔔 New Order #${finalOrder.orderNumber || finalOrder._id.toString().slice(-4)}`,
+        message: `Table ${initialTable.tableNumber} placed a new order of ${validatedItems.length} items (₹${grandTotal.toFixed(2)}).`,
+        priority: 'high',
+        data: {
+          orderId: finalOrder._id,
+          tableNumber: initialTable.tableNumber,
+          grandTotal,
+          itemsCount: validatedItems.length,
+        },
+        dedupKey: `order_created:${finalOrder._id}`,
+      });
+    } catch (err) {
+      logger.warn({ err }, 'Notification publishing error in placeDineInOrder');
+    }
 
     return finalOrder;
   }

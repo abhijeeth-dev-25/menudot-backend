@@ -70,11 +70,29 @@ class TableController {
   triggerServiceCall = asyncHandler(async (req, res) => {
     const { restaurantId, tableNumber, serviceType } = req.body;
     const socketManager = require('../../utils/socket');
-    
+    const NotificationService = require('../../services/restaurant/notification.service');
+
     socketManager.sendServiceCallNotification(restaurantId, tableNumber, serviceType, {
       requestedAt: new Date(),
     });
-    
+
+    try {
+      await NotificationService.publish({
+        restaurantId,
+        targetType: 'role',
+        targetId: 'waiter',
+        type: 'SERVICE_CALL',
+        title: `👋 Table ${tableNumber} Service Request`,
+        message: `Table ${tableNumber} requested ${serviceType.toUpperCase()} service.`,
+        priority: 'urgent',
+        data: { tableNumber, serviceType, requestedAt: new Date() },
+        dedupKey: `service_call:${tableNumber}:${serviceType}`,
+      });
+    } catch (err) {
+      const logger = require('../../utils/logger');
+      logger.warn({ err }, 'Notification publishing error in triggerServiceCall');
+    }
+
     return sendSuccess(res, 200, `Requested ${serviceType} service successfully.`);
   });
 

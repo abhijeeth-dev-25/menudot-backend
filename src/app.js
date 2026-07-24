@@ -25,6 +25,7 @@ const financeRoutes = require('./routes/restaurant/finance.routes');
 const feedbackRoutes = require('./routes/restaurant/feedback.routes');
 const campaignRoutes = require('./routes/restaurant/campaign.routes');
 const paymentRoutes = require('./routes/restaurant/payment.routes');
+const notificationRoutes = require('./routes/restaurant/notification.routes');
 
 // Platform Routes
 const platformRestaurantRoutes = require('./routes/platform/restaurant.routes');
@@ -32,6 +33,7 @@ const platformSystemRoutes = require('./routes/platform/system.routes');
 const platformAdRoutes = require('./routes/platform/ad.routes');
 const platformCouponRoutes = require('./routes/platform/coupon.routes');
 const platformFinanceRoutes = require('./routes/platform/platformFinance.routes');
+const platformSupportRoutes = require('./routes/platform/platformSupport.routes');
 const metricsRoutes = require('./routes/platform/metrics.routes');
 const { metricsMiddleware } = require('./middlewares/metrics.middleware');
 const path = require('path');
@@ -132,6 +134,7 @@ app.use('/api/v1/finance', financeRoutes);
 app.use('/api/v1/feedback', feedbackRoutes);
 app.use('/api/v1/campaigns', campaignRoutes);
 app.use('/api/v1/payments', paymentRoutes);
+app.use('/api/v1/notifications', notificationRoutes);
 
 // Platform administration route handlers
 app.use('/api/v1/platform/restaurants', platformRestaurantRoutes);
@@ -139,6 +142,8 @@ app.use('/api/v1/platform/system', platformSystemRoutes);
 app.use('/api/v1/platform/ads', platformAdRoutes);
 app.use('/api/v1/platform/coupons', platformCouponRoutes);
 app.use('/api/v1/platform/finance', platformFinanceRoutes);
+app.use('/api/v1/platform/support', platformSupportRoutes);
+app.use('/api/v1/support', platformSupportRoutes);
 app.use('/api/v1/coupons', platformCouponRoutes);
 
 // 8. 404 Handler for undefined routes

@@ -43,6 +43,24 @@ class OrderService {
     // Broadcast live WebSocket event to restaurant room
     socketManager.broadcastToRestaurant(restaurantId, 'order_updated', updatedOrder);
 
+    // Publish high-throughput durable notification
+    try {
+      const NotificationService = require('./notification.service');
+      await NotificationService.publish({
+        restaurantId,
+        targetType: 'role',
+        targetId: 'kitchen',
+        type: 'ORDER_STATUS_CHANGED',
+        title: `Order #${order.orderNumber || orderId.slice(-4)} Status: ${status.toUpperCase()}`,
+        message: `Table ${order.tableNumber || 'Takeaway'} order status changed from ${oldStatus} to ${status}.`,
+        priority: status === 'completed' || status === 'cancelled' ? 'high' : 'normal',
+        data: { orderId, orderNumber: order.orderNumber, status, tableNumber: order.tableNumber },
+        dedupKey: `order_status:${orderId}:${status}`,
+      });
+    } catch (err) {
+      logger.warn({ err }, 'Notification publishing error in order status update');
+    }
+
     return updatedOrder;
   }
 }

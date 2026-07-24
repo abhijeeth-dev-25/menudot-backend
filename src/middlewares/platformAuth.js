@@ -15,8 +15,8 @@ function restrictToPlatformPermission(...requiredPermissions) {
 
     const { globalRole } = req.user;
 
-    // 1. Super Admins bypass all permission checks
-    if (globalRole === PLATFORM_ROLES.SUPER_ADMIN) {
+    // 1. Super Admins & Platform Admins bypass all permission checks
+    if (globalRole === PLATFORM_ROLES.SUPER_ADMIN || globalRole === PLATFORM_ROLES.PLATFORM_ADMIN) {
       return next();
     }
 
