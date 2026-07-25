@@ -22,7 +22,7 @@ async function processEmailJob(payload) {
     });
 
     await transporter.sendMail({
-      from: process.env.EMAIL_FROM || '"Menudot Platform" <noreply@menudot.com>',
+      from: process.env.SMTP_FROM || process.env.EMAIL_FROM || process.env.SMTP_USER || '"Menudot Platform" <noreply@menudot.com>',
       to,
       subject,
       text,
