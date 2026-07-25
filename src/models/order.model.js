@@ -47,6 +47,11 @@ const orderSchema = new mongoose.Schema({
     default: null,
     index: true,
   },
+  deviceId: {
+    type: String,
+    default: null,
+    index: true,
+  },
   tableNumber: {
     type: String,
     default: null,

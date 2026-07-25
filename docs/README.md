@@ -37,11 +37,13 @@ This documentation is structured into modular sections for clear reading, easy m
 - [03-10. Finance & Daily P&L API](file:///Users/abhijeethkar/Desktop/menudot-backend/docs/03-api-reference/10-finance-and-pl-api.md) — Expense entry & daily financial reporting.
 - [03-11. Feedback & Growth Campaigns API](file:///Users/abhijeethkar/Desktop/menudot-backend/docs/03-api-reference/11-feedback-and-campaigns-api.md) — Sentiment reviews, merchant campaigns, platform ads.
 - [03-12. Platform Administration API](file:///Users/abhijeethkar/Desktop/menudot-backend/docs/03-api-reference/12-platform-admin-api.md) — Verification queue, onboarding approval, emergency controls.
+- [03-14. Customer Portal & Ad Engine API](file:///Users/abhijeethkar/Desktop/menudot-backend/docs/03-api-reference/14-customer-portal-api.md) — Home feed, experience offerings, menu search, Swiggy partner link, order tracking & 5-placement ads.
 
 ### 4. 🗄️ Database Schemas & Data Models
 - [04-1. Core & User Models](file:///Users/abhijeethkar/Desktop/menudot-backend/docs/04-database-schemas/01-core-and-users.md) — `Restaurant`, `User`, `Table`, `Screen`.
 - [04-2. Catalog & Order Models](file:///Users/abhijeethkar/Desktop/menudot-backend/docs/04-database-schemas/02-menu-and-orders.md) — `MenuItem`, `MenuCategory`, `Order`, `Booking`.
 - [04-3. Operations, Finance & Ads Models](file:///Users/abhijeethkar/Desktop/menudot-backend/docs/04-database-schemas/03-inventory-finance-ads.md) — `InventoryItem`, `Expense`, `DailyFinanceReport`, `AdCreative`, etc.
+- [04-4. Customer Portal Data Models](file:///Users/abhijeethkar/Desktop/menudot-backend/docs/04-database-schemas/04-customer-portal-models.md) — `ExperienceService`, `HeroBanner`, `SwiggyLink`, `Restaurant.branches`.
 
 ### 5. 🚀 Deployment & Operations
 - [05-1. Environment & Setup Guide](file:///Users/abhijeethkar/Desktop/menudot-backend/docs/05-deployment-and-ops/01-environment-and-setup.md) — `.env` reference, local running, production setup, health check endpoints.

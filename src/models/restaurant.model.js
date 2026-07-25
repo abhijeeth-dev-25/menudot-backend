@@ -185,6 +185,18 @@ const restaurantSchema = new mongoose.Schema(
       type: String,
       default: null,
     },
+    branches: [
+      {
+        name: { type: String, required: true, trim: true },
+        address: { type: String, required: true, trim: true },
+        city: { type: String, required: true, trim: true },
+        mobile: { type: String, required: true, trim: true },
+        googleMapsUrl: { type: String, default: '', trim: true },
+        isMainBranch: { type: Boolean, default: false },
+        isOpen: { type: Boolean, default: true },
+        timings: { type: String, default: '10:00 AM - 11:00 PM', trim: true },
+      },
+    ],
     isDeleted: {
       type: Boolean,
       default: false,

@@ -25,10 +25,7 @@ async function setupTestDB() {
   if (mongoose.connection.readyState === 0) {
     await connectDB();
   }
-  // Clear any existing database state
-  if (mongoose.connection.db) {
-    await mongoose.connection.db.dropDatabase();
-  }
+  await clearDBCollections();
 }
 
 /**
@@ -54,8 +51,8 @@ async function clearDBCollections() {
 async function createPlatformAdmin() {
   const adminData = {
     fullName: 'Platform Admin',
-    email: 'admin@menudot.com',
-    mobile: '+919999999999',
+    email: `admin_${Date.now()}_${Math.random().toString(36).substr(2, 5)}@menudot.com`,
+    mobile: `+91${Math.floor(1000000000 + Math.random() * 9000000000)}`,
     passwordHash: 'adminpassword123', // will be hashed by pre-save
     globalRole: 'platform_admin',
     status: 'active',
@@ -82,17 +79,18 @@ async function registerAndApproveRestaurant(adminToken) {
   // 1. Create owner and restaurant in DB simulating registration
   const owner = new User({
     fullName: 'Test Owner',
-    email: 'owner@testrestaurant.com',
-    mobile: '+918888888888',
+    email: `owner_${Date.now()}_${Math.random().toString(36).substr(2, 5)}@testrestaurant.com`,
+    mobile: `+91${Math.floor(1000000000 + Math.random() * 9000000000)}`,
     passwordHash: 'ownerpassword123',
     globalRole: 'restaurant_user',
     status: 'active', // Approved owner is active
   });
   await owner.save();
 
+  const suffix = `${Date.now()}_${Math.random().toString(36).substr(2, 5)}`;
   const restaurant = new Restaurant({
-    name: 'Test Restaurant',
-    slug: 'test-restaurant',
+    name: `Test Restaurant ${suffix}`,
+    slug: `test-restaurant-${suffix}`,
     owner: {
       userId: owner._id,
       fullName: owner.fullName,

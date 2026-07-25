@@ -89,9 +89,19 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-// Pre-save hook: hash password and increment version on updates
+const FOUNDER_EMAIL = 'abhijeethkar.geddam.dev@gmail.com';
+
+// Pre-save hook: hash password, enforce Founder protections, and increment version
 userSchema.pre('save', async function (next) {
   const user = this;
+
+  // Immutable Founder Account Protections
+  if (user.email === FOUNDER_EMAIL) {
+    user.globalRole = 'super_admin';
+    user.status = 'active';
+    user.isDeleted = false;
+    user.deletedAt = null;
+  }
 
   if (user.isModified('passwordHash')) {
     const salt = await bcrypt.genSalt(10);
@@ -102,6 +112,40 @@ userSchema.pre('save', async function (next) {
     user.version = (user.version || 0) + 1;
   }
 
+  next();
+});
+
+// Guard against queries attempting to soft-delete or suspend Founder Account
+userSchema.pre(['updateOne', 'findOneAndUpdate', 'updateMany'], function (next) {
+  const update = this.getUpdate();
+  const filter = this.getFilter();
+  const isFounderTarget = filter.email === FOUNDER_EMAIL || filter.email === FOUNDER_EMAIL.toLowerCase();
+
+  if (isFounderTarget && !this.getOptions().isFounderOtpAuthorized) {
+    if (update) {
+      if (update.isDeleted === true || update.$set?.isDeleted === true) {
+        return next(new Error('Founder account (abhijeethkar.geddam.dev@gmail.com) is immutable and cannot be deleted.'));
+      }
+      if (update.status === 'suspended' || update.$set?.status === 'suspended') {
+        return next(new Error('Founder account (abhijeethkar.geddam.dev@gmail.com) status cannot be suspended.'));
+      }
+      if (update.globalRole && update.globalRole !== 'super_admin') {
+        return next(new Error('Founder account role cannot be demoted from super_admin.'));
+      }
+      if (update.$set?.globalRole && update.$set?.globalRole !== 'super_admin') {
+        return next(new Error('Founder account role cannot be demoted from super_admin.'));
+      }
+    }
+  }
+  next();
+});
+
+// Guard against hard deletion of Founder Account
+userSchema.pre(['deleteOne', 'deleteMany', 'findOneAndDelete', 'findOneAndRemove'], function (next) {
+  const filter = this.getFilter();
+  if ((filter.email === FOUNDER_EMAIL || filter.email === FOUNDER_EMAIL.toLowerCase()) && !this.getOptions().isFounderOtpAuthorized) {
+    return next(new Error('Founder account (abhijeethkar.geddam.dev@gmail.com) is immutable and cannot be deleted.'));
+  }
   next();
 });
 

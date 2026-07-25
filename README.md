@@ -25,7 +25,8 @@
 17. [API — Platform System Operations](#17-api--platform-system-operations)
 18. [API — Platform Verification Team](#18-api--platform-verification-team)
 19. [API — Coupons (Platform & Restaurant Scope)](#19-api--coupons-platform--restaurant-scope)
-20. [Error Codes Reference](#20-error-codes-reference)
+20. [API — Customer Portal & Ad Engine](#20-api--customer-portal--ad-engine)
+21. [Error Codes Reference](#21-error-codes-reference)
 
 ---
 
@@ -1205,7 +1206,66 @@ Apply a coupon code to the current customer checkout cart.
 
 ---
 
-## 20. Error Codes Reference
+## 20. API — Customer Portal & Ad Engine
+
+Powers the B2C Customer Web Application (**Home**, **Menu**, **Service**, **Account**, **Live Order Status Tracking**, and **5-Placement Targeted Ads**).
+
+### `GET /customer/home-feed` *(Public)*
+Aggregates restaurant info, hero banners, experience offerings, coupons, menu categories, and multi-outlet branches in a single call.
+
+- **Headers**: `x-restaurant-id` (required), `x-device-id` (optional)
+- **Query Parameters**: `tableCode` (optional)
+
+---
+
+### `GET /customer/menu/search` *(Public)*
+Multi-filter instant menu item search engine.
+
+- **Headers**: `x-restaurant-id` (required)
+- **Query Parameters**: `q` / `search`, `foodType` (`veg` | `non-veg` | `both`), `categoryId`, `inStockOnly`, `sortBy` (`price_asc` | `price_desc` | `rating`)
+
+---
+
+### `POST /customer/swiggy/link` *(Public)*
+Links optional Swiggy partner account to unlock co-branded discounts.
+
+- **Headers**: `x-restaurant-id` (required)
+- **Body**: `{ "deviceId": "dev_123", "swiggyUserId": "swiggy_user_99" }`
+
+---
+
+### `GET /customer/bill` *(Public)*
+Calculates active table order breakdown, subtotal, GST tax, packing charges, discounts, and total net payable.
+
+- **Headers**: `x-restaurant-id` (required)
+- **Query Parameters**: `deviceId` or `tableId`
+
+---
+
+### `GET /customer/status` *(Public)*
+Returns real-time order lifecycle tracking progress steps (`received` → `preparing` → `ready` → `served` → `completed`).
+
+- **Headers**: `x-restaurant-id` (required)
+- **Query Parameters**: `orderId` or `deviceId`
+
+---
+
+### `POST /customer/service-request` *(Public)*
+Alerts staff terminals via Socket.io (`water`, `bill`, `waiter`, `cleaning`). Requires active unlocked table session.
+
+- **Headers**: `x-restaurant-id` (required)
+- **Body**: `{ "tableCode": "qr_code_123", "serviceType": "water" }`
+
+---
+
+### `GET /customer/ads` *(Public)*
+Serves targeted ad creatives across 5 UI placements (`home_top_banner`, `home_in_feed`, `navbar_bottom_sticky`, `payment_checkout_banner`, `order_status_card`).
+
+- **Query Parameters**: `placementKey` (required)
+
+---
+
+## 21. Error Codes Reference
 
 | HTTP Status | Meaning | Common Cause |
 |---|---|---|

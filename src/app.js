@@ -26,6 +26,8 @@ const feedbackRoutes = require('./routes/restaurant/feedback.routes');
 const campaignRoutes = require('./routes/restaurant/campaign.routes');
 const paymentRoutes = require('./routes/restaurant/payment.routes');
 const notificationRoutes = require('./routes/restaurant/notification.routes');
+const customerRoutes = require('./routes/customer/customer.routes');
+const experienceServiceRoutes = require('./routes/restaurant/experienceService.routes');
 
 // Platform Routes
 const platformRestaurantRoutes = require('./routes/platform/restaurant.routes');
@@ -135,6 +137,8 @@ app.use('/api/v1/feedback', feedbackRoutes);
 app.use('/api/v1/campaigns', campaignRoutes);
 app.use('/api/v1/payments', paymentRoutes);
 app.use('/api/v1/notifications', notificationRoutes);
+app.use('/api/v1/customer', customerRoutes);
+app.use('/api/v1/restaurant/experiences', experienceServiceRoutes);
 
 // Platform administration route handlers
 app.use('/api/v1/platform/restaurants', platformRestaurantRoutes);

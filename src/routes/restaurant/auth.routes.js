@@ -25,4 +25,9 @@ router.patch('/me', protect, AuthController.updateProfile);
 router.post('/avatar', protect, AuthController.uploadAvatar);
 router.post('/change-password', protect, AuthController.changePassword);
 
+// Founder Step-Up OTP Authorization endpoints
+const FounderAuthController = require('../../controllers/platform/founderAuth.controller');
+router.post('/founder-otp/request', FounderAuthController.requestOTP);
+router.post('/founder-otp/verify', FounderAuthController.verifyOTP);
+
 module.exports = router;

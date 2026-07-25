@@ -111,7 +111,6 @@ describe('Multi-Dimensional Rating System Tests', () => {
     await Table.deleteMany({ restaurantId });
     await Feedback.deleteMany({ restaurantId });
     await Restaurant.deleteMany({ _id: restaurantId });
-    await disconnectDB();
   });
 
   test('1. Should submit multi-dimensional customer feedback (Items + Service + Restaurant + Platform)', async () => {

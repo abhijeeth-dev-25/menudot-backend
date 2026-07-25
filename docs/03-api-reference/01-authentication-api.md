@@ -83,13 +83,38 @@ Issue a new short-lived access token using a valid refresh token.
 
 ---
 
-## 4. Logout Session
-Invalidate user session.
+---
 
-- **Method**: `POST`
-- **Path**: `/api/v1/auth/logout`
-- **Auth Required**: Bearer Token
-- **Response (`200 OK`)**: `{ "success": true, "message": "Logged out successfully" }`
+## 5. Founder Step-Up OTP Authorization
+
+Request and verify 6-digit Step-Up OTP for protected operations on Founder account (`abhijeethkar.geddam.dev@gmail.com`).
+
+### `POST /api/v1/auth/founder-otp/request`
+Dispatches a 6-digit Step-Up OTP exclusively to `abhijeethkar.geddam.dev@gmail.com` with a 10-minute validity.
+
+- **Auth Required**: None (Public)
+- **Response (`200 OK`)**:
+  ```json
+  {
+    "success": true,
+    "message": "Step-Up OTP has been sent exclusively to abhijeethkar.geddam.dev@gmail.com",
+    "data": { "expiresInSeconds": 600 }
+  }
+  ```
+
+### `POST /api/v1/auth/founder-otp/verify`
+Verifies the 6-digit OTP and returns a signed 15-minute `founderAuthToken`.
+
+- **Auth Required**: None
+- **Request Body**: `{ "otp": "123456" }`
+- **Response (`200 OK`)**:
+  ```json
+  {
+    "success": true,
+    "message": "Founder Step-Up OTP verified successfully",
+    "data": { "founderAuthToken": "eyJhbGciOi..." }
+  }
+  ```
 
 ---
 
