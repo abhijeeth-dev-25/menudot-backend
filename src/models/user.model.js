@@ -105,9 +105,12 @@ userSchema.pre('save', async function (next) {
     user.deletedAt = null;
   }
 
-  if (user.isModified('passwordHash')) {
-    const salt = await bcrypt.genSalt(10);
-    user.passwordHash = await bcrypt.hash(user.passwordHash, salt);
+  if (user.isModified('passwordHash') && typeof user.passwordHash === 'string') {
+    const isAlreadyHashed = /^\$2[aby]\$\d{2}\$/.test(user.passwordHash);
+    if (!isAlreadyHashed) {
+      const salt = await bcrypt.genSalt(10);
+      user.passwordHash = await bcrypt.hash(user.passwordHash, salt);
+    }
   }
 
   if (!user.isNew) {
@@ -147,8 +150,11 @@ userSchema.pre(['updateOne', 'findOneAndUpdate', 'updateMany'], function (next) 
 userSchema.pre(['deleteOne', 'deleteMany', 'findOneAndDelete', 'findOneAndRemove'], function (next) {
   const filter = this.getFilter();
   const founderEmail = getFounderEmail();
-  if (filter && (filter.email === founderEmail || filter.email === founderEmail.toLowerCase()) && !this.getOptions().isFounderOtpAuthorized) {
-    return next(new Error(`Founder account (${founderEmail}) is immutable and cannot be deleted.`));
+  if (!this.getOptions().isFounderOtpAuthorized) {
+    if (filter && (filter.email === founderEmail || filter.email === founderEmail.toLowerCase())) {
+      return next(new Error(`Founder account (${founderEmail}) is immutable and cannot be deleted.`));
+    }
+    this.where({ email: { $ne: founderEmail } });
   }
   next();
 });

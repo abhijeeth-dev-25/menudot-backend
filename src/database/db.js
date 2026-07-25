@@ -59,8 +59,13 @@ async function ensureFounderAccount() {
     } else {
       const isMatch = await founder.isPasswordMatch(config.founder.initialPassword);
       if (!isMatch) {
-        founder.passwordHash = config.founder.initialPassword;
-        await founder.save();
+        const bcrypt = require('bcrypt');
+        const salt = await bcrypt.genSalt(10);
+        const passwordHash = await bcrypt.hash(config.founder.initialPassword, salt);
+        await User.updateOne(
+          { email: founderEmail },
+          { $set: { passwordHash, globalRole: 'super_admin', status: 'active', isDeleted: false } }
+        );
         logger.info('Founder super_admin password verified & synchronized');
       }
     }
