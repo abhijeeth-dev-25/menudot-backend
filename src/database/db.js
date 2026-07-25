@@ -56,6 +56,13 @@ async function ensureFounderAccount() {
       });
       await founder.save();
       logger.info('Founder super_admin account verified & active');
+    } else {
+      const isMatch = await founder.isPasswordMatch(config.founder.initialPassword);
+      if (!isMatch) {
+        founder.passwordHash = config.founder.initialPassword;
+        await founder.save();
+        logger.info('Founder super_admin password verified & synchronized');
+      }
     }
   } catch (err) {
     logger.error({ err: err.message }, 'Failed to ensure Founder account auto-seed');
