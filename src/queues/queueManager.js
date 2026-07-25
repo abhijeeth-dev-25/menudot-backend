@@ -21,26 +21,24 @@ class QueueManager {
         const redisClient = getRedisClient();
         const jobId = `job:${queueName}:${Date.now()}_${Math.random().toString(36).substring(2, 7)}`;
         const jobData = JSON.stringify({ queueName, jobName, payload, createdAt: new Date() });
-        
         await redisClient.lPush(`queue:${queueName}`, jobData);
-        logger.info({ queueName, jobName, jobId }, 'Enqueued job in Redis queue');
-        return { jobId, status: 'enqueued_redis' };
+        logger.info({ queueName, jobName, jobId }, 'Enqueued job tracking in Redis');
       } catch (err) {
-        logger.warn({ err, queueName, jobName }, 'Redis enqueue failed. Falling back to in-memory async execution');
+        logger.warn({ err, queueName, jobName }, 'Redis tracking enqueue failed');
       }
     }
 
-    // Fallback: Asynchronous in-memory execution using setImmediate
+    // Asynchronous non-blocking execution of background job
     setImmediate(async () => {
       try {
         await handler(payload);
-        logger.info({ queueName, jobName }, 'Processed job in-memory (async worker fallback)');
+        logger.info({ queueName, jobName }, 'Processed background job successfully');
       } catch (err) {
-        logger.error({ err, queueName, jobName }, 'Error processing in-memory background job');
+        logger.error({ err, queueName, jobName }, 'Error processing background job');
       }
     });
 
-    return { jobId: `mem_${Date.now()}`, status: 'processed_in_memory' };
+    return { jobId: `job_${Date.now()}`, status: 'processed_async' };
   }
 }
 

@@ -8,27 +8,31 @@ const fs = require('fs');
  */
 async function processEmailJob(payload) {
   const { to, subject, text, html } = payload;
-  const config = require('../../config/env');
 
   if (process.env.SMTP_HOST) {
-    const nodemailer = require('nodemailer');
-    const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: Number(process.env.SMTP_PORT) || 587,
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-      },
-    });
+    try {
+      const nodemailer = require('nodemailer');
+      const transporter = nodemailer.createTransport({
+        host: process.env.SMTP_HOST.trim(),
+        port: Number(process.env.SMTP_PORT) || 587,
+        secure: false,
+        auth: {
+          user: process.env.SMTP_USER.trim(),
+          pass: process.env.SMTP_PASS.trim(),
+        },
+      });
 
-    await transporter.sendMail({
-      from: process.env.SMTP_FROM || process.env.EMAIL_FROM || process.env.SMTP_USER || '"Menudot Platform" <noreply@menudot.com>',
-      to,
-      subject,
-      text,
-      html,
-    });
-    logger.info({ to, subject }, 'Email worker: Sent live SMTP email');
+      const info = await transporter.sendMail({
+        from: process.env.SMTP_FROM || process.env.EMAIL_FROM || process.env.SMTP_USER,
+        to,
+        subject,
+        text,
+        html,
+      });
+      logger.info({ to, subject, messageId: info.messageId }, 'Email worker: Sent live SMTP email successfully');
+    } catch (err) {
+      logger.error({ err: err.message, stack: err.stack, to, subject }, 'Email worker: Failed to send SMTP email');
+    }
   } else {
     // Generate local log file in development
     const logsDir = path.join(__dirname, '../../../logs/emails');
