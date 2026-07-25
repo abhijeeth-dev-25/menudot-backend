@@ -24,18 +24,11 @@ class RestaurantPlatformService {
       throw new AppError(404, 'Restaurant onboarding application not found.');
     }
 
-    const allowedStages = ['pending_approval', 'submitted', 'under_review', 'verified'];
+    const allowedStages = ['pending_approval', 'submitted', 'under_review', 'verified', 'pending_payment'];
     if (!allowedStages.includes(restaurant.onboarding.stage)) {
       throw new AppError(
         400,
         `Application cannot be reviewed at current stage (current stage: ${restaurant.onboarding.stage})`
-      );
-    }
-
-    if (action === 'approve' && restaurant.onboarding.stage !== 'verified') {
-      throw new AppError(
-        400,
-        'Cannot approve restaurant application. All documents (PAN, GSTIN, FSSAI, Bank) must be verified by the Verification Team first.'
       );
     }
 
