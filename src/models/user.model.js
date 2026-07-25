@@ -89,14 +89,16 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-const FOUNDER_EMAIL = 'abhijeethkar.geddam.dev@gmail.com';
+const config = require('../config/env');
+const getFounderEmail = () => (config.founder?.email || process.env.FOUNDER_EMAIL || 'abhijeethkar.geddam.dev@gmail.com').toLowerCase();
 
 // Pre-save hook: hash password, enforce Founder protections, and increment version
 userSchema.pre('save', async function (next) {
   const user = this;
+  const founderEmail = getFounderEmail();
 
   // Immutable Founder Account Protections
-  if (user.email === FOUNDER_EMAIL) {
+  if (user.email && user.email.toLowerCase() === founderEmail) {
     user.globalRole = 'super_admin';
     user.status = 'active';
     user.isDeleted = false;
@@ -119,15 +121,16 @@ userSchema.pre('save', async function (next) {
 userSchema.pre(['updateOne', 'findOneAndUpdate', 'updateMany'], function (next) {
   const update = this.getUpdate();
   const filter = this.getFilter();
-  const isFounderTarget = filter.email === FOUNDER_EMAIL || filter.email === FOUNDER_EMAIL.toLowerCase();
+  const founderEmail = getFounderEmail();
+  const isFounderTarget = filter.email === founderEmail || filter.email === founderEmail.toLowerCase();
 
   if (isFounderTarget && !this.getOptions().isFounderOtpAuthorized) {
     if (update) {
       if (update.isDeleted === true || update.$set?.isDeleted === true) {
-        return next(new Error('Founder account (abhijeethkar.geddam.dev@gmail.com) is immutable and cannot be deleted.'));
+        return next(new Error(`Founder account (${founderEmail}) is immutable and cannot be deleted.`));
       }
       if (update.status === 'suspended' || update.$set?.status === 'suspended') {
-        return next(new Error('Founder account (abhijeethkar.geddam.dev@gmail.com) status cannot be suspended.'));
+        return next(new Error(`Founder account (${founderEmail}) status cannot be suspended.`));
       }
       if (update.globalRole && update.globalRole !== 'super_admin') {
         return next(new Error('Founder account role cannot be demoted from super_admin.'));
@@ -143,8 +146,9 @@ userSchema.pre(['updateOne', 'findOneAndUpdate', 'updateMany'], function (next) 
 // Guard against hard deletion of Founder Account
 userSchema.pre(['deleteOne', 'deleteMany', 'findOneAndDelete', 'findOneAndRemove'], function (next) {
   const filter = this.getFilter();
-  if ((filter.email === FOUNDER_EMAIL || filter.email === FOUNDER_EMAIL.toLowerCase()) && !this.getOptions().isFounderOtpAuthorized) {
-    return next(new Error('Founder account (abhijeethkar.geddam.dev@gmail.com) is immutable and cannot be deleted.'));
+  const founderEmail = getFounderEmail();
+  if (filter && (filter.email === founderEmail || filter.email === founderEmail.toLowerCase()) && !this.getOptions().isFounderOtpAuthorized) {
+    return next(new Error(`Founder account (${founderEmail}) is immutable and cannot be deleted.`));
   }
   next();
 });

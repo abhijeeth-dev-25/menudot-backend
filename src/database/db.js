@@ -38,9 +38,34 @@ async function connectDB() {
   }
 }
 
+async function ensureFounderAccount() {
+  try {
+    const User = require('../models/user.model');
+    const founderEmail = config.founder?.email;
+    if (!founderEmail) return;
+
+    let founder = await User.findOne({ email: founderEmail });
+    if (!founder) {
+      founder = new User({
+        fullName: config.founder.name,
+        email: founderEmail,
+        mobile: config.founder.mobile,
+        passwordHash: config.founder.initialPassword,
+        globalRole: 'super_admin',
+        status: 'active',
+      });
+      await founder.save();
+      logger.info('Founder super_admin account verified & active');
+    }
+  } catch (err) {
+    logger.error({ err: err.message }, 'Failed to ensure Founder account auto-seed');
+  }
+}
+
 // Connection Event Listeners
 mongoose.connection.on('connected', async () => {
   logger.info('MongoDB connected successfully');
+  await ensureFounderAccount();
 });
 
 mongoose.connection.on('error', (err) => {

@@ -15,8 +15,9 @@ class AuthController {
    * User login.
    */
   login = asyncHandler(async (req, res) => {
-    const { identifier, password } = req.body;
-    const result = await AuthService.login(identifier, password);
+    const { identifier, email, password } = req.body;
+    const loginIdentifier = identifier || email;
+    const result = await AuthService.login(loginIdentifier, password);
     return sendSuccess(res, 200, 'User logged in successfully', result);
   });
 

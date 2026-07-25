@@ -28,6 +28,10 @@ const envVarsSchema = Joi.object({
   RATE_LIMIT_MAX: Joi.number().default(100),
   REDIS_URI: Joi.string().default('redis://localhost:6379').description('Redis connection URI'),
   PAYMENT_MODE: Joi.string().valid('mock', 'razorpay', 'cashfree', 'stripe', 'phonepe').default('mock'),
+  FOUNDER_EMAIL: Joi.string().email().lowercase().trim().default('abhijeethkar.geddam.dev@gmail.com'),
+  FOUNDER_FULL_NAME: Joi.string().default('Geddam Abhijeethkar'),
+  FOUNDER_MOBILE: Joi.string().default('+919177813634'),
+  FOUNDER_INITIAL_PASSWORD: Joi.string().default('Ajk@123#'),
 })
   .unknown()
   .required();
@@ -75,5 +79,11 @@ module.exports = {
   },
   payment: {
     mode: envVars.PAYMENT_MODE,
+  },
+  founder: {
+    email: envVars.FOUNDER_EMAIL,
+    name: envVars.FOUNDER_FULL_NAME,
+    mobile: envVars.FOUNDER_MOBILE,
+    initialPassword: envVars.FOUNDER_INITIAL_PASSWORD,
   },
 };

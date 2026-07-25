@@ -85,9 +85,10 @@ const publicRegisterSchema = Joi.object({
 });
 
 const loginSchema = Joi.object({
-  identifier: Joi.string().required().trim(),
+  identifier: Joi.string().trim().optional(),
+  email: Joi.string().trim().optional(),
   password: Joi.string().required(),
-});
+}).or('identifier', 'email');
 
 const screenLoginSchema = Joi.object({
   restaurantId: objectId.required(),

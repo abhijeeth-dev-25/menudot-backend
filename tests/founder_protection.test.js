@@ -14,15 +14,19 @@ describe('Founder Account Immutability & Step-Up OTP Authorization Suite', () =>
 
   beforeEach(async () => {
     await clearDBCollections();
-    founderUser = await User.create({
-      fullName: 'Geddam Abhijeethkar',
-      email: FOUNDER_EMAIL,
-      mobile: '+919177813634',
-      passwordHash: 'Ajk@123#',
-      globalRole: 'super_admin',
-      status: 'active',
-      isDeleted: false,
-    });
+    try {
+      founderUser = await User.create({
+        fullName: 'Geddam Abhijeethkar',
+        email: FOUNDER_EMAIL,
+        mobile: '+919177813634',
+        passwordHash: 'Ajk@123#',
+        globalRole: 'super_admin',
+        status: 'active',
+        isDeleted: false,
+      });
+    } catch (e) {
+      founderUser = await User.findOne({ email: FOUNDER_EMAIL });
+    }
   });
 
   afterAll(async () => {
