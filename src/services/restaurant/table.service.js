@@ -112,6 +112,7 @@ class TableService {
         {
           status: 'activation_pending',
           tableId: table._id,
+          restaurantId,
           tableNumber,
           requestedAt: new Date(),
         }
@@ -119,23 +120,19 @@ class TableService {
       throw err;
     }
 
-    // 3. Enforce device session lock
+    // 3. Adopt active table session
     if (table.activeSession) {
-      if (table.activeSession.deviceId !== deviceId && !table.activeSession.deviceId.startsWith('booking_')) {
-        throw new AppError(403, 'A customer session is already active at this table. Only one device can order at a time.');
-      }
-      
-      // Adopt session with customer deviceId and renew timestamp
+      // Keep session active for the table until checkout; update latest scan timestamp and deviceId
       const updatedTable = await TableRepository.update(
         restaurantId,
         table._id,
         {
-          'activeSession.deviceId': deviceId,
+          'activeSession.deviceId': deviceId || table.activeSession.deviceId,
           'activeSession.scannedAt': new Date(),
         }
       );
-      
-      // Fetch menu catalog for client
+
+      // Fetch and return menu catalog for active session
       return this._assembleCustomerCatalog(restaurantId, updatedTable);
     }
 
@@ -272,8 +269,16 @@ class TableService {
 
     const updatedTable = await TableRepository.update(restaurantId, id, payload);
 
-    // Notify connected terminals and customer device via WebSockets
+    // Notify staff/KDS terminals via restaurant room
     socketManager.emitToRestaurantRoom(restaurantId, 'table:qr_unlocked', {
+      tableId: id,
+      tableNumber: table.tableNumber,
+      qrCodeActive: true,
+      activeSession: updatedTable.activeSession,
+    });
+
+    // Notify the waiting customer device via table-specific room
+    socketManager.emitToTable(id, 'table:qr_unlocked', {
       tableId: id,
       tableNumber: table.tableNumber,
       qrCodeActive: true,

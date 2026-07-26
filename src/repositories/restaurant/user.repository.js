@@ -37,7 +37,15 @@ class UserRepository {
    * @returns {Promise<User|null>}
    */
   async findByMobile(mobile) {
-    return User.findOne({ mobile });
+    if (!mobile) return null;
+    const cleanDigits = mobile.replace(/\D/g, '');
+    if (!cleanDigits) return null;
+    return User.findOne({
+      $or: [
+        { mobile },
+        { mobile: { $regex: cleanDigits + '$' } }
+      ]
+    });
   }
 
   /**

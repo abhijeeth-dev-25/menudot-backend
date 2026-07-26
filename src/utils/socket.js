@@ -25,11 +25,10 @@ function init(server) {
     const isCustomer = socket.handshake.query?.isCustomer === 'true';
     if (isCustomer) {
       const restaurantId = socket.handshake.query?.restaurantId;
-      if (!restaurantId) {
-        return next(new Error('Restaurant ID required for customer connections.'));
-      }
+      const tableId = socket.handshake.query?.tableId;
       socket.auth = { type: 'customer', id: 'public-client', role: 'customer' };
-      socket.restaurantId = restaurantId;
+      if (restaurantId) socket.restaurantId = restaurantId;
+      if (tableId) socket.tableId = tableId;
       return next();
     }
 
@@ -103,6 +102,10 @@ function init(server) {
       if (socket.screenDetails?.id) {
         socket.join(`screen_${socket.screenDetails.id}`);
       }
+    }
+
+    if (socket.tableId) {
+      socket.join(`table_${socket.tableId}`);
     }
 
     // Dynamic join event for users who switch restaurants in their dashboard
@@ -187,6 +190,15 @@ function broadcastToRestaurant(restaurantId, event, data) {
 }
 
 /**
+ * Emits an event directly to a table-specific room.
+ * Used for customer-targeted events (e.g. table:qr_unlocked).
+ */
+function emitToTable(tableId, event, data) {
+  if (!io) return;
+  io.to(`table_${tableId}`).emit(event, data);
+}
+
+/**
  * Emits a structured notification to specific target rooms based on targetType.
  */
 function emitNotification(notification) {
@@ -245,6 +257,7 @@ module.exports = {
   init,
   broadcastToRestaurant,
   emitToRestaurantRoom: broadcastToRestaurant,
+  emitToTable,
   sendServiceCallNotification,
   emitNotification,
 };

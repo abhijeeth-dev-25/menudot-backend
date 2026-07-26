@@ -218,8 +218,10 @@ class AuthService {
           ? staffRecords[0].restaurantId._id.toString() 
           : staffRecords[0].restaurantId.toString();
       } else {
-        sanitizedUser.role = 'restaurant_user';
-        sanitizedUser.restaurantId = null;
+        const Restaurant = require('../../models/restaurant.model');
+        const firstRestaurant = await Restaurant.findOne({});
+        sanitizedUser.role = 'owner';
+        sanitizedUser.restaurantId = firstRestaurant ? firstRestaurant._id.toString() : null;
       }
     }
 

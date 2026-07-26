@@ -46,11 +46,13 @@ class TableRepository {
   }
 
   /**
-   * Lists all active tables in a restaurant.
+   * Lists active tables in a restaurant matching filter criteria.
    * @param {string} restaurantId - Owning restaurant
+   * @param {object} [filter={}] - Additional query filter criteria
+   * @param {object} [options={}] - Mongoose options
    */
-  async findAll(restaurantId) {
-    return Table.find({ restaurantId }).sort({ tableNumber: 1 });
+  async findAll(restaurantId, filter = {}, options = {}) {
+    return Table.find({ restaurantId, isDeleted: false, ...filter }, null, options).sort({ tableNumber: 1 });
   }
 
   /**

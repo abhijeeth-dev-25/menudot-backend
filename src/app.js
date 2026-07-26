@@ -78,7 +78,11 @@ app.use(
 );
 
 // 3. Security Middlewares
-app.use(helmet()); // Sets standard secure HTTP headers
+app.use(
+  helmet({
+    crossOriginResourcePolicy: { policy: 'cross-origin' },
+  })
+); // Sets standard secure HTTP headers with cross-origin asset policy
 app.use(cors());   // Allow CORS for frontends (e.g. tablet screens, client-side app)
 
 // 4. Rate Limiting to prevent brute-force/DoS attacks
@@ -120,7 +124,15 @@ app.get('/health', (req, res) => {
 });
 
 // 7. Route handlers
-app.use('/uploads', express.static(path.join(__dirname, '../public/uploads')));
+app.use(
+  '/uploads',
+  (req, res, next) => {
+    res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    next();
+  },
+  express.static(path.join(__dirname, '../public/uploads'))
+);
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/restaurants', restaurantRoutes);
 app.use('/api/v1/menu', menuRoutes);

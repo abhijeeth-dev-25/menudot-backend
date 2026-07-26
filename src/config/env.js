@@ -44,11 +44,16 @@ if (error) {
   throw new Error(`Config validation error: ${error.message}`);
 }
 
+let mongodbUrl = envVars.MONGODB_URI;
+if (envVars.NODE_ENV === 'test') {
+  mongodbUrl = process.env.MONGODB_URI_TEST || (mongodbUrl.includes('_test') ? mongodbUrl : mongodbUrl.replace(/\/menudot(\?|$)/, '/menudot_test$1'));
+}
+
 module.exports = {
   env: envVars.NODE_ENV,
   port: envVars.PORT,
   mongoose: {
-    url: envVars.MONGODB_URI,
+    url: mongodbUrl,
     options: {
       // Modern mongoose configuration options
     },
