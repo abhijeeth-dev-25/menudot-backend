@@ -69,6 +69,25 @@ const onboardingReviewSchema = Joi.object({
 const updateRestaurantProfileSchema = Joi.object({
   name: Joi.string().optional().trim().min(3).max(100),
   imageUrl: Joi.string().uri().optional().allow(null, ''),
+  coverImage: Joi.string().uri().optional().allow(null, ''),
+  tagline: Joi.string().optional().allow(''),
+  amenitiesAndServices: Joi.array().items(Joi.string()).optional(),
+  branches: Joi.array().items(
+
+    Joi.object({
+      _id: Joi.string().optional(),
+      name: Joi.string().required().trim(),
+      address: Joi.string().required().trim(),
+      city: Joi.string().required().trim(),
+      country: Joi.string().optional().default('India'),
+      imageUrl: Joi.string().optional().allow(''),
+      mobile: Joi.string().required().trim(),
+      googleMapsUrl: Joi.string().optional().allow(''),
+      isMainBranch: Joi.boolean().optional(),
+      isOpen: Joi.boolean().optional(),
+      timings: Joi.string().optional().allow(''),
+    })
+  ).optional(),
   location: Joi.object({
     address: Joi.string().optional().trim(),
     coordinates: Joi.array().items(Joi.number()).length(2).optional(),
@@ -101,6 +120,7 @@ const updateRestaurantProfileSchema = Joi.object({
     }).optional(),
   }).optional(),
 });
+
 
 module.exports = {
   onboardingSchema,

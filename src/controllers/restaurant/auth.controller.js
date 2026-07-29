@@ -22,6 +22,16 @@ class AuthController {
   });
 
   /**
+   * Platform admin user login.
+   */
+  platformLogin = asyncHandler(async (req, res) => {
+    const { identifier, email, password } = req.body;
+    const loginIdentifier = identifier || email;
+    const result = await AuthService.platformLogin(loginIdentifier, password);
+    return sendSuccess(res, 200, 'Platform administrator logged in successfully', result);
+  });
+
+  /**
    * Shared screen device login.
    */
   loginScreen = asyncHandler(async (req, res) => {

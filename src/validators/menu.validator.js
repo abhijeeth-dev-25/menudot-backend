@@ -52,8 +52,9 @@ const createItemSchema = Joi.object({
   description: Joi.string().trim().max(500).optional().allow(''),
   price: Joi.number().min(0).required(),
   foodType: Joi.string().valid('veg', 'non-veg', 'egg').required(),
-  image: Joi.string().uri().optional().allow(''),
+  image: Joi.string().optional().allow('', null),
   tags: Joi.array().items(Joi.string().trim()).optional(),
+  isSignatureDish: Joi.boolean().optional(),
   ingredients: Joi.array().items(Joi.string().trim()).optional(),
   addOnGroups: Joi.array().items(addOnGroupSchema).optional(),
   status: Joi.string().valid('available', 'out_of_stock', 'inactive').default('available').optional(),
@@ -68,8 +69,11 @@ const updateItemSchema = Joi.object({
   description: Joi.string().trim().max(500).optional().allow(''),
   price: Joi.number().min(0).optional(),
   foodType: Joi.string().valid('veg', 'non-veg', 'egg').optional(),
-  image: Joi.string().uri().optional().allow(''),
+  image: Joi.string().optional().allow('', null),
+
   tags: Joi.array().items(Joi.string().trim()).optional(),
+  isSignatureDish: Joi.boolean().optional(),
+
   ingredients: Joi.array().items(Joi.string().trim()).optional(),
   addOnGroups: Joi.array().items(addOnGroupSchema).optional(),
   status: Joi.string().valid('available', 'out_of_stock', 'inactive').optional(),

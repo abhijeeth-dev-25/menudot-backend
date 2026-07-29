@@ -100,11 +100,11 @@ const resolveTenant = asyncHandler(async (req, res, next) => {
   const restaurantId = new mongoose.Types.ObjectId(restaurantIdStr);
   req.restaurantId = restaurantId;
 
-  // 2. If it's an internal platform user, bypass staff membership checks
+  // 2. If it's an internal platform user / super_admin, bypass staff membership checks
   if (req.user && req.user.globalRole !== 'restaurant_user') {
     req.staff = {
-      role: 'owner', // Map platform user to full owner capabilities within this tenant context
-      permissions: ['*'], // Access to all actions
+      role: 'owner',
+      permissions: ['*'],
     };
     return next();
   }
@@ -141,11 +141,14 @@ function restrictToRoles(...roles) {
       return next(new AppError(500, 'Staff context missing. resolveTenant must run before authorization checks.'));
     }
 
-    if (req.user?.globalRole === 'platform_admin') {
+    if (req.user?.globalRole === 'platform_admin' || req.user?.globalRole === 'super_admin') {
       return next(); // Platform admins bypass role restrictions
     }
 
-    const hasRole = roles.includes(req.staff.role);
+    const userRole = req.staff.role;
+    const userRoles = (userRole === 'waiter' || userRole === 'server') ? ['waiter', 'server'] : [userRole];
+
+    const hasRole = roles.some((r) => userRoles.includes(r));
     if (!hasRole) {
       return next(new AppError(403, 'Permission denied. Your role is unauthorized to perform this action.'));
     }

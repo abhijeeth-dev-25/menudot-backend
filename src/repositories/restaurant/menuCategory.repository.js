@@ -1,6 +1,15 @@
+const mongoose = require('mongoose');
 const MenuCategory = require('../../models/menuCategory.model');
 
 class MenuCategoryRepository {
+  _toObjectId(id) {
+    if (!id) return id;
+    if (mongoose.Types.ObjectId.isValid(id) && typeof id === 'string') {
+      return new mongoose.Types.ObjectId(id);
+    }
+    return id;
+  }
+
   /**
    * Creates a new menu category.
    * @param {string} restaurantId - The owning restaurant ID
@@ -10,7 +19,7 @@ class MenuCategoryRepository {
   async create(restaurantId, categoryData, options = {}) {
     const category = new MenuCategory({
       ...categoryData,
-      restaurantId,
+      restaurantId: this._toObjectId(restaurantId),
     });
     return category.save(options);
   }
@@ -22,7 +31,7 @@ class MenuCategoryRepository {
    * @param {object} [options={}] - Mongoose options
    */
   async findById(restaurantId, id, options = {}) {
-    return MenuCategory.findOne({ _id: id, restaurantId }, null, options);
+    return MenuCategory.findOne({ _id: id, restaurantId: this._toObjectId(restaurantId) }, null, options);
   }
 
   /**
@@ -31,7 +40,7 @@ class MenuCategoryRepository {
    * @param {string} slug - Unique category slug
    */
   async findBySlug(restaurantId, slug) {
-    return MenuCategory.findOne({ slug, restaurantId });
+    return MenuCategory.findOne({ slug, restaurantId: this._toObjectId(restaurantId) });
   }
 
   /**
@@ -42,7 +51,7 @@ class MenuCategoryRepository {
   async findByName(restaurantId, name) {
     return MenuCategory.findOne({
       name: { $regex: new RegExp(`^${name.trim()}$`, 'i') },
-      restaurantId,
+      restaurantId: this._toObjectId(restaurantId),
     });
   }
 
@@ -51,7 +60,7 @@ class MenuCategoryRepository {
    * @param {string} restaurantId - The owning restaurant ID
    */
   async findAll(restaurantId) {
-    return MenuCategory.find({ restaurantId, status: 'active' }).sort({ sortOrder: 1 });
+    return MenuCategory.find({ restaurantId: this._toObjectId(restaurantId), status: 'active' }).sort({ sortOrder: 1 });
   }
 
   /**
@@ -63,7 +72,7 @@ class MenuCategoryRepository {
    */
   async update(restaurantId, id, updateData, options = {}) {
     return MenuCategory.findOneAndUpdate(
-      { _id: id, restaurantId },
+      { _id: id, restaurantId: this._toObjectId(restaurantId) },
       { $set: updateData },
       { new: true, runValidators: true, ...options }
     );
@@ -77,7 +86,7 @@ class MenuCategoryRepository {
    */
   async delete(restaurantId, id, options = {}) {
     return MenuCategory.findOneAndUpdate(
-      { _id: id, restaurantId },
+      { _id: id, restaurantId: this._toObjectId(restaurantId) },
       { $set: { isDeleted: true, deletedAt: new Date() } },
       { new: true, ...options }
     );

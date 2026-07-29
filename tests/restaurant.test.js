@@ -233,17 +233,33 @@ describe('Restaurant API (/api/v1/restaurants)', () => {
         .expect(403);
     });
 
-    test('should allow owner to upload cover image via local fallback storage', async () => {
+    test('should allow owner to upload profile avatar image via ImageKit/fallback storage', async () => {
       const { headers } = await registerAndApproveRestaurant();
 
       const res = await request(app)
         .post('/api/v1/restaurants/profile/image')
         .set(headers)
-        .attach('image', Buffer.from('fake_image_binary_data'), 'cover.png')
+        .attach('image', Buffer.from('fake_image_binary_data'), 'avatar.png')
         .expect(200);
 
       expect(res.body.success).toBe(true);
-      expect(res.body.data.imageUrl).toContain('/uploads/');
+      expect(typeof res.body.data.imageUrl).toBe('string');
+      expect(res.body.data.imageUrl.length).toBeGreaterThan(0);
+    });
+
+    test('should allow owner to upload background cover banner image via ImageKit/fallback storage', async () => {
+      const { headers } = await registerAndApproveRestaurant();
+
+      const res = await request(app)
+        .post('/api/v1/restaurants/profile/cover')
+        .set(headers)
+        .attach('image', Buffer.from('fake_image_binary_data'), 'cover_banner.png')
+        .expect(200);
+
+      expect(res.body.success).toBe(true);
+      expect(typeof res.body.data.coverImage).toBe('string');
+      expect(res.body.data.coverImage.length).toBeGreaterThan(0);
     });
   });
 });
+

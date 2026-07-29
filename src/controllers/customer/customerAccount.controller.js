@@ -35,7 +35,7 @@ class CustomerAccountController {
 
   getBillSummary = asyncHandler(async (req, res) => {
     const restaurantId = req.headers['x-restaurant-id'] || req.query.restaurantId;
-    const tableId = req.query.tableId || null;
+    const tableId = req.query.tableId || req.query.tableCode || null;
     const deviceId = req.headers['x-device-id'] || req.query.deviceId || null;
 
     const bill = await CustomerAccountService.getBillSummary(restaurantId, { tableId, deviceId });

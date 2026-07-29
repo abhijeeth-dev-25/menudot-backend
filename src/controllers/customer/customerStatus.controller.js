@@ -19,13 +19,14 @@ class CustomerStatusController {
 
   requestTableService = asyncHandler(async (req, res) => {
     const restaurantId = req.headers['x-restaurant-id'] || req.body.restaurantId;
-    const { tableId, serviceType, note } = req.body;
+    const { tableId, tableCode, tableNumber, serviceType, note, notes } = req.body;
+    const identifier = tableId || tableCode || tableNumber;
 
     const result = await CustomerStatusService.requestTableService(
       restaurantId,
-      tableId,
+      identifier,
       serviceType,
-      note
+      note || notes || ''
     );
 
     return sendSuccess(res, 200, result.message, result.payload);

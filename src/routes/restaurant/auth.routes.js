@@ -15,6 +15,7 @@ const router = express.Router();
 // Public auth endpoints
 router.post('/register', validate(publicRegisterSchema), AuthController.register);
 router.post('/login', validate(loginSchema), AuthController.login);
+router.post('/platform-login', validate(loginSchema), AuthController.platformLogin);
 router.post('/login/screen', validate(screenLoginSchema), AuthController.loginScreen);
 router.post('/refresh', validate(refreshSchema), AuthController.refresh);
 router.post('/logout', AuthController.logout);

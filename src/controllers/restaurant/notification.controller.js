@@ -11,7 +11,7 @@ class NotificationController {
   getNotifications = asyncHandler(async (req, res) => {
     const restaurantId = req.restaurantId;
     const userId = req.user._id;
-    const role = req.user.role || 'staff';
+    const role = req.staff?.role || req.user?.role || 'staff';
     const { page, limit, type, unreadOnly } = req.query;
 
     const data = await NotificationService.getNotifications(restaurantId, userId, role, {
@@ -31,7 +31,7 @@ class NotificationController {
   getUnreadCount = asyncHandler(async (req, res) => {
     const restaurantId = req.restaurantId;
     const userId = req.user._id;
-    const role = req.user.role || 'staff';
+    const role = req.staff?.role || req.user?.role || 'staff';
 
     const unreadCount = await NotificationService.getUnreadCount(restaurantId, userId, role);
 
@@ -58,7 +58,7 @@ class NotificationController {
   dismissAllNotifications = asyncHandler(async (req, res) => {
     const restaurantId = req.restaurantId;
     const userId = req.user._id;
-    const role = req.user.role || 'staff';
+    const role = req.staff?.role || req.user?.role || 'staff';
 
     const result = await NotificationService.dismissAllNotifications(restaurantId, userId, role);
     return sendSuccess(res, 200, 'All active notifications cleared', result);
@@ -88,7 +88,7 @@ class NotificationController {
   markAllAsRead = asyncHandler(async (req, res) => {
     const restaurantId = req.restaurantId;
     const userId = req.user._id;
-    const role = req.user.role || 'staff';
+    const role = req.staff?.role || req.user?.role || 'staff';
 
     const result = await NotificationService.markAllAsRead(restaurantId, userId, role);
     return sendSuccess(res, 200, 'All notifications marked as read', result);
@@ -110,7 +110,7 @@ class NotificationController {
   subscribePush = asyncHandler(async (req, res) => {
     const restaurantId = req.restaurantId;
     const userId = req.user._id;
-    const role = req.user.role || 'staff';
+    const role = req.staff?.role || req.user?.role || 'staff';
     const { subscription } = req.body;
 
     if (!subscription || !subscription.endpoint || !subscription.keys) {

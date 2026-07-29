@@ -35,6 +35,7 @@ router.put('/:tableId', validate(updateTableSchema), TableController.updateTable
 router.delete('/:tableId', TableController.deleteTable);
 router.patch('/:tableId/qr/toggle', validate(toggleQrSchema), TableController.toggleQrCode);
 router.post('/:tableId/unlock-access', validate(unlockAccessSchema), TableController.unlockTableAccess);
+router.post('/:tableId/reject-access', TableController.rejectTableAccess);
 router.post('/:tableId/checkout', TableController.checkoutTable);
 
 module.exports = router;

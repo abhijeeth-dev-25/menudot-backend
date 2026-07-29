@@ -42,7 +42,16 @@ class TableRepository {
    * @param {string} code - The secure QR code token
    */
   async findByQrCode(code) {
-    return Table.findOne({ 'qrCode.code': code });
+    if (!code) return null;
+    const mongoose = require('mongoose');
+    let table = await Table.findOne({ 'qrCode.code': code });
+    if (!table && mongoose.Types.ObjectId.isValid(code)) {
+      table = await Table.findOne({ _id: code });
+    }
+    if (!table) {
+      table = await Table.findOne({ tableNumber: { $regex: new RegExp(`^${code.toString().trim()}$`, 'i') } });
+    }
+    return table;
   }
 
   /**

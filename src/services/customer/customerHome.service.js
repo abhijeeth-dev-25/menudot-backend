@@ -3,6 +3,7 @@ const HeroBanner = require('../../models/heroBanner.model');
 const Coupon = require('../../models/coupon.model');
 const ExperienceService = require('../../models/experienceService.model');
 const MenuCategory = require('../../models/menuCategory.model');
+const MenuItem = require('../../models/menuItem.model');
 const Table = require('../../models/table.model');
 const AppError = require('../../exceptions/AppError');
 
@@ -21,7 +22,7 @@ class CustomerHomeService {
     }
 
     // Parallel fetch for optimal latency
-    const [heroBanners, experienceServices, categories, activeCoupons] = await Promise.all([
+    const [heroBanners, experienceServices, categories, activeCoupons, rawSignatureDishes] = await Promise.all([
       HeroBanner.find({ restaurantId, isActive: true }).sort({ sortOrder: 1, createdAt: -1 }).lean(),
       ExperienceService.find({ restaurantId, isAvailable: true }).sort({ sortOrder: 1, createdAt: -1 }).lean(),
       MenuCategory.find({ restaurantId, status: 'active' }).sort({ sortOrder: 1 }).lean(),
@@ -31,7 +32,17 @@ class CustomerHomeService {
         startDate: { $lte: new Date() },
         endDate: { $gte: new Date() },
       }).lean(),
+      MenuItem.find({ restaurantId, isSignatureDish: true, status: 'available' }).lean(),
     ]);
+
+    const signatureDishes = rawSignatureDishes.map((item) => ({
+      _id: item._id,
+      name: item.name,
+      tagline: item.description || 'Chef Signature Specialty',
+      imageUrl: item.image || '',
+      price: item.price,
+      isBestseller: true,
+    }));
 
     // Check table session status if table code provided
     let sessionStatus = {
@@ -43,7 +54,15 @@ class CustomerHomeService {
     };
 
     if (tableCode) {
-      const table = await Table.findOne({ restaurantId, 'qrCode.code': tableCode }).lean();
+      const mongoose = require('mongoose');
+      let tableQuery = { restaurantId, 'qrCode.code': tableCode };
+      if (mongoose.Types.ObjectId.isValid(tableCode)) {
+        tableQuery = { restaurantId, $or: [{ _id: new mongoose.Types.ObjectId(tableCode) }, { 'qrCode.code': tableCode }, { tableNumber: tableCode }] };
+      } else {
+        tableQuery = { restaurantId, $or: [{ 'qrCode.code': tableCode }, { tableNumber: tableCode }] };
+      }
+
+      const table = await Table.findOne(tableQuery).lean();
       if (table) {
         sessionStatus = {
           isUnlocked: Boolean(table.qrCode && table.qrCode.isActive),
@@ -67,8 +86,16 @@ class CustomerHomeService {
         ratingsSummary: restaurant.ratingsSummary || { overallRating: 5.0, totalReviews: 0 },
         menuProfile: restaurant.menuProfile || { foodType: 'both', cuisines: [], costForTwo: 500 },
         imageUrl: restaurant.imageUrl || null,
+        coverImage: restaurant.coverImage || '',
+        tagline: restaurant.tagline || '',
+        galleryImages: restaurant.galleryImages || [],
+        activeServices: restaurant.activeServices || ['water', 'bill', 'waiter', 'cleaning', 'drinks'],
+        amenitiesAndServices: restaurant.amenitiesAndServices || ['bar', 'catering', 'banquet_halls', 'private_dining', 'valet_parking'],
+        signatureDishes,
         branches: restaurant.branches || [],
       },
+
+
       sessionStatus,
       heroBanners: heroBanners.map((b) => ({
         id: b._id,

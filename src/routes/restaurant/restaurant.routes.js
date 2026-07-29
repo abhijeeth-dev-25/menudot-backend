@@ -34,13 +34,28 @@ router.patch(
   RestaurantController.updateRestaurantProfile
 );
 
-// 3. Upload image
+// 3. Upload images (Logo / Avatar & Background Cover Banner)
 router.post(
   '/profile/image',
   restrictToRoles('owner'),
   upload.single('image'),
   RestaurantController.uploadRestaurantImage
 );
+
+router.post(
+  '/profile/cover',
+  restrictToRoles('owner'),
+  upload.single('image'),
+  RestaurantController.uploadRestaurantCoverImage
+);
+
+router.post(
+  '/profile/media-asset',
+  restrictToRoles('owner', 'manager'),
+  upload.single('image'),
+  RestaurantController.uploadMediaAsset
+);
+
 
 // 4. Legal & Bank Amendment Requests (Owner submitted, Staff viewable)
 router.post(

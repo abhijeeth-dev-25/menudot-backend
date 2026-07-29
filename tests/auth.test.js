@@ -165,6 +165,29 @@ describe('Authentication API (/api/v1/auth)', () => {
       expect(res.body.data.user.email).toBe('active@user.com');
     });
 
+    test('should reject login for platform admin users on partner login page', async () => {
+      const adminUser = new User({
+        fullName: 'Platform Admin',
+        email: 'admin@platform.com',
+        mobile: '+919876543299',
+        passwordHash: 'mypassword123',
+        globalRole: 'platform_admin',
+        status: 'active',
+      });
+      await adminUser.save();
+
+      const res = await request(app)
+        .post('/api/v1/auth/login')
+        .send({
+          identifier: 'admin@platform.com',
+          password: 'mypassword123',
+        })
+        .expect(401);
+
+      expect(res.body.success).toBe(false);
+      expect(res.body.message).toBe('Invalid login credentials.');
+    });
+
     test('should return 401 on incorrect password', async () => {
       const user = new User({
         fullName: 'Active User',

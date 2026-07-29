@@ -53,6 +53,12 @@ class TableController {
     return sendSuccess(res, 200, 'Table QR ordering access unlocked successfully', table);
   });
 
+  rejectTableAccess = asyncHandler(async (req, res) => {
+    const { tableId } = req.params;
+    const table = await TableService.rejectTableAccess(req.restaurantId, tableId);
+    return sendSuccess(res, 200, 'Table QR unlock request rejected successfully', table);
+  });
+
   getPendingUnlockRequests = asyncHandler(async (req, res) => {
     const tables = await TableService.getPendingUnlockRequests(req.restaurantId);
     return sendSuccess(res, 200, 'Pending table unlock requests retrieved', tables);
@@ -98,7 +104,7 @@ class TableController {
 
   getCustomerOrder = asyncHandler(async (req, res) => {
     const { orderId } = req.params;
-    const Order = require('../models/order.model');
+    const Order = require('../../models/order.model');
     const order = await Order.findOne({ _id: orderId, isDeleted: false });
     if (!order) {
       const AppError = require('../../exceptions/AppError');

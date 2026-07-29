@@ -60,9 +60,16 @@ function init(server) {
         const queryRestaurantId = socket.handshake.query?.restaurantId;
         if (queryRestaurantId) {
           socket.restaurantId = queryRestaurantId;
+          try {
+            const RestaurantStaffRepository = require('../repositories/restaurant/restaurantStaff.repository');
+            const staff = await RestaurantStaffRepository.findByUserId(queryRestaurantId, decoded.id);
+            if (staff && staff.role) {
+              socket.role = staff.role;
+            }
+          } catch (e) {}
         }
         socket.userId = decoded.id;
-        socket.role = decoded.role || 'staff';
+        if (!socket.role) socket.role = decoded.role || 'staff';
       }
 
       next();
@@ -91,6 +98,10 @@ function init(server) {
       // 2. Join role-specific subroom
       if (socket.role) {
         socket.join(`restaurant_${socket.restaurantId}:role:${socket.role}`);
+        if (socket.role === 'server' || socket.role === 'waiter') {
+          socket.join(`restaurant_${socket.restaurantId}:role:waiter`);
+          socket.join(`restaurant_${socket.restaurantId}:role:server`);
+        }
       }
 
       // 3. Join user room
@@ -210,6 +221,11 @@ function emitNotification(notification) {
     io.to(`restaurant_${restaurantId}`).emit('notification_received', notification);
   } else if (targetType === 'role') {
     io.to(`restaurant_${restaurantId}:role:${targetId}`).emit('notification_received', notification);
+    if (targetId === 'waiter' || targetId === 'server' || targetId === 'kitchen') {
+      io.to(`restaurant_${restaurantId}:role:waiter`).emit('notification_received', notification);
+      io.to(`restaurant_${restaurantId}:role:server`).emit('notification_received', notification);
+      io.to(`restaurant_${restaurantId}:role:chef`).emit('notification_received', notification);
+    }
   } else if (targetType === 'user') {
     io.to(`user_${targetId}`).emit('notification_received', notification);
   } else if (targetType === 'screen') {

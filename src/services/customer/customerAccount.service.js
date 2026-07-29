@@ -93,14 +93,33 @@ class CustomerAccountService {
    * Retrieves live bill summary for active table session
    */
   static async getBillSummary(restaurantId, { tableId = null, deviceId = null }) {
-    if (!restaurantId) {
+    const mongoose = require('mongoose');
+    let resolvedTableId = null;
+
+    if (tableId) {
+      if (mongoose.Types.ObjectId.isValid(tableId)) {
+        resolvedTableId = tableId;
+      } else {
+        const table = await Table.findOne({
+          $or: [{ 'qrCode.code': tableId }, { tableNumber: tableId }],
+          ...(restaurantId ? { restaurantId } : {}),
+        });
+        if (table) {
+          resolvedTableId = table._id;
+          restaurantId = restaurantId || table.restaurantId.toString();
+        }
+      }
+    }
+
+    if (!restaurantId && !resolvedTableId && !deviceId) {
       throw new AppError(400, 'Restaurant ID is required');
     }
 
-    let query = { restaurantId, status: { $ne: 'cancelled' } };
+    let query = { status: { $ne: 'cancelled' } };
+    if (restaurantId) query.restaurantId = restaurantId;
 
-    if (tableId) {
-      query.tableId = tableId;
+    if (resolvedTableId) {
+      query.tableId = resolvedTableId;
     } else if (deviceId) {
       query.deviceId = deviceId;
     } else {
@@ -144,8 +163,22 @@ class CustomerAccountService {
 
     const netPayable = Math.max(0, subtotal + totalTax + packingCharges - totalDiscount);
 
+    const latestOrder = orders.length > 0 ? orders[orders.length - 1] : null;
+    const activeOrder = latestOrder
+      ? {
+          id: latestOrder._id,
+          orderId: latestOrder.orderNumber || latestOrder._id.toString().substring(0, 6),
+          status: latestOrder.status,
+          estimatedTimeMins: 15,
+          items: latestOrder.items || [],
+          totals: latestOrder.totals || { grandTotal: latestOrder.totalAmount || 0 },
+          createdAt: latestOrder.createdAt,
+        }
+      : null;
+
     return {
       orderCount: orders.length,
+      activeOrder,
       items: allItems,
       subtotal,
       tax: totalTax,

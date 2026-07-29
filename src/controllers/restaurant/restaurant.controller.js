@@ -38,7 +38,7 @@ class RestaurantTenantController {
   });
 
   /**
-   * Upload restaurant cover image (Owner only).
+   * Upload restaurant profile avatar/logo image (Owner only).
    */
   uploadRestaurantImage = asyncHandler(async (req, res) => {
     if (!req.file) {
@@ -50,8 +50,40 @@ class RestaurantTenantController {
       req.file.buffer,
       req.file.originalname
     );
-    return sendSuccess(res, 200, 'Restaurant cover image uploaded successfully.', { imageUrl: updated.imageUrl });
+    return sendSuccess(res, 200, 'Restaurant profile logo image uploaded successfully.', { imageUrl: updated.imageUrl });
   });
+
+  /**
+   * Upload restaurant background cover banner image (Owner only).
+   */
+  uploadRestaurantCoverImage = asyncHandler(async (req, res) => {
+    if (!req.file) {
+      throw new AppError(400, 'No image file provided. Send a multipart/form-data request with field name "image".');
+    }
+    const restaurantId = req.restaurantId;
+    const updated = await RestaurantService.uploadRestaurantCoverImage(
+      restaurantId,
+      req.file.buffer,
+      req.file.originalname
+    );
+    return sendSuccess(res, 200, 'Restaurant background cover banner uploaded successfully.', { coverImage: updated.coverImage });
+  });
+
+  /**
+   * Upload general restaurant media asset (e.g. branch photo, signature dish photo) to ImageKit.
+   */
+  uploadMediaAsset = asyncHandler(async (req, res) => {
+    if (!req.file) {
+      throw new AppError(400, 'No image file provided. Send a multipart/form-data request with field name "image".');
+    }
+    const result = await RestaurantService.uploadMediaAsset(
+      req.restaurantId,
+      req.file.buffer,
+      req.file.originalname
+    );
+    return sendSuccess(res, 200, 'Media asset uploaded successfully to ImageKit.', result);
+  });
+
 
   /**
    * Submit formal Legal Amendment Request (Owner only).

@@ -1,6 +1,14 @@
+const mongoose = require('mongoose');
 const MenuItem = require('../../models/menuItem.model');
 const MenuCategory = require('../../models/menuCategory.model');
 const AppError = require('../../exceptions/AppError');
+
+function toObjId(id) {
+  if (id && typeof id === 'string' && mongoose.Types.ObjectId.isValid(id)) {
+    return new mongoose.Types.ObjectId(id);
+  }
+  return id;
+}
 
 class CustomerMenuService {
   /**
@@ -11,11 +19,13 @@ class CustomerMenuService {
       throw new AppError(400, 'Restaurant ID is required');
     }
 
-    const categories = await MenuCategory.find({ restaurantId, status: 'active' })
+    const rId = toObjId(restaurantId);
+
+    const categories = await MenuCategory.find({ restaurantId: rId, status: 'active' })
       .sort({ sortOrder: 1 })
       .lean();
 
-    const itemFilter = { restaurantId, status: { $in: ['available', 'out_of_stock'] } };
+    const itemFilter = { restaurantId: rId, status: { $in: ['available', 'out_of_stock'] } };
     if (foodType && foodType !== 'both') {
       itemFilter.foodType = foodType;
     }
@@ -88,7 +98,8 @@ class CustomerMenuService {
       throw new AppError(400, 'Restaurant ID is required');
     }
 
-    const filter = { restaurantId, status: { $in: ['available', 'out_of_stock'] } };
+    const rId = toObjId(restaurantId);
+    const filter = { restaurantId: rId, status: { $in: ['available', 'out_of_stock'] } };
 
     if (inStockOnly) {
       filter.status = 'available';
@@ -99,7 +110,7 @@ class CustomerMenuService {
     }
 
     if (categoryId) {
-      filter.categoryId = categoryId;
+      filter.categoryId = toObjId(categoryId);
     }
 
     if (q && q.trim()) {
@@ -149,7 +160,8 @@ class CustomerMenuService {
    * Fetch single menu item detail payload
    */
   static async getItemDetails(restaurantId, itemId) {
-    const item = await MenuItem.findOne({ _id: itemId, restaurantId }).lean();
+    const rId = toObjId(restaurantId);
+    const item = await MenuItem.findOne({ _id: itemId, restaurantId: rId }).lean();
     if (!item) {
       throw new AppError(404, 'Menu item not found');
     }

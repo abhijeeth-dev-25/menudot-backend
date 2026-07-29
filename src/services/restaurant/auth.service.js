@@ -198,6 +198,11 @@ class AuthService {
       throw new AppError(401, 'Invalid login credentials.');
     }
 
+    // Allow super_admin (founder) and restaurant_user accounts to log in on the portal
+    if (user.globalRole && user.globalRole !== 'restaurant_user' && user.globalRole !== 'super_admin') {
+      throw new AppError(401, 'Invalid login credentials.');
+    }
+
     // Update login timestamp
     await UserRepository.update(user._id, { lastLoginAt: new Date() });
 
@@ -207,23 +212,71 @@ class AuthService {
     const sanitizedUser = user.toObject();
     delete sanitizedUser.passwordHash;
 
-    if (user.globalRole === 'platform_admin') {
-      sanitizedUser.role = 'platform_admin';
-      sanitizedUser.restaurantId = null;
+    const staffRecords = await RestaurantStaffRepository.findRestaurantsForUser(user._id);
+    if (staffRecords && staffRecords.length > 0) {
+      sanitizedUser.role = staffRecords[0].role;
+      sanitizedUser.restaurantId = (staffRecords[0].restaurantId && staffRecords[0].restaurantId._id) 
+        ? staffRecords[0].restaurantId._id.toString() 
+        : staffRecords[0].restaurantId.toString();
     } else {
-      const staffRecords = await RestaurantStaffRepository.findRestaurantsForUser(user._id);
-      if (staffRecords && staffRecords.length > 0) {
-        sanitizedUser.role = staffRecords[0].role;
-        sanitizedUser.restaurantId = (staffRecords[0].restaurantId && staffRecords[0].restaurantId._id) 
-          ? staffRecords[0].restaurantId._id.toString() 
-          : staffRecords[0].restaurantId.toString();
-      } else {
-        const Restaurant = require('../../models/restaurant.model');
-        const firstRestaurant = await Restaurant.findOne({});
-        sanitizedUser.role = 'owner';
-        sanitizedUser.restaurantId = firstRestaurant ? firstRestaurant._id.toString() : null;
-      }
+      const Restaurant = require('../../models/restaurant.model');
+      const firstRestaurant = await Restaurant.findOne({});
+      sanitizedUser.role = user.globalRole || 'owner';
+      sanitizedUser.restaurantId = firstRestaurant ? firstRestaurant._id.toString() : null;
     }
+
+    return {
+      user: sanitizedUser,
+      tokens: {
+        accessToken,
+        refreshToken,
+      },
+    };
+  }
+
+  /**
+   * Log in a platform administrator / super admin account.
+   * @param {string} identifier - Email or mobile
+   * @param {string} password - Raw password
+   */
+  async platformLogin(identifier, password) {
+    if (!identifier || !password) {
+      throw new AppError(400, 'Credentials and password are required.');
+    }
+
+    let user;
+    if (identifier.includes('@')) {
+      user = await UserRepository.findByEmail(identifier);
+    } else {
+      user = await UserRepository.findByMobile(identifier);
+    }
+
+    if (!user) {
+      throw new AppError(401, 'Invalid platform login credentials.');
+    }
+
+    if (user.globalRole === 'restaurant_user') {
+      throw new AppError(401, 'Invalid platform login credentials.');
+    }
+
+    if (user.status !== 'active') {
+      throw new AppError(403, 'Your platform user account is suspended or inactive.');
+    }
+
+    const isMatch = await user.isPasswordMatch(password);
+    if (!isMatch) {
+      throw new AppError(401, 'Invalid platform login credentials.');
+    }
+
+    await UserRepository.update(user._id, { lastLoginAt: new Date() });
+
+    const accessToken = generateAccessToken(user, 'user');
+    const refreshToken = generateRefreshToken(user, 'user');
+
+    const sanitizedUser = user.toObject();
+    delete sanitizedUser.passwordHash;
+    sanitizedUser.role = user.globalRole;
+    sanitizedUser.restaurantId = null;
 
     return {
       user: sanitizedUser,
@@ -339,6 +392,12 @@ class AuthService {
       sanitized.permissions = staffRecords[0].permissions || [];
       sanitized.restaurantId = staffRecords[0].restaurantId;
       sanitized.employment = staffRecords[0].employment;
+    } else {
+      const Restaurant = require('../../models/restaurant.model');
+      const firstRestaurant = await Restaurant.findOne({});
+      sanitized.role = user.globalRole || 'owner';
+      sanitized.permissions = ['*'];
+      sanitized.restaurantId = firstRestaurant ? firstRestaurant._id : null;
     }
 
     return sanitized;

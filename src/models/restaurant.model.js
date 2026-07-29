@@ -185,11 +185,34 @@ const restaurantSchema = new mongoose.Schema(
       type: String,
       default: null,
     },
+    coverImage: {
+      type: String,
+      default: '',
+    },
+    tagline: {
+      type: String,
+      default: '',
+    },
+    galleryImages: {
+      type: [String],
+      default: [],
+    },
+    activeServices: {
+      type: [String],
+      default: ['water', 'bill', 'waiter', 'cleaning', 'drinks'],
+    },
+    amenitiesAndServices: {
+      type: [String],
+      default: ['bar', 'catering', 'banquet_halls', 'private_dining', 'valet_parking'],
+    },
     branches: [
+
       {
         name: { type: String, required: true, trim: true },
         address: { type: String, required: true, trim: true },
         city: { type: String, required: true, trim: true },
+        country: { type: String, default: 'India', trim: true },
+        imageUrl: { type: String, default: '', trim: true },
         mobile: { type: String, required: true, trim: true },
         googleMapsUrl: { type: String, default: '', trim: true },
         isMainBranch: { type: Boolean, default: false },
@@ -197,6 +220,7 @@ const restaurantSchema = new mongoose.Schema(
         timings: { type: String, default: '10:00 AM - 11:00 PM', trim: true },
       },
     ],
+
     isDeleted: {
       type: Boolean,
       default: false,

@@ -195,6 +195,20 @@ class NotificationService {
     }
   }
 
+  getRoleTargetQuery(role) {
+    const isManagerOrOwner = role === 'owner' || role === 'manager';
+    if (isManagerOrOwner) {
+      return { targetType: 'role' };
+    }
+    if (role === 'server' || role === 'waiter') {
+      return { targetType: 'role', targetId: { $in: ['server', 'waiter', 'kitchen', 'all'] } };
+    }
+    if (role === 'chef') {
+      return { targetType: 'role', targetId: { $in: ['chef', 'kitchen', 'all'] } };
+    }
+    return { targetType: 'role', targetId: role };
+  }
+
   /**
    * Fetches paginated ACTIVE notifications (excluding dismissed alerts)
    */
@@ -203,12 +217,14 @@ class NotificationService {
     const limitNum = Math.min(100, Math.max(1, parseInt(limit, 10)));
     const skip = (pageNum - 1) * limitNum;
 
+    const roleTargetQuery = this.getRoleTargetQuery(role);
+
     const query = {
       restaurantId,
       'dismissedBy.userId': { $ne: userId }, // Exclude dismissed alerts
       $or: [
         { targetType: 'all' },
-        { targetType: 'role', targetId: role },
+        roleTargetQuery,
         { targetType: 'user', targetId: userId },
       ],
     };
@@ -256,13 +272,15 @@ class NotificationService {
    * Returns total count of active unread notifications for a user
    */
   async getUnreadCount(restaurantId, userId, role) {
+    const roleTargetQuery = this.getRoleTargetQuery(role);
+
     const query = {
       restaurantId,
       'dismissedBy.userId': { $ne: userId },
       'readBy.userId': { $ne: userId },
       $or: [
         { targetType: 'all' },
-        { targetType: 'role', targetId: role },
+        roleTargetQuery,
         { targetType: 'user', targetId: userId },
       ],
     };
@@ -295,12 +313,17 @@ class NotificationService {
    * Dismisses all active notifications for user
    */
   async dismissAllNotifications(restaurantId, userId, role) {
+    const isManagerOrOwner = role === 'owner' || role === 'manager';
+    const roleTargetQuery = isManagerOrOwner
+      ? { targetType: 'role' }
+      : { targetType: 'role', targetId: role };
+
     const activeNotifications = await Notification.find({
       restaurantId,
       'dismissedBy.userId': { $ne: userId },
       $or: [
         { targetType: 'all' },
-        { targetType: 'role', targetId: role },
+        roleTargetQuery,
         { targetType: 'user', targetId: userId },
       ],
     }).select('_id');
@@ -347,13 +370,18 @@ class NotificationService {
    * Marks all unread notifications as read for a user
    */
   async markAllAsRead(restaurantId, userId, role) {
+    const isManagerOrOwner = role === 'owner' || role === 'manager';
+    const roleTargetQuery = isManagerOrOwner
+      ? { targetType: 'role' }
+      : { targetType: 'role', targetId: role };
+
     const unreadNotifications = await Notification.find({
       restaurantId,
       'dismissedBy.userId': { $ne: userId },
       'readBy.userId': { $ne: userId },
       $or: [
         { targetType: 'all' },
-        { targetType: 'role', targetId: role },
+        roleTargetQuery,
         { targetType: 'user', targetId: userId },
       ],
     }).select('_id');

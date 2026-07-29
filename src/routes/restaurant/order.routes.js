@@ -13,10 +13,10 @@ router.use(resolveTenant);
 // Get orders queue
 router.get('/', OrderController.getOrders);
 
-// Only owners, managers, and chefs can modify order preparation statuses
+// Allow owners, managers, chefs, waiters, and servers to modify order preparation statuses
 router.patch(
   '/:orderId/status',
-  restrictToRoles('owner', 'manager', 'chef'),
+  restrictToRoles('owner', 'manager', 'chef', 'waiter', 'server'),
   validate(updateStatusSchema),
   OrderController.updateOrderStatus
 );

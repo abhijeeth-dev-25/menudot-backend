@@ -143,14 +143,15 @@ class MenuService {
 
     const updates = { ...updateData };
 
-    if (updateData.name && updateData.name !== item.name) {
+    if (updateData.name && updateData.name.trim().toLowerCase() !== item.name.trim().toLowerCase()) {
       const existingItem = await MenuItemRepository.findByName(restaurantId, updateData.name);
-      if (existingItem) {
+      if (existingItem && existingItem._id.toString() !== id.toString()) {
         throw new AppError(400, `A menu item with the name "${updateData.name}" already exists.`);
       }
     }
 
-    if (updateData.categoryId && updateData.categoryId !== item.categoryId.toString()) {
+    const currentCatId = item.categoryId?._id ? item.categoryId._id.toString() : item.categoryId?.toString();
+    if (updateData.categoryId && updateData.categoryId.toString() !== currentCatId) {
       const category = await MenuCategoryRepository.findById(restaurantId, updateData.categoryId);
       if (!category) {
         throw new AppError(400, 'Invalid category selected. Category does not exist.');
@@ -161,6 +162,7 @@ class MenuService {
     await this._invalidateCatalogCache(restaurantId);
     return updatedItem;
   }
+
 
   async deleteItem(restaurantId, id) {
     const item = await MenuItemRepository.findById(restaurantId, id);

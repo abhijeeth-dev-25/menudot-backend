@@ -78,9 +78,20 @@ const orderSchema = new mongoose.Schema({
     grandTotal: { type: Number, required: true, min: 0 },
   },
   payment: {
-    method: { type: String, default: 'prepaid' }, // 'cod', 'online', 'prepaid'
+    method: { type: String, default: 'prepaid' }, // 'cash', 'card_pos', 'counter_upi', 'online', 'prepaid'
     status: { type: String, enum: ['pending', 'paid', 'refunded'], default: 'pending' },
     platformTransactionId: { type: String, default: null },
+  },
+  billId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Bill',
+    default: null,
+    index: true,
+  },
+  numberOfPeople: {
+    type: Number,
+    default: 1,
+    min: 1,
   },
 });
 

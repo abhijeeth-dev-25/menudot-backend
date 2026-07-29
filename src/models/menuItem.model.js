@@ -89,7 +89,13 @@ const menuItemSchema = new mongoose.Schema({
     type: [String],
     default: [],
   },
+  isSignatureDish: {
+    type: Boolean,
+    default: false,
+    index: true,
+  },
   ingredients: {
+
     type: [String],
     default: [],
   },
@@ -166,6 +172,22 @@ const menuItemSchema = new mongoose.Schema({
 menuItemSchema.index({ restaurantId: 1, name: 1 }, { unique: true });
 // 2. Index for filtering by category inside a restaurant
 menuItemSchema.index({ restaurantId: 1, categoryId: 1 });
+
+// Pre-save hook: Ensure category belongs to the exact same restaurantId
+menuItemSchema.pre('save', async function (next) {
+  if (this.isModified('categoryId') || this.isModified('restaurantId')) {
+    const MenuCategory = mongoose.model('MenuCategory');
+    const category = await MenuCategory.findOne({
+      _id: this.categoryId,
+      restaurantId: this.restaurantId,
+      isDeleted: false,
+    });
+    if (!category) {
+      return next(new Error('Selected category does not exist or does not belong to this restaurant.'));
+    }
+  }
+  next();
+});
 
 // Register auditable plugin for tenancy, soft delete, and timestamps
 menuItemSchema.plugin(auditablePlugin);

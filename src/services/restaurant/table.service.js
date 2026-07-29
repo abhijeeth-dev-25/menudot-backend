@@ -24,7 +24,34 @@ class TableService {
   }
 
   async getTables(restaurantId) {
-    return TableRepository.findAll(restaurantId);
+    const tables = await TableRepository.findAll(restaurantId);
+
+    // Auto-resolve real customer name from active orders if table displays generic placeholder
+    for (const table of tables) {
+      if (table.status === 'occupied' && table.activeSession) {
+        const isGenericName =
+          !table.activeSession.customerName ||
+          table.activeSession.customerName === 'Dine-in Guest' ||
+          table.activeSession.customerName === 'Walk-in Guest';
+
+        if (isGenericName) {
+          const activeOrders = await OrderRepository.findAll(restaurantId, {
+            tableId: table._id,
+            status: { $ne: 'cancelled' },
+          });
+
+          if (activeOrders && activeOrders.length > 0 && activeOrders[0].customer?.name) {
+            const realName = activeOrders[0].customer.name;
+            table.activeSession.customerName = realName;
+            await TableRepository.update(restaurantId, table._id, {
+              'activeSession.customerName': realName,
+            });
+          }
+        }
+      }
+    }
+
+    return tables;
   }
 
   async updateTable(restaurantId, id, updateData) {
@@ -56,6 +83,21 @@ class TableService {
     const table = await TableRepository.findById(restaurantId, id);
     if (!table) {
       throw new AppError(404, 'Table not found.');
+    }
+
+    // Rule 5: Cannot turn OFF QR code while customer has active orders
+    if (!isActive && table.status === 'occupied' && table.activeSession) {
+      const activeOrders = await OrderRepository.findAll(restaurantId, {
+        tableId: id,
+        status: { $ne: 'cancelled' },
+      });
+
+      if (activeOrders && activeOrders.length > 0) {
+        throw new AppError(
+          400,
+          `Cannot disable QR access on Table ${table.tableNumber} while an active order is in progress. Settle bill and checkout table first.`
+        );
+      }
     }
 
     // Toggle scanning permission
@@ -122,17 +164,20 @@ class TableService {
 
     // 3. Adopt active table session
     if (table.activeSession) {
-      // Keep session active for the table until checkout; update latest scan timestamp and deviceId
+      // Adopt active session for scanning device; update customer name if provided
+      const updatePayload = {
+        'activeSession.scannedAt': new Date(),
+      };
+      if (customerName && (table.activeSession.customerName === 'Dine-in Guest' || table.activeSession.customerName === 'Walk-in Guest')) {
+        updatePayload['activeSession.customerName'] = customerName;
+      }
+
       const updatedTable = await TableRepository.update(
         restaurantId,
         table._id,
-        {
-          'activeSession.deviceId': deviceId || table.activeSession.deviceId,
-          'activeSession.scannedAt': new Date(),
-        }
+        updatePayload
       );
 
-      // Fetch and return menu catalog for active session
       return this._assembleCustomerCatalog(restaurantId, updatedTable);
     }
 
@@ -294,6 +339,47 @@ class TableService {
   }
 
   /**
+   * Staff rejects walk-in customer QR activation request (fake user / invalid request).
+   * Clears pending request and emits 'table:qr_rejected' WebSocket notification to customer device.
+   */
+  async rejectTableAccess(restaurantId, id) {
+    const table = await TableRepository.findById(restaurantId, id);
+    if (!table) {
+      throw new AppError(404, 'Table not found.');
+    }
+
+    const updatedTable = await TableRepository.update(restaurantId, id, {
+      qrUnlockRequest: {
+        requested: false,
+        customerName: '',
+        numberOfPeople: 1,
+        deviceId: '',
+        requestedAt: null,
+      },
+    });
+
+    // Notify staff room to update UI
+    socketManager.emitToRestaurantRoom(restaurantId, 'table:qr_rejected', {
+      tableId: id,
+      tableNumber: table.tableNumber,
+    });
+
+    // Notify customer device that request was declined
+    socketManager.emitToTable(id, 'table:qr_rejected', {
+      tableId: id,
+      tableNumber: table.tableNumber,
+      message: 'Access request was declined by restaurant management.',
+    });
+
+    logger.info(
+      { restaurantId, tableNumber: table.tableNumber },
+      'Staff rejected table QR activation request'
+    );
+
+    return updatedTable;
+  }
+
+  /**
    * Retrieves all pending table unlock requests for staff dashboard.
    */
   async getPendingUnlockRequests(restaurantId) {
@@ -363,7 +449,7 @@ class TableService {
   }
 
   async placeDineInOrder(orderData) {
-    const { code, deviceId, items, couponCode } = orderData;
+    const { code, deviceId, items, couponCode, customerName } = orderData;
 
     // 1. Resolve table and validate session active state
     const initialTable = await TableRepository.findByQrCode(code);
@@ -371,16 +457,25 @@ class TableService {
       throw new AppError(404, 'Table not found or invalid QR code.');
     }
 
+    // Auto-activate QR code access when valid order is placed
     if (!initialTable.qrCode.isActive) {
-      throw new AppError(400, 'This QR code is currently inactive and cannot accept orders.');
+      initialTable.qrCode.isActive = true;
+      await initialTable.save();
     }
 
     if (initialTable.status !== 'occupied' || !initialTable.activeSession) {
-      throw new AppError(400, 'No active customer session exists at this table.');
-    }
-
-    if (initialTable.activeSession.deviceId !== deviceId) {
-      throw new AppError(403, 'A customer session is already active at this table on another device.');
+      initialTable.status = 'occupied';
+      initialTable.activeSession = {
+        customerName: customerName || initialTable.qrUnlockRequest?.customerName || 'Walk-in Guest',
+        numberOfPeople: 2,
+        deviceId: deviceId || `device_${Date.now()}`,
+        scannedAt: new Date(),
+        orderIds: [],
+      };
+      await initialTable.save();
+    } else if (customerName && (initialTable.activeSession.customerName === 'Dine-in Guest' || initialTable.activeSession.customerName === 'Walk-in Guest')) {
+      initialTable.activeSession.customerName = customerName;
+      await initialTable.save();
     }
 
     const restaurantId = initialTable.restaurantId.toString();
@@ -469,6 +564,7 @@ class TableService {
 
       const finalOrderData = {
         orderSource: 'dine_in',
+        deviceId,
         customer: {
           name: tableInTx.activeSession.customerName,
           mobile: '',
@@ -518,8 +614,7 @@ class TableService {
       const NotificationService = require('./notification.service');
       await NotificationService.publish({
         restaurantId,
-        targetType: 'role',
-        targetId: 'kitchen',
+        targetType: 'all',
         type: 'ORDER_CREATED',
         title: `🔔 New Order #${finalOrder.orderNumber || finalOrder._id.toString().slice(-4)}`,
         message: `Table ${initialTable.tableNumber} placed a new order of ${validatedItems.length} items (₹${grandTotal.toFixed(2)}).`,

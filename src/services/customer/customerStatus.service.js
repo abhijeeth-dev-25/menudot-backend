@@ -82,11 +82,24 @@ class CustomerStatusService {
   /**
    * Dispatches real-time table service requests (waiter, bill, water, cleaning)
    */
-  static async requestTableService(restaurantId, tableId, serviceType, note = '') {
-    const table = await Table.findOne({ _id: tableId, restaurantId });
+  static async requestTableService(restaurantId, tableIdentifier, serviceType, note = '') {
+    const mongoose = require('mongoose');
+    let table;
+    if (mongoose.Types.ObjectId.isValid(tableIdentifier)) {
+      table = await Table.findOne({ _id: tableIdentifier, ...(restaurantId ? { restaurantId } : {}) });
+    }
+    if (!table && tableIdentifier) {
+      table = await Table.findOne({ 'qrCode.code': tableIdentifier, ...(restaurantId ? { restaurantId } : {}) });
+    }
+    if (!table && tableIdentifier) {
+      table = await Table.findOne({ tableNumber: tableIdentifier, ...(restaurantId ? { restaurantId } : {}) });
+    }
+
     if (!table) {
       throw new AppError(404, 'Table not found');
     }
+
+    restaurantId = restaurantId || table.restaurantId.toString();
 
     if (!table.qrCode || !table.qrCode.isActive) {
       throw new AppError(403, 'Table session is not active or awaiting staff approval');
@@ -103,6 +116,25 @@ class CustomerStatusService {
     // Emit real-time WebSockets event to staff room
     if (socketUtil && socketUtil.broadcastToRestaurant) {
       socketUtil.broadcastToRestaurant(restaurantId, 'service_call_received', payload);
+    }
+
+    // Publish persistent notification for staff inbox
+    try {
+      const NotificationService = require('../restaurant/notification.service');
+      await NotificationService.publish({
+        restaurantId,
+        targetType: 'role',
+        targetId: 'waiter',
+        type: 'SERVICE_CALL',
+        title: `👋 Table ${table.tableNumber} Service Request`,
+        message: `Table ${table.tableNumber} requested ${serviceType.toUpperCase()} service${note ? `: ${note}` : '.'}`,
+        priority: 'urgent',
+        data: { tableId: table._id, tableNumber: table.tableNumber, serviceType, note, requestedAt: payload.requestedAt },
+        dedupKey: `service_call:${table.tableNumber}:${serviceType}`,
+      });
+    } catch (err) {
+      const logger = require('../../utils/logger');
+      logger.warn({ err }, 'Notification publishing error in requestTableService');
     }
 
     return {

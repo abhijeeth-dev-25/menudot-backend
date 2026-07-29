@@ -17,7 +17,7 @@ class RestaurantTenantService {
   }
 
   /**
-   * Uploads restaurant cover image to ImageKit and saves URL to profile.
+   * Uploads restaurant profile avatar image to ImageKit and saves URL to profile.
    */
   async uploadRestaurantImage(restaurantId, fileBuffer, originalName) {
     const restaurant = await RestaurantRepository.findById(restaurantId);
@@ -25,11 +25,36 @@ class RestaurantTenantService {
       throw new AppError(404, 'Restaurant profile not found.');
     }
 
-    const { url } = await uploadImage(fileBuffer, `restaurant_${restaurantId}_${originalName}`);
+    const { url } = await uploadImage(fileBuffer, `restaurant_avatar_${restaurantId}_${originalName}`);
     const updated = await RestaurantRepository.update(restaurantId, { imageUrl: url });
-    logger.info({ restaurantId, url }, 'Restaurant cover image uploaded successfully');
+    logger.info({ restaurantId, url }, 'Restaurant profile logo avatar uploaded successfully');
     return updated;
   }
+
+  /**
+   * Uploads restaurant background cover banner image to ImageKit and saves URL to profile.
+   */
+  async uploadRestaurantCoverImage(restaurantId, fileBuffer, originalName) {
+    const restaurant = await RestaurantRepository.findById(restaurantId);
+    if (!restaurant) {
+      throw new AppError(404, 'Restaurant profile not found.');
+    }
+
+    const { url } = await uploadImage(fileBuffer, `restaurant_cover_${restaurantId}_${originalName}`);
+    const updated = await RestaurantRepository.update(restaurantId, { coverImage: url });
+    logger.info({ restaurantId, url }, 'Restaurant background cover banner uploaded successfully');
+    return updated;
+  }
+
+  /**
+   * Uploads any general restaurant media asset (branch photo, signature dish photo) to ImageKit.
+   */
+  async uploadMediaAsset(restaurantId, fileBuffer, originalName) {
+    const { url, fileId } = await uploadImage(fileBuffer, `restaurant_asset_${restaurantId}_${originalName}`);
+    logger.info({ restaurantId, url }, 'Restaurant media asset uploaded successfully to ImageKit');
+    return { url, fileId };
+  }
+
 
   /**
    * Updates restaurant profile configuration (Owner/Manager only).
