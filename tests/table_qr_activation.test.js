@@ -52,6 +52,7 @@ describe('Dual-Flow Table QR Code Activation Tests (Pre-Booked vs Direct Walk-In
         .expect(201);
 
       const tableId = tableRes.body.data._id;
+      await Table.findByIdAndUpdate(tableId, { 'qrCode.isActive': false });
       const initialTable = await Table.findById(tableId);
       expect(initialTable.qrCode.isActive).toBe(false);
 
@@ -125,6 +126,7 @@ describe('Dual-Flow Table QR Code Activation Tests (Pre-Booked vs Direct Walk-In
         .expect(201);
 
       const tableId = tableRes.body.data._id;
+      await Table.findByIdAndUpdate(tableId, { 'qrCode.isActive': false });
       const qrCodeToken = tableRes.body.data.qrCode.code;
 
       // 2. Direct Walk-In Customer scans inactive QR code

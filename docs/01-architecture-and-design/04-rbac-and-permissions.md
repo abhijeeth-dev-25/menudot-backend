@@ -22,17 +22,17 @@ The restaurant operational context supports 5 granular roles checked via `restri
 
 Platform administration utilizes granular permission-based RBAC enforced via `restrictToPlatformPermission(permission)`:
 
-| Role | Role Description | Key Assigned Permissions |
-|---|---|---|
-| `super_admin` | Global Root User | `*` (All permissions bypass checks automatically) |
-| `platform_admin` | Platform Administrator | `approve_restaurant`, `suspend_restaurant`, `manage_platform_ads`, `view_system_reports` |
-| `verification` | Document Officer | `verify_restaurant_docs`, `view_system_reports` |
-| `operations` | Operations Staff | `view_system_reports`, `handle_support_tickets` |
-| `finance` | Accounting Team | `view_financial_reports`, `manage_payouts` |
-| `support` | Customer Support | `handle_support_tickets`, `view_restaurant_profile` |
-| `safety` | Trust & Safety | `suspend_restaurant`, `audit_logs` |
-| `sales` | Growth & Sales | `manage_platform_ads`, `view_sales_pipeline` |
-| `tech` | Engineering | `access_db_tools`, `emergency_controls`, `view_system_logs` |
+| Role | Role Description | Key Assigned Permissions | Scope Enforcement |
+|---|---|---|---|
+| `super_admin` | Global Root User | `*` | Bypasses all permission checks automatically. Has full access to database tools (`/platform/system/stats`), user provisioning, and emergency controls. |
+| `platform_admin` | Platform Administrator | `approve_restaurant`, `suspend_restaurant`, `activate_restaurant`, `manage_plans`, `view_platform_analytics`, `handle_escalations`, `manage_platform_staff`, `view_system_reports`, `access_all_audit_logs`, `manage_platform_ads` | Checked against assigned permission list. Restricted from root super_admin actions (e.g. `/platform/system/stats`). |
+| `verification` | Document Officer | `verify_restaurant_docs`, `view_system_reports` | Scoped to verification queues and document approval steps. |
+| `operations` | Operations Staff | `view_platform_analytics`, `handle_escalations`, `view_system_reports` | Scoped to platform analytics and support escalations. |
+| `finance` | Accounting Team | `view_platform_analytics`, `manage_payouts`, `view_financial_reports` | Scoped to merchant payouts and financial rollups. |
+| `support` | Customer Support | `manage_tickets`, `handle_escalations` | Scoped to support ticket management. |
+| `safety` | Trust & Safety | `suspend_restaurant`, `fraud_detection` | Scoped to fraud detection and safety suspensions. |
+| `sales` | Growth & Sales | `manage_sales_leads`, `view_platform_analytics`, `manage_platform_ads` | Scoped to growth campaigns and sales pipelines. |
+| `tech` | Engineering | `view_system_logs`, `manage_system_config` | Scoped to system logs and system config. |
 
 ---
 

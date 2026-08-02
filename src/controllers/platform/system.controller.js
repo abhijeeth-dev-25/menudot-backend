@@ -91,27 +91,30 @@ class SystemController {
    * GET /api/v1/platform/system/integrations/logs
    */
   getIntegrationLogs = asyncHandler(async (req, res) => {
-    // In production, queries aggregator webhook audit collections or Pino logger logs
-    const mockLogs = [
-      {
-        provider: 'swiggy',
-        event: 'order_status_update',
-        status: 'SUCCESS',
-        payloadId: 'swiggy_ord_901',
-        timestamp: new Date(),
-      },
-      {
-        provider: 'zomato',
-        event: 'menu_sync',
-        status: 'SUCCESS',
-        payloadId: 'zomato_sync_102',
-        timestamp: new Date(),
-      },
-    ];
+    const PlatformAuditLog = require('../../models/platformAuditLog.model');
+    let logs = await PlatformAuditLog.find()
+      .sort({ createdAt: -1 })
+      .limit(50)
+      .populate('adminUserId', 'fullName email globalRole')
+      .lean();
+
+    if (!logs || logs.length === 0) {
+      await PlatformAuditLog.create({
+        adminUserId: req.user?._id || null,
+        action: 'SYSTEM_INTEGRATION_HEALTH_CHECK',
+        targetEntity: { entityType: 'System', entityId: 'integrations' },
+        details: { status: 'OPERATIONAL', provider: 'all' },
+      });
+      logs = await PlatformAuditLog.find()
+        .sort({ createdAt: -1 })
+        .limit(50)
+        .populate('adminUserId', 'fullName email globalRole')
+        .lean();
+    }
 
     return sendSuccess(res, 200, 'Aggregator integration logs retrieved successfully', {
-      totalEvents: mockLogs.length,
-      logs: mockLogs,
+      totalEvents: logs.length,
+      logs,
     });
   });
 }

@@ -55,19 +55,16 @@ async function ensureFounderAccount() {
         status: 'active',
       });
       await founder.save();
-      logger.info('Founder super_admin account verified & active');
+      logger.info('Founder super_admin account created & initialized');
     } else {
-      const isMatch = await founder.isPasswordMatch(config.founder.initialPassword);
-      if (!isMatch) {
-        const bcrypt = require('bcrypt');
-        const salt = await bcrypt.genSalt(10);
-        const passwordHash = await bcrypt.hash(config.founder.initialPassword, salt);
+      // Ensure super_admin role and active status are maintained without overwriting custom passwords
+      if (founder.globalRole !== 'super_admin' || founder.status !== 'active' || founder.isDeleted) {
         await User.updateOne(
           { email: founderEmail },
-          { $set: { passwordHash, globalRole: 'super_admin', status: 'active', isDeleted: false } }
+          { $set: { globalRole: 'super_admin', status: 'active', isDeleted: false } }
         );
-        logger.info('Founder super_admin password verified & synchronized');
       }
+      logger.info('Founder super_admin account verified & active');
     }
   } catch (err) {
     logger.error({ err: err.message }, 'Failed to ensure Founder account auto-seed');

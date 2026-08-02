@@ -94,6 +94,7 @@ describe('Auxiliary Modules API (Campaigns, Bookings, Inventory, Finance, Feedba
           bookingDate: dateStr,
           timeSlot: '19:30',
           customerName: 'Marcus Aurelius',
+          customerEmail: 'marcus@example.com',
           customerMobile: '+919988776655',
           numberOfPeople: 4,
         })

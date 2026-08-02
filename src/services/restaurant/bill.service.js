@@ -267,6 +267,12 @@ class BillService {
     socketManager.broadcastToRestaurant(restaurantId, 'bill_settled', updatedBill);
     if (bill.tableId) {
       socketManager.emitToTable(bill.tableId.toString(), 'bill_settled', updatedBill);
+      socketManager.broadcastToRestaurant(restaurantId, 'table:session_ended', {
+        tableId: bill.tableId,
+      });
+      socketManager.broadcastToRestaurant(restaurantId, 'table_updated', {
+        tableId: bill.tableId,
+      });
     }
 
     logger.info(

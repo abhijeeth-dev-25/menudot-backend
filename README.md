@@ -269,7 +269,22 @@ Exchange a valid refresh token for a new access token.
 ### `POST /auth/logout`
 Invalidate refresh token and end session.
 
-**Headers**: `Authorization: Bearer <token>`
+- **Headers**: `Authorization: Bearer <token>`
+
+---
+
+### `POST /auth/founder-otp/request`
+Request an emergency step-up authorization 6-digit OTP sent to the founder email (`abhijeethkar.geddam.dev@gmail.com`).
+
+- **Role**: `super_admin` only
+
+---
+
+### `POST /auth/founder-otp/verify`
+Verify 6-digit founder step-up OTP token to grant high-security elevation.
+
+- **Role**: `super_admin` only
+- **Body**: `{ "email": "abhijeethkar.geddam.dev@gmail.com", "otp": "123456" }`
 
 ---
 
@@ -408,8 +423,25 @@ Soft-delete a table configuration.
 ### `PATCH /tables/:tableId/qr/toggle`
 Enable or disable QR scanning on a table.
 
-- **Role**: `owner`, `manager`
+- **Role**: `owner`, `manager`, `server`
 - **Body**: `{ "isActive": true | false }`
+
+---
+
+### `GET /tables/staff/pending-unlock-requests`
+Lists all tables awaiting staff unlock approval for direct walk-in guests.
+
+- **Role**: `owner`, `manager`, `server`
+- **Response**: Array of tables with `qrUnlockRequest.requested = true`.
+
+---
+
+### `POST /tables/:tableId/unlock-access`
+Staff approves and unlocks table ordering access for a direct walk-in guest.
+
+- **Role**: `owner`, `manager`, `server`
+- **Body**: `{ "customerName": "Alice", "numberOfPeople": 2, "deviceId": "device_123" }`
+- **Behavior**: Activates `qrCode.isActive = true`, sets table status to `occupied`, initializes `activeSession`, and clears pending unlock request.
 
 ---
 
@@ -417,6 +449,7 @@ Enable or disable QR scanning on a table.
 Check out a table session and release it back to vacant.
 
 - **Role**: `owner`, `manager`, `server`
+- **Behavior**: Automatically calculates and applies pre-paid booking fee credits to the bill if applicable, clears `activeSession`, and sets table status to `vacant`.
 
 ---
 
@@ -430,6 +463,10 @@ Retrieve the status and detail of a specific customer order (used for live statu
 
 ### `POST /tables/scan` *(Public)*
 Customer scans QR code to start a table session.
+
+**Behavior**:
+- If `qrCode.isActive = true`: Initializes active session and returns full menu catalog (`200 OK`).
+- If `qrCode.isActive = false`: Records a pending unlock request in database, notifies staff terminals, and returns `403 Forbidden` with `{ "status": "activation_pending" }`.
 
 **Body**:
 ```json
@@ -842,6 +879,30 @@ Trigger manual generation/rollup of the daily finance report for a specific date
 
 ---
 
+### `POST /bills/table/:tableId/generate`
+Generate formal itemized tax invoice bill for a table session.
+
+- **Role**: `owner`, `manager`, `server`
+- **Behavior**: Sums table orders, applies pre-paid booking fee credit if available, computes GST tax, assigns invoice number, and saves Bill document.
+
+---
+
+### `GET /bills/:billId/print`
+Generate printable thermal receipt payload (HTML format styled for 80mm thermal receipt printers, or raw JSON format).
+
+- **Role**: `owner`, `manager`, `server`
+- **Query Filters**: `format=html` | `format=json`
+
+---
+
+### `GET /bills/history`
+Retrieve settled bill history log.
+
+- **Role**: `owner`, `manager`
+- **Query Filters**: `paymentStatus`, `paymentChannel`, `tableNumber`
+
+---
+
 ## 15. API — Reputation & Feedbacks
 
 ### `POST /feedback` *(Public)*
@@ -1123,9 +1184,7 @@ List all restaurant applications pending final admin activation review.
 ### `POST /platform/restaurants/onboarding/:restaurantId/review`
 Approve or reject a fully-verified onboarding application to activate the restaurant.
 
-- **Required Platform Permission**: `restaurant:approve` (Platform Admin role)
-- **Body**: `{ "action": "approve" | "reject", "rejectionReason": "string (required if reject)" }`
-- **Behavior on Approve**: Restaurant transitions to `'active'`, owner account activated, credentials emailed to owner.
+- **Behavior on Approve**: Requires application stage to be `'verified'` by Verification Team (`400 Bad Request` if stage is `submitted`). Restaurant transitions stage to `'approved'`, owner user account activated, temporary password & credentials emailed to owner.
 
 ---
 

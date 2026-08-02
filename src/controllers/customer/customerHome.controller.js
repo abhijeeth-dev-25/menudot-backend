@@ -5,7 +5,9 @@ const Restaurant = require('../../models/restaurant.model');
 const { sendSuccess } = require('../../utils/response');
 const asyncHandler = require('../../utils/asyncHandler');
 
-async function resolveRestaurantId(req, tableCode) {
+const AppError = require('../../exceptions/AppError');
+
+async function resolveRestaurantId(req, tableCode, required = false) {
   let restaurantId = req.headers['x-restaurant-id'] || req.query.restaurantId;
   if (restaurantId && restaurantId !== 'undefined' && restaurantId !== 'null') {
     return restaurantId;
@@ -24,6 +26,10 @@ async function resolveRestaurantId(req, tableCode) {
     }
   }
 
+  if (required) {
+    throw new AppError(400, 'x-restaurant-id header or restaurantId query parameter is required');
+  }
+
   const firstRest = await Restaurant.findOne({}).select('_id').lean();
   return firstRest ? firstRest._id : null;
 }
@@ -32,7 +38,7 @@ class CustomerHomeController {
   getHomeFeed = asyncHandler(async (req, res) => {
     const tableCode = req.query.tableCode || req.query.code || null;
     const deviceId = req.headers['x-device-id'] || req.query.deviceId || null;
-    const restaurantId = await resolveRestaurantId(req, tableCode);
+    const restaurantId = await resolveRestaurantId(req, tableCode, true);
 
     const data = await CustomerHomeService.getHomeFeed(restaurantId, tableCode, deviceId);
     return sendSuccess(res, 200, 'Customer home feed retrieved successfully', data);

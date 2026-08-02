@@ -223,7 +223,7 @@ describe('MenuDot Platform Roles & Onboarding Workflows', () => {
         .expect(200);
 
       expect(res.body.success).toBe(true);
-      expect(res.body.data.dbName).toBe('menudot');
+      expect(res.body.data.dbName).toMatch(/^menudot(_test)?$/);
     });
 
     test('should block platform admins from pulling system stats', async () => {

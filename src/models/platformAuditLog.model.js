@@ -5,7 +5,7 @@ const platformAuditLogSchema = new mongoose.Schema(
     adminUserId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
-      required: true,
+      required: false,
       index: true,
     },
     action: {

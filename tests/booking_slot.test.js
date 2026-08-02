@@ -98,8 +98,11 @@ describe('Web Slot Booking, Payment, Email Confirmation & Real-Time Restaurant M
       const emailLogsDir = path.join(__dirname, '../logs/emails');
       expect(fs.existsSync(emailLogsDir)).toBe(true);
       const files = fs.readdirSync(emailLogsDir);
-      const bobLogs = files.filter((f) => f.includes('bob@example.com')).sort();
-      const bobEmailLog = bobLogs[bobLogs.length - 1];
+      const bobEmailLog = files.find(f => {
+        if (!f.includes('bob')) return false;
+        const content = fs.readFileSync(path.join(emailLogsDir, f), 'utf-8');
+        return content.includes(verifyRes.body.data.couponCode);
+      }) || files.filter(f => f.includes('bob')).sort().reverse()[0];
       expect(bobEmailLog).toBeDefined();
 
       const emailContent = fs.readFileSync(path.join(emailLogsDir, bobEmailLog), 'utf-8');

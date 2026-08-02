@@ -23,7 +23,7 @@ The **Platform Administration & Developer APIs** empower Platform Super Admins, 
 | `POST` | `/api/v1/platform/finance/settlements/:id/disburse` | `MANAGE_PAYOUTS` | Disburse merchant daily bank payout & log audit trail |
 | `PATCH` | `/api/v1/platform/finance/subscriptions/:id` | `MANAGE_PLANS` | Admin management of SaaS tiers (Starter, Pro, Enterprise) and trial extensions |
 | `GET` | `/api/v1/platform/system/integrations/logs` | `VIEW_SYSTEM_LOGS` | Inspect Swiggy, Zomato & Magicpin integration webhook audit logs |
-| `GET` | `/api/v1/platform/system/stats` | `ACCESS_DB_TOOLS` | Database collection statistics & system health |
+| `GET` | `/api/v1/platform/system/stats` | `ACCESS_DB_TOOLS` (Super Admin Scope) | Database collection statistics & system health (restricted to `super_admin`) |
 | `POST` | `/api/v1/platform/system/emergency` | `EMERGENCY_CONTROLS` | Toggle global maintenance mode / emergency controls |
 | `POST` | `/api/v1/platform/system/users` | `MANAGE_PLATFORM_ADMINS` | Provision platform admin staff accounts |
 

@@ -261,7 +261,7 @@ class TableService {
 
     logger.info({ restaurantId, tableNumber: table.tableNumber }, 'Checking out table session');
 
-    return TableRepository.update(restaurantId, id, {
+    const updatedTable = await TableRepository.update(restaurantId, id, {
       status: 'vacant',
       'qrCode.isActive': false,
       activeSession: null,
@@ -273,6 +273,24 @@ class TableService {
         requestedAt: null,
       },
     });
+
+    try {
+      const socketManager = require('../../utils/socket');
+      socketManager.emitToRestaurantRoom(restaurantId, 'table:session_ended', {
+        tableId: id,
+        tableNumber: updatedTable.tableNumber,
+        tableCode: updatedTable.qrCode?.code,
+      });
+      socketManager.emitToRestaurantRoom(restaurantId, 'table_updated', {
+        tableId: id,
+        tableNumber: updatedTable.tableNumber,
+        tableCode: updatedTable.qrCode?.code,
+      });
+    } catch (err) {
+      logger.error({ err }, 'Failed to broadcast table:session_ended socket event');
+    }
+
+    return updatedTable;
   }
 
   /**

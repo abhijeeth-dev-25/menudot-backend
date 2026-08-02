@@ -16,25 +16,8 @@ class AdSupportService {
       campaign = await Campaign.findById(campaignId).lean();
     }
 
-    // Fallback Mock Campaign Context if database record is null or non-ObjectId format
     if (!campaign) {
-      campaign = {
-        _id: campaignId || 'cmp_ad_9941',
-        name: 'Weekend Special Biryani Boost',
-        type: 'banner',
-        slot: 'hero_carousel',
-        status: 'pending_review',
-        dailyBudget: 500,
-        totalSpent: 1250,
-        walletBalance: 3750,
-        impressionsCount: 14200,
-        clicksCount: 890,
-        ctrPercent: 6.26,
-        targetRadiusKm: 5,
-        imageUrl: 'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=800&auto=format&fit=crop&q=60',
-        paymentGatewayRef: 'pay_rzp_ad_77218',
-        rejectionReason: null,
-      };
+      throw new AppError(404, 'Ad campaign context not found for the specified ID');
     }
 
     let ticket = null;

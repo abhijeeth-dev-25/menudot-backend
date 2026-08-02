@@ -52,10 +52,11 @@ Restaurant Proprietor                Platform Verification Team             Plat
 - **API**: `POST /api/v1/platform/restaurants/onboarding/:restaurantId/review`
 - **Role Required**: Platform user with `APPROVE_RESTAURANT` permission.
 - **Payload**: `{ "action": "approve", "reviewNotes": "All compliance documents verified." }`
+- **Verification Gate**: Application stage must be `verified` by the Verification Team prior to approval (`400 Bad Request` returned if stage is still `submitted`).
 - **System Action**:
-  - Updates `Restaurant` status to `approved`.
+  - Updates `Restaurant` stage to `approved`.
   - Automatically provisions an `owner` staff user account in `User` collection.
-  - Emails access credentials to the restaurant proprietor.
+  - Emails access credentials and temporary password to the restaurant proprietor.
 
 ---
 

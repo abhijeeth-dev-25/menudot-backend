@@ -201,30 +201,13 @@ class FeedbackService {
       );
     }
 
-    const mockReviews = [
-      {
-        id: `${platform.toUpperCase()}-REV-101`,
-        customerName: 'Sam review',
-        rating: 5,
-        comment: 'Absolutely loved the packaging and speed!',
-      },
-      {
-        id: `${platform.toUpperCase()}-REV-102`,
-        customerName: 'Rohit K.',
-        rating: 1,
-        comment: 'Missing item in delivery order, extremely disappointing!',
-      },
-      {
-        id: `${platform.toUpperCase()}-REV-103`,
-        customerName: 'Nisha S.',
-        rating: 4,
-        comment: 'Super delicious and warm.',
-      },
-    ];
+    const reviewsToProcess = Array.isArray(integration.pendingReviews) ? integration.pendingReviews : [];
 
     let syncedCount = 0;
 
-    for (const review of mockReviews) {
+    for (const review of reviewsToProcess) {
+      if (!review.id || !review.rating) continue;
+
       const existing = await FeedbackRepository.findByExternalId(
         restaurantId,
         platform,
@@ -238,8 +221,8 @@ class FeedbackService {
       const feedbackData = {
         source: platform,
         rating: review.rating,
-        customerName: review.customerName,
-        comment: review.comment,
+        customerName: review.customerName || 'Aggregator Guest',
+        comment: review.comment || '',
         externalReviewId: review.id,
       };
 
@@ -264,7 +247,7 @@ class FeedbackService {
     return {
       platform,
       syncedCount,
-      totalProcessed: mockReviews.length,
+      totalProcessed: reviewsToProcess.length,
     };
   }
 

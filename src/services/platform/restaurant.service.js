@@ -32,6 +32,10 @@ class RestaurantPlatformService {
       );
     }
 
+    if (action === 'approve' && restaurant.onboarding.stage !== 'verified') {
+      throw new AppError(400, 'Restaurant application must be verified by the Verification Team first');
+    }
+
     const ownerUserId = restaurant.owner.userId;
     const ownerEmail = restaurant.owner.email;
     const ownerName = restaurant.owner.fullName;

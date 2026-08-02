@@ -31,7 +31,7 @@ const envVarsSchema = Joi.object({
   FOUNDER_EMAIL: Joi.string().email().lowercase().trim().default('abhijeethkar.geddam.dev@gmail.com'),
   FOUNDER_FULL_NAME: Joi.string().default('Geddam Abhijeethkar'),
   FOUNDER_MOBILE: Joi.string().default('+919177813634'),
-  FOUNDER_INITIAL_PASSWORD: Joi.string().default('Ajk@123#'),
+  FOUNDER_INITIAL_PASSWORD: Joi.string().default(process.env.FOUNDER_INITIAL_PASSWORD || 'Ajk@123#'),
 })
   .unknown()
   .required();
